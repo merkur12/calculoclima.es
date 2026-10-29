@@ -7,7 +7,7 @@
 <meta content="no-cache" http-equiv="Pragma"/>
 <meta content="0" http-equiv="Expires"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Cálculo de climatización: aire acondicionado, caldera y bomba de calor</title>
+<title>Cálculo de climatización: aire acondicionado, calderas y aerotermia</title>
 <!-- Canonical Etiketi -->
 <link href="https://calculoclima.es/" rel="canonical"/>
 <!-- Favicon (Sekme Logosu) -->
@@ -121,7 +121,15 @@
     [hidden] { display:none !important; }
         #hesapAraclari { scroll-margin-top:110px; }
         #lblOnerilenSegment, #printKlimaOneri, #tekSayfaRapor .raporSonuc p { white-space:pre-line; }
-        </style>
+        
+/* Align field captions independently of translated label length. */
+:is(#pratikForm,#ts825Form,#isitmaForm) .grid > div:has(> label):has(> input,> select) { min-width:0; }
+:is(#pratikForm,#ts825Form,#isitmaForm) .grid > div > label { display:flex; align-items:flex-end; min-height:2.5rem; line-height:1.25; }
+:is(#pratikForm,#ts825Form,#isitmaForm) .grid > div > :is(input,select) { box-sizing:border-box; height:3rem; min-width:0; }
+.parametre-paneli .grid > label { display:flex; flex-direction:column; justify-content:flex-end; gap:.4rem; min-width:0; line-height:1.35; }
+.parametre-paneli .grid > label > :is(input,select) { box-sizing:border-box; height:2.75rem; margin-top:auto; flex-shrink:0; }
+@media(min-width:768px) { :is(#pratikForm,#ts825Form,#isitmaForm) .grid > div > label { min-height:3rem; } }
+</style>
 <meta content="Calcula la potencia de aire acondicionado, caldera y aerotermia con localidades españolas, zonas CTE y referencias RITE. Estimación orientativa con desglose de cargas." name="description"/><meta content="https://calculoclima.es/" property="og:url"/><meta content="es_ES" property="og:locale"/><meta content="website" property="og:type"/><meta content="Calculoclima | Calculadora de aire acondicionado y calefacción" property="og:title"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "Guías de climatización e ingeniería", "itemListElement": [{"@type": "ListItem", "position": 1, "url": "https://calculoclima.es/makale-1.html", "name": "Normativa de Aislamiento Térmico y Eficiencia Energética en Edificios"}, {"@type": "ListItem", "position": 2, "url": "https://calculoclima.es/makale-2.html", "name": "Principios Básicos del Reglamento de Eficiencia Energética en Edificios"}, {"@type": "ListItem", "position": 3, "url": "https://calculoclima.es/makale-3.html", "name": "Normativa de Aislamiento Térmico CTE-HE: Principios Básicos"}, {"@type": "ListItem", "position": 4, "url": "https://calculoclima.es/makale-4.html", "name": "¿Qué es la Transferencia de Calor? Principios Básicos y Tipos"}, {"@type": "ListItem", "position": 5, "url": "https://calculoclima.es/makale-5.html", "name": "Leyes de la Termodinámica (0ª, 1ª y 2ª Ley) y su Relación Energética"}, {"@type": "ListItem", "position": 6, "url": "https://calculoclima.es/makale-6.html", "name": "El Sector de la Climatización y Bombas de Calor en España y a Escala Global"}, {"@type": "ListItem", "position": 7, "url": "https://calculoclima.es/makale-7.html", "name": "Comparativa: Bomba de Calor Inverter vs. Caldera de Condensación"}, {"@type": "ListItem", "position": 8, "url": "https://calculoclima.es/makale-8.html", "name": "Radiación Solar y el Factor de Fachada en la Carga de Refrigeración"}, {"@type": "ListItem", "position": 9, "url": "https://calculoclima.es/makale-9.html", "name": "¿Qué se debe tener en cuenta al elegir un aire acondicionado?"}, {"@type": "ListItem", "position": 10, "url": "https://calculoclima.es/makale-10.html", "name": "¿Cuáles son los Criterios de Selección de Calderas de Condensación?"}, {"@type": "ListItem", "position": 11, "url": "https://calculoclima.es/makale-11.html", "name": "¿Bomba de Calor o Caldera Eléctrica?"}, {"@type": "ListItem", "position": 12, "url": "https://calculoclima.es/makale-12.html", "name": "Uso Correcto del Aire Acondicionado y Salud"}, {"@type": "ListItem", "position": 13, "url": "https://calculoclima.es/makale-13.html", "name": "Métodos Prácticos para Reducir las Pérdidas de Calor"}, {"@type": "ListItem", "position": 14, "url": "https://calculoclima.es/makale-14.html", "name": "¿Cómo Funciona un Aire Acondicionado Split? Principio de Operación"}, {"@type": "ListItem", "position": 15, "url": "https://calculoclima.es/makale-15.html", "name": "¿Cómo se Calcula el Espesor de Aislamiento en los Hogares?"}, {"@type": "ListItem", "position": 16, "url": "https://calculoclima.es/makale-16.html", "name": "Factores que Afectan la Eficiencia de la Bomba de Calor (COP y EER)"}, {"@type": "ListItem", "position": 17, "url": "https://calculoclima.es/makale-17.html", "name": "El Papel de las Ventanas en las Pérdidas de Calor y Selección de Vidrios"}, {"@type": "ListItem", "position": 18, "url": "https://calculoclima.es/makale-18.html", "name": "Prevención de Condensaciones en Climatización Invisible"}, {"@type": "ListItem", "position": 19, "url": "https://calculoclima.es/makale-19.html", "name": "Uso Correcto del Termostato de Ambiente y Métodos de Ahorro"}, {"@type": "ListItem", "position": 20, "url": "https://calculoclima.es/makale-20.html", "name": "Importancia de los Cálculos de Ingeniería en Proyectos de Instalaciones Mecánicas"}]}</script></head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
 <!-- NAVBAR -->
@@ -146,14 +154,14 @@
 <span class="inline-flex rounded-full bg-blue-50 text-blue-700 px-3 py-1 text-xs font-bold mb-4">Aire acondicionado · Calderas · Aerotermia</span>
 <h1 class="text-2xl md:text-4xl font-extrabold text-slate-900 leading-tight mb-5">Calcula la potencia que necesita tu vivienda o local</h1>
 <div class="text-base md:text-lg text-slate-600 leading-relaxed space-y-4 max-w-4xl">
-<p>Elegir un equipo de climatización empieza por saber cuánto frío o calor necesita el espacio. En calculoclima.es puedes estimar la carga térmica de una habitación, comparar distintas condiciones de uso y orientar la elección de un aire acondicionado, una caldera o una bomba de calor.</p>
+<p>Elegir un equipo de climatización empieza por saber cuánto frío o calor necesita el espacio. En calculoclima.es puedes estimar la carga térmica de una habitación, comparar distintas condiciones de uso y orientar la elección de un aire acondicionado, una caldera o un sistema de aerotermia.</p>
 <p>Las calculadoras tienen en cuenta la localidad, la envolvente del edificio y las condiciones de uso. El resultado sirve para una primera selección; la potencia real del equipo y su instalación deben comprobarse con los datos del fabricante y las características del inmueble.</p>
 </div>
 <nav aria-label="Guía de cálculo" class="flex flex-wrap gap-x-5 gap-y-2 mt-6 text-sm text-blue-700"><a class="underline" href="#ornek-klima-hesabi">Ejemplo explicado</a><a class="underline" href="#hesap-yontemi">Método y límites</a><a class="underline" href="#teknik-kaynaklar">Fuentes técnicas</a></nav>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
 <button class="text-left bg-amber-50 border border-amber-200 rounded-2xl p-5 hover:bg-amber-100 transition focus-visible:outline-2 focus-visible:outline-amber-500" onclick="hesapAracinaGit('pratik')" type="button"><span class="block text-amber-900 font-extrabold text-lg">Cálculo rápido de aire acondicionado →</span><span class="block mt-2 text-sm text-slate-600">Estima la potencia de refrigeración con las medidas y características básicas del espacio.</span></button>
 <button class="text-left bg-blue-50 border border-blue-200 rounded-2xl p-5 hover:bg-blue-100 transition focus-visible:outline-2 focus-visible:outline-blue-500" onclick="hesapAracinaGit('klima')" type="button"><span class="block text-blue-900 font-extrabold text-lg">Cálculo detallado de aire acondicionado →</span><span class="block mt-2 text-sm text-slate-600">Introduce fachadas, ventanas y uso del recinto. Consulta el desglose y guarda un informe en PDF.</span></button>
-<button class="text-left bg-orange-50 border border-orange-200 rounded-2xl p-5 hover:bg-orange-100 transition focus-visible:outline-2 focus-visible:outline-orange-500" onclick="hesapAracinaGit('isitma')" type="button"><span class="block text-orange-900 font-extrabold text-lg">Cálculo de caldera y aerotermia →</span><span class="block mt-2 text-sm text-slate-600">Calcula la necesidad aproximada de calefacción y compara clases de potencia.</span></button>
+<button class="text-left bg-orange-50 border border-orange-200 rounded-2xl p-5 hover:bg-orange-100 transition focus-visible:outline-2 focus-visible:outline-orange-500" onclick="hesapAracinaGit('isitma')" type="button"><span class="block text-orange-900 font-extrabold text-lg">Cálculo de calderas y aerotermia →</span><span class="block mt-2 text-sm text-slate-600">Calcula la necesidad aproximada de calefacción y compara clases de potencia.</span></button>
 </div>
 </div>
 </section>
@@ -180,7 +188,7 @@
 <i class="fa-solid fa-sun text-blue-500"></i> Cálculo detallado de refrigeración
             </button>
 <button class="flex-1 min-w-[200px] py-3 px-4 rounded-xl font-bold text-sm transition flex items-center justify-center gap-2 text-slate-600 hover:text-slate-900 cursor-pointer" id="btnTabIsitma" onclick="sekmeDegistir('isitma')">
-<i class="fa-solid fa-fire text-orange-500"></i> Cálculo de caldera y bomba de calor
+<i class="fa-solid fa-fire text-orange-500"></i> Cálculo de calderas y aerotermia
             </button>
 </div>
 </div>
@@ -194,7 +202,7 @@
 <i class="fa-solid fa-bolt text-amber-500"></i> Cálculo rápido de refrigeración 
                 </h2>
 <form autocomplete="off" class="space-y-6" id="pratikForm">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
 <div>
 <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Localidad / zona climática CTE</label>
 <select class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:outline-none focus:border-amber-500 font-bold" id="pratikSehir"><optgroup label="Zona CTE α3"><option data-kis-dis="14.4" data-zona="α3" value="Las Palmas de Gran Canaria">Las Palmas de Gran Canaria · α3</option><option data-kis-dis="14.6" data-zona="α3" value="Santa Cruz de Tenerife">Santa Cruz de Tenerife · α3</option></optgroup><optgroup label="Zona CTE A3"><option data-kis-dis="7.6" data-zona="A3" value="Cádiz">Cádiz · A3</option><option data-kis-dis="8.4" data-zona="A3" value="Melilla">Melilla · A3</option><option data-kis-dis="5.8" data-zona="A3" value="Málaga">Málaga · A3</option></optgroup><optgroup label="Zona CTE A4"><option data-kis-dis="7.5" data-zona="A4" value="Almería">Almería · A4</option><option data-kis-dis="3.6" data-zona="A4" value="Huelva">Huelva · A4</option></optgroup><optgroup label="Zona CTE B3"><option data-kis-dis="4.4" data-zona="B3" value="Castellón">Castellón · B3</option><option data-kis-dis="5.7" data-zona="B3" value="Ibiza">Ibiza · B3</option><option data-kis-dis="5.6" data-zona="B3" value="Mahón">Mahón · B3</option><option data-kis-dis="3.5" data-zona="B3" value="Murcia">Murcia · B3</option><option data-kis-dis="6.3" data-zona="B3" value="Palma">Palma · B3</option><option data-kis-dis="0.5" data-zona="B3" value="Tarragona">Tarragona · B3</option><option data-kis-dis="5.5" data-zona="B3" selected="" value="Valencia">Valencia · B3</option></optgroup><optgroup label="Zona CTE B4"><option data-kis-dis="4.4" data-zona="B4" value="Alicante">Alicante · B4</option><option data-kis-dis="1.4" data-zona="B4" value="Córdoba">Córdoba · B4</option><option data-kis-dis="4.5" data-zona="B4" value="Sevilla">Sevilla · B4</option></optgroup><optgroup label="Zona CTE C1"><option data-kis-dis="5.6" data-zona="C1" value="A Coruña">A Coruña · C1</option><option data-kis-dis="1.2" data-zona="C1" value="Bilbao">Bilbao · C1</option><option data-kis-dis="3.3" data-zona="C1" value="Pontevedra">Pontevedra · C1</option><option data-kis-dis="4.7" data-zona="C1" value="Santander">Santander · C1</option></optgroup><optgroup label="Zona CTE C2"><option data-kis-dis="2.7" data-zona="C2" value="Barcelona">Barcelona · C2</option><option data-kis-dis="-1.9" data-zona="C2" value="Girona">Girona · C2</option></optgroup><optgroup label="Zona CTE C3"><option data-kis-dis="-0.6" data-zona="C3" value="Granada">Granada · C3</option><option data-kis-dis="-1.4" data-zona="C3" value="Ourense">Ourense · C3</option><option data-kis-dis="-1.1" data-zona="C3" value="Zaragoza">Zaragoza · C3</option></optgroup><optgroup label="Zona CTE C4"><option data-kis-dis="0.3" data-zona="C4" value="Badajoz">Badajoz · C4</option><option data-kis-dis="1.2" data-zona="C4" value="Cáceres">Cáceres · C4</option><option data-kis-dis="2.6" data-zona="C4" value="Jaén">Jaén · C4</option></optgroup><optgroup label="Zona CTE D1"><option data-kis-dis="-2.5" data-zona="D1" value="Lugo">Lugo · D1</option><option data-kis-dis="1.2" data-zona="D1" value="Oviedo">Oviedo · D1</option><option data-kis-dis="-3.6" data-zona="D1" value="Palencia">Palencia · D1</option><option data-kis-dis="-2.0" data-zona="D1" value="Pamplona">Pamplona · D1</option><option data-kis-dis="1.0" data-zona="D1" value="San Sebastián">San Sebastián · D1</option><option data-kis-dis="-2.4" data-zona="D1" value="Vitoria-Gasteiz">Vitoria-Gasteiz · D1</option></optgroup><optgroup label="Zona CTE D2"><option data-kis-dis="-3.1" data-zona="D2" value="Cuenca">Cuenca · D2</option><option data-kis-dis="-2.5" data-zona="D2" value="Huesca">Huesca · D2</option><option data-kis-dis="-1.1" data-zona="D2" value="Logroño">Logroño · D2</option><option data-kis-dis="-4.4" data-zona="D2" value="Salamanca">Salamanca · D2</option><option data-kis-dis="-3.4" data-zona="D2" value="Segovia">Segovia · D2</option><option data-kis-dis="-6.1" data-zona="D2" value="Teruel">Teruel · D2</option><option data-kis-dis="-2.8" data-zona="D2" value="Valladolid">Valladolid · D2</option><option data-kis-dis="-3.2" data-zona="D2" value="Zamora">Zamora · D2</option></optgroup><optgroup label="Zona CTE D3"><option data-kis-dis="-3.0" data-zona="D3" value="Albacete">Albacete · D3</option><option data-kis-dis="-1.3" data-zona="D3" value="Ciudad Real">Ciudad Real · D3</option><option data-kis-dis="-2.8" data-zona="D3" value="Lleida">Lleida · D3</option><option data-kis-dis="0.3" data-zona="D3" value="Madrid">Madrid · D3</option><option data-kis-dis="-1.2" data-zona="D3" value="Toledo">Toledo · D3</option></optgroup><optgroup label="Zona CTE E1"><option data-kis-dis="-4.2" data-zona="E1" value="Burgos">Burgos · E1</option><option data-kis-dis="-3.8" data-zona="E1" value="León">León · E1</option><option data-kis-dis="-4.8" data-zona="E1" value="Soria">Soria · E1</option><option data-kis-dis="-4.5" data-zona="E1" value="Ávila">Ávila · E1</option></optgroup></select>
@@ -202,7 +210,7 @@
 <div>
 <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Superficie útil (m²)</label>
 <input class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:outline-none focus:border-amber-500 font-bold" id="pratikAlan" max="500.0" min="0.0" step="0.1" type="number" value="0.0"/>
-</div>
+</div><div><label class="block text-xs font-bold uppercase text-slate-500 mb-2" for="pratikYukseklik">Altura del recinto (m)</label><input class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 font-bold" id="pratikYukseklik" min="1" step="0.1" type="number" value="2.8"/></div>
 <div>
 <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Nivel de aislamiento</label>
 <select class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:outline-none focus:border-amber-500 font-bold" id="pratikYalitim">
@@ -296,7 +304,7 @@
 <label>Anchura de la 2. fachada (m)<input class="w-full border rounded p-2" disabled="" id="pratikIkinciDuvar" min="0.1" onchange="pratikIkinciDuvarDuzelt()" step="0.1" type="number"/></label>
 <label>Orientación de la 2. fachada<select class="w-full border rounded p-2" disabled="" id="pratikIkinciYon"><option selected="" value="Ninguna">Ninguna</option><option value="Oeste">Oeste</option><option value="Este">Este</option><option value="Sur">Sur</option><option value="Norte">Norte</option><option value="Suroeste">Suroeste</option><option value="Sureste">Sureste</option><option value="Noroeste">Noroeste</option><option value="Noreste">Noreste</option></select></label>
 <label>Suma de longitudes de paredes interiores / medianeras (m)<input class="w-full border rounded p-2" id="pratikIcDuvar" min="0" step="0.1" type="number"/></label>
-<label>Altura del recinto (m)<input class="w-full border rounded p-2" id="pratikYukseklik" min="1" step="0.1" type="number" value="2.8"/></label>
+
 <label hidden="" id="pratikDolapKutusu">Frigorífico industrial del comercio<select class="w-full border rounded p-2" id="pratikDolap"><option value="ic">Automático: condensador en el recinto</option><option value="yok">Ninguno / condensador exterior</option></select></label>
 </div>
 <p class="mt-3 text-xs text-slate-600">Si seleccionas dos fachadas pero dejas la orientación de la segunda en «Selecciona», solo se calculan la fachada principal y sus ventanas. Elige la orientación de la segunda para incluir su carga. Suma al acristalamiento las partes de vidrio de puertas correderas y balconeras.</p>
@@ -422,7 +430,7 @@
 </div>
 <div>
 <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Altura del recinto (m)</label>
-<input class="w-full bg-slate-200 cursor-not-allowed border border-slate-200 rounded-lg p-3 focus:outline-none font-bold" disabled="" id="katYuksekligi" min="1.0" oninput="guncelleSihirbazVeMotor()" step="0.1" type="number" value="2.8"/>
+<input class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:outline-none font-bold" id="katYuksekligi" min="1.0" oninput="guncelleSihirbazVeMotor()" step="0.1" type="number" value="2.8"/>
 </div>
 <div>
 <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Ventana</label>
@@ -604,7 +612,7 @@
 <!-- 2. MOTOR: KOMBİ VE ISI POMPASI HESABI -->
 <div class="hidden bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-8 space-y-6" id="motorIsitma">
 <h2 class="text-xl font-bold text-slate-700 border-b pb-3 border-slate-100 flex items-center gap-2">
-<i class="fa-solid fa-fire text-orange-600"></i> Datos de calefacción: caldera y bomba de calor
+<i class="fa-solid fa-fire text-orange-600"></i> Datos de calefacción: calderas y aerotermia
                 </h2>
 <form autocomplete="off" class="space-y-6" id="isitmaForm">
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -671,7 +679,7 @@
 </div>
 <div>
 <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Altura del recinto (m)</label>
-<input class="w-full bg-slate-200 cursor-not-allowed border border-slate-200 rounded-lg p-3 focus:outline-none font-bold" id="tavanIsitma" readonly="" step="0.1" type="number" value="2.8"/>
+<input class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:outline-none font-bold" id="tavanIsitma" min="1" step="0.1" type="number" value="2.8"/>
 </div>
 <div>
 <label class="block text-xs font-bold uppercase text-slate-500 mb-2" id="lblKisiBaslik">Número de residentes / trabajadores</label>
@@ -682,8 +690,8 @@
 <div>
 <label class="block text-xs font-bold uppercase text-orange-900 mb-2">Tipo de generador</label>
 <select class="w-full bg-white border border-orange-200 rounded-lg p-3 focus:outline-none focus:border-orange-500 font-bold text-orange-950" id="isiticiCihazTuru" onchange="isiticiCihazDegisti()">
-<option selected="" value="yogusmali">Caldera de condensación</option>
-<option value="isipompasi">Bomba de calor aire-agua</option>
+<option selected="" value="yogusmali">Caldera de gas de condensación</option>
+<option value="isipompasi">Aerotermia (bomba de calor aire-agua)</option>
 <option value="elektrikli">Caldera eléctrica</option>
 </select>
 </div>
@@ -875,7 +883,7 @@
                 btnIsitma.className = "px-4 py-2 rounded-lg font-bold text-xs transition flex items-center gap-1.5 bg-orange-600 text-white shadow-xs cursor-pointer";
                 btnSogutma.className = "px-4 py-2 rounded-lg font-bold text-xs transition flex items-center gap-1.5 text-slate-600 hover:text-blue-600 cursor-pointer";
                 demoBilgiKutusu.className = "bg-orange-50 border border-orange-200 rounded-xl p-4 space-y-2";
-                demoBaslik.innerHTML = `<i class="fa-solid fa-fire text-orange-600"></i> Funcionamiento de la bomba de calor en calefacción`;
+                demoBaslik.innerHTML = `<i class="fa-solid fa-fire text-orange-600"></i> Funcionamiento de la aerotermia en calefacción`;
                 demoAciklama.innerHTML = "En modo calor, la válvula de cuatro vías invierte el circuito. La unidad interior impulsa <strong>aire caliente (rojo)</strong>. La unidad exterior extrae calor del aire ambiente y expulsa <strong>aire frío (azul)</strong>.";
                 txt4YolDurum.innerText = "Activo (ciclo invertido)";
                 txtHavaDurum.className = "text-red-600 font-bold";
@@ -1178,7 +1186,7 @@
 
             const etiketEl = document.getElementById('lblOnerilenEtiket');
             if (tur === 'yogusmali') etiketEl.innerText = "Caldera de condensación recomendada:";
-            else if (tur === 'isipompasi') etiketEl.innerText = "Bomba de calor inverter recomendada:";
+            else if (tur === 'isipompasi') etiketEl.innerText = "Aerotermia (bomba de calor aire-agua) recomendada:";
             else etiketEl.innerText = "Caldera eléctrica recomendada:";
         }
 
@@ -1443,9 +1451,9 @@ function yapiTipiDegisti() {
     katSelect.disabled=!(yapiTipi==='daire'||yapiTipi==='ofis'||yapiTipi==='dubleks');
     if (yapiTipi === "daire" || yapiTipi === "ofis") {
         boxKatKonum.classList.remove("opacity-40", "pointer-events-none");
-        tavanInput.readOnly = yapiTipi === "daire";
-        tavanInput.className = yapiTipi === "daire" ? "w-full bg-slate-200 cursor-not-allowed border border-slate-200 rounded-lg p-3 focus:outline-none font-bold" : "w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:outline-none focus:border-orange-500 font-bold";
-        if(yapiTipi === "daire") tavanInput.value = "2.8";
+        tavanInput.readOnly = false;
+        tavanInput.className = "w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:outline-none focus:border-orange-500 font-bold";
+
 
         cepheSelect.value = "2";
         opt4.disabled = true;
@@ -1499,9 +1507,29 @@ function yapiTipiDegisti() {
         }
 
         function renderPazaryerleri(baslikMetni,tur,klimaModeli=null) {
-            const nombres={salon:'equipo de columna',kaset:'split cassette',duvar:'split mural inverter'};
-            const equipos=tur==='klima'&&klimaModeli?klimaModeli.urunler.map(x=>({label:`${nombres[x.tip]} · ${capacidadES(x.kapasite)}`,query:`aire acondicionado ${nombres[x.tip]} ${Math.round(x.kapasite/3.412/1000*10)/10} kW`})):[{label:baslikMetni,query:baslikMetni.replace(/\([^)]*\)/g,'')}];
-            document.getElementById('pazaryeriListesi').innerHTML=equipos.map(x=>`<div class="p-3 rounded-xl border border-blue-100 bg-blue-50/50 flex items-center justify-between gap-3"><div><span class="text-xs font-bold">Amazon.es</span><h4 class="font-bold text-slate-800 text-xs">${x.label}</h4></div><a href="https://www.amazon.es/s?k=${encodeURIComponent(x.query)}" target="_blank" rel="noopener sponsored" class="bg-blue-600 text-white font-bold text-xs py-2 px-3 rounded-lg">Buscar equipos</a></div>`).join('');
+            const nombres={salon:'aire acondicionado de columna',kaset:'aire acondicionado split cassette',duvar:'aire acondicionado split mural inverter'};
+            const escaparTexto=texto=>String(texto).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+            const tipo=tur==='klima'?'klima':document.getElementById('isiticiCihazTuru').value;
+            let equipos;
+            if(tur==='klima'&&klimaModeli) {
+                const unicos=new Map();
+                klimaModeli.urunler.forEach(x=>unicos.set(`${x.tip}:${x.kapasite}`,x));
+                equipos=[...unicos.values()].map(x=>({label:`${nombres[x.tip]} · ${capacidadES(x.kapasite)}`,query:`${nombres[x.tip]}${x.tip==='duvar'?' '+Math.round(x.kapasite)+' BTU':''}`}));
+            } else {
+                const potencia=baslikMetni.match(/([\d.,]+)\s*kW/);
+                const nombre=tipo==='isipompasi'?'aerotermia bomba de calor aire-agua calefacción':tipo==='elektrikli'?'caldera eléctrica':'caldera gas condensación';
+                equipos=[{label:baslikMetni,query:`${nombre}${potencia?' '+potencia[1]+' kW':''}`}];
+            }
+            // Enlaces directos sin identificadores de afiliación. No se consultan precios ni existencias.
+            const tiendas=[
+                {nombre:'El Corte Inglés',tipos:['klima','yogusmali','isipompasi'],url:q=>'https://www.elcorteingles.es/search/?s='+encodeURIComponent(q)},
+                {nombre:'MediaMarkt',tipos:['klima'],url:q=>'https://www.mediamarkt.es/es/search.html?query='+encodeURIComponent(q)},
+                {nombre:'Leroy Merlin',tipos:['klima','yogusmali','isipompasi','elektrikli'],categoria:true,url:q=>tipo==='isipompasi'?'https://www.leroymerlin.es/productos/energias-renovables/aerotermia/':tipo==='yogusmali'?'https://www.leroymerlin.es/productos/calefaccion-y-climatizacion/calderas-y-radiadores-de-agua/calderas-de-gas-de-condensacion/':tipo==='elektrikli'?'https://www.leroymerlin.es/productos/calefaccion-y-climatizacion/calderas-y-radiadores-de-agua/calderas-electricas/':'https://www.leroymerlin.es/productos/calefaccion-y-climatizacion/aire-acondicionado/aire-acondicionado-split-inverter/'},
+                {nombre:'ManoMano',tipos:['klima','yogusmali','isipompasi','elektrikli'],url:q=>'https://www.manomano.es/busqueda/'+encodeURIComponent(q)},
+                {nombre:'Amazon.es',tipos:['klima','yogusmali','isipompasi','elektrikli'],url:q=>'https://www.amazon.es/s?k='+encodeURIComponent(q)},
+                {nombre:'eBay.es',tipos:['klima','yogusmali','isipompasi','elektrikli'],url:q=>'https://www.ebay.es/sch/i.html?_nkw='+encodeURIComponent(q)}
+            ].filter(t=>t.tipos.includes(tipo));
+            document.getElementById('pazaryeriListesi').innerHTML=`<p class="text-xs text-slate-500 leading-relaxed">Busca y compara equipos en tiendas externas. Los enlaces no incorporan códigos de afiliación. No verificamos precios, descuentos ni existencias; comprueba la potencia, el vendedor y si la instalación está incluida.</p>`+equipos.map(x=>`<section class="p-3 rounded-xl border border-blue-100 bg-blue-50/50"><h4 class="font-bold text-slate-800 text-xs mb-3">${escaparTexto(x.label)}</h4><div class="grid grid-cols-1 sm:grid-cols-2 gap-2">${tiendas.map(t=>`<a href="${escaparTexto(t.url(x.query))}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between gap-2 bg-white border border-slate-200 hover:border-blue-500 text-blue-700 font-bold text-xs py-3 px-3 rounded-lg transition" aria-label="${escaparTexto((t.categoria?'Ver categoría de equipos':'Buscar '+x.label)+' en '+t.nombre+' (se abre en otra pestaña)')}"><span>${t.nombre}${t.categoria?'<span class="block text-xs font-normal text-slate-500">Ver categoría</span>':''}</span><span aria-hidden="true">↗</span></a>`).join('')}</div></section>`).join('');
         }
         function capacidadES(btu) {return `${(btu/3.412/1000).toLocaleString('es-ES',{maximumFractionDigits:2})} kW · ${Math.round(btu).toLocaleString('es-ES')} BTU/h · ${Math.round(btu/3.412/1000*3600000/4186.8).toLocaleString('es-ES')} fg/h`;}
         // https://www.baymak.com.tr/isi-pompasi-nedir
@@ -1511,7 +1539,7 @@ function yapiTipiDegisti() {
             const clases=tur==='yogusmali'?[24,28,30,35,40,45,50,60,70,80,100,120,150]:tur==='isipompasi'?[4,6,8,10,12,14,16,18,22,24,30,40,50,60,70,90]:[4,6,9,12,14,18,21,24,28,36,45,60,72,90];
             const capacidad=clases.find(x=>x>=yukKw)??null;
             const n=capacidad??Math.ceil(yukKw);
-            const nombre=tur==='yogusmali'?(n>45?'Caldera mural de condensación':'Caldera de gas de condensación'):tur==='isipompasi'?'Bomba de calor aire-agua':'Caldera eléctrica';
+            const nombre=tur==='yogusmali'?(n>45?'Caldera mural de condensación':'Caldera de gas de condensación'):tur==='isipompasi'?'Aerotermia (bomba de calor aire-agua)':'Caldera eléctrica';
             const unidad=`${n.toLocaleString('es-ES')} kW`+(tur==='yogusmali'?` · ${Math.round(n*3600000/4186.8).toLocaleString('es-ES')} kcal/h`:'');
             return {kapasite:capacidad,etiket:`${capacidad?'':'Al menos '}${unidad} — ${nombre}${capacidad?' (clase orientativa)':' · selección mediante proyecto'}`};
         }
@@ -1682,8 +1710,8 @@ function yapiTipiDegisti() {
             const ekCihazlarAlani = document.getElementById("ekCihazlarAlani");
 
             if (mahalFonks === "Vivienda") {
-                yukseklikInput.value = "2.8"; yukseklikInput.disabled = true;
-                yukseklikInput.className = "w-full bg-slate-200 cursor-not-allowed border border-slate-200 rounded-lg p-3 focus:outline-none font-bold";
+                yukseklikInput.disabled = false;
+                yukseklikInput.className = "w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:outline-none focus:border-blue-500 font-bold";
                 ekCihazlarAlani.classList.add("hidden");
             } else {
                 yukseklikInput.disabled = false;
