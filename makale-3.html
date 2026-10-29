@@ -1,105 +1,143 @@
 <!DOCTYPE html>
 
-<html lang="es">
+<html lang="es-ES">
 <head>
 <meta charset="utf-8"/>
 <meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
 <meta content="no-cache" http-equiv="Pragma"/>
 <meta content="0" http-equiv="Expires"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Normativa de Aislamiento Térmico CTE-HE: Principios Básicos | Calculoclima</title>
-<meta content="Guía sobre el Código Técnico de la Edificación (CTE-HE), zonas climáticas en España, ahorro energético y optimización de la envolvente." name="description"/>
+<title>Leyes de la termodinámica y su aplicación a la climatización | Calculoclima</title>
+<meta content="Guía de termodinámica aplicada a climatización: principios cero, primero y segundo, COP, ciclo frigorífico, Carnot y ejemplos de cálculo." name="description"/>
+<meta content="index, follow" name="robots"/>
+
+
+<meta content="Guía de termodinámica aplicada a climatización: principios cero, primero y segundo, COP, ciclo frigorífico, Carnot y ejemplos de cálculo." property="og:description"/>
+
+
+<link href="favicon.png" rel="icon" type="image/png"/>
+<link href="favicon.png" rel="apple-touch-icon"/>
 <!-- Google tag (gtag.js) -->
 
 
-<!-- Google AdSense Kodu -->
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6907551704910400"></script>
-<!-- Canonical Etiketi -->
-<link href="https://calculoclima.es/makale-3.html" rel="canonical"/>
-<!-- Article Schema Markup (JSON-LD) -->
-<script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://calculoclima.es/makale-3.html"
-  },
-  "headline": "Normativa de Aislamiento Térmico CTE-HE: Principios Básicos",
-  "description": "Guía sobre el Código Técnico de la Edificación (CTE-HE), zonas climáticas en España, ahorro energético y optimización de la envolvente.",
-  "image": "https://calculoclima.es/favicon.png",
-  "author": {
-    "@type": "Organization",
-    "name": "Calculoclima",
-    "url": "https://calculoclima.es/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Calculoclima",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://calculoclima.es/favicon.png"
-    }
-  },
-  "datePublished": "2026-09-01",
-  "dateModified": "2026-10-28",
-  "inLanguage": "es-ES",
-  "url": "https://calculoclima.es/makale-3.html"
-}</script>
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="favicon.png" rel="icon" type="image/png"/>
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KGZZ4GT50W"></script><script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('consent', 'default', {ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
-  gtag('js', new Date());
-
-  gtag('config', 'G-KGZZ4GT50W');
-</script></head>
+<!-- Article Schema (JSON-LD) -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Leyes de la termodinámica y su aplicación a la climatización", "description": "Guía de termodinámica aplicada a climatización: principios cero, primero y segundo, COP, ciclo frigorífico, Carnot y ejemplos de cálculo.", "url": "https://calculoclima.es/makale-3.html", "publisher": {"@type": "Organization", "name": "Calculoclima", "url": "https://calculoclima.es/"}, "inLanguage": "es-ES", "wordCount": 2610, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://calculoclima.es/makale-3.html"}, "dateModified": "2026-10-29"}</script>
+<style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; scroll-behavior: smooth; }
+        .formula { overflow-x: auto; background: #eff6ff; padding: 1rem; border-radius: .75rem; font-size: 1.05rem; }
+        article h2 { font-weight: 800; font-size: 1.35rem; padding-top: 1rem; scroll-margin-top: 6rem; }
+        article h3 { font-weight: 700; font-size: 1.1rem; }
+        article a { color: #1d4ed8; text-decoration: underline; }
+        article ul { list-style: disc; padding-left: 1.5rem; }
+        article table { border-collapse: collapse; width: 100%; }
+        article th, article td { border: 1px solid #cbd5e1; padding: .6rem; text-align: left; }
+    </style>
+<link href="https://calculoclima.es/makale-3.html" rel="canonical"/><meta content="Leyes de la termodinámica y su aplicación a la climatización" property="og:title"/><meta content="https://calculoclima.es/makale-3.html" property="og:url"/><meta content="article" property="og:type"/><meta content="es_ES" property="og:locale"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KGZZ4GT50W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});gtag('js',new Date());gtag('config','G-KGZZ4GT50W');</script><style>main,article{min-width:0;overflow-wrap:anywhere}main img,article img{max-width:100%;height:auto}main table,article table{display:block;max-width:100%;overflow-x:auto}main pre,article pre{max-width:100%;overflow-x:auto}nav>div{flex-wrap:wrap;gap:.75rem}</style></head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
 <!-- NAVBAR -->
 <nav class="no-print bg-white border-b border-slate-100 py-4 px-6 shadow-xs sticky top-0 z-40">
 <div class="max-w-7xl mx-auto flex justify-between items-center">
 <div class="flex items-center gap-2">
+<a class="flex items-center gap-2 cursor-pointer" href="index.html">
 <i class="fa-solid fa-snowflake text-blue-600 text-2xl animate-pulse"></i>
 <span class="text-2xl font-black tracking-tight text-slate-900">calculoclima<span class="text-blue-600">.es</span></span>
+</a>
 </div>
 <div class="flex items-center gap-3">
 <a class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-blue-600 transition cursor-pointer" href="index.html">
-<i class="fa-solid fa-arrow-left text-blue-500"></i> Volver a Herramientas de Cálculo
-            </a>
+<i class="fa-solid fa-calculator text-blue-500"></i> Volver a la calculadora
+                </a>
 </div>
 </div>
 </nav>
 <!-- ANA İÇERİK CONTAINER -->
-<main class="max-w-4xl mx-auto my-8 px-4 flex-grow w-full">
-<article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-12 space-y-6">
-<div class="space-y-3 border-b pb-6 border-slate-100">
-<span class="text-xs font-extrabold bg-blue-100 text-blue-800 px-3 py-1 rounded-full inline-block">Artículo de Ingeniería &amp; Estándares</span>
-<h1 class="text-2xl md:text-4xl font-black text-slate-900 leading-tight">Normativa de Aislamiento Térmico CTE-HE: Principios Básicos</h1>
-<p class="text-xs text-slate-500"><i class="fa-regular fa-calendar mr-1"></i> Actualizado: 2026 | Grupo de Contenido Técnico</p>
-</div>
-<div class="prose prose-slate max-w-none text-sm md:text-base leading-relaxed space-y-6 text-slate-700">
-<p>En el sector de la construcción en España, el estándar nacional fundamental para los cálculos de aislamiento térmico y la optimización de la envolvente de los edificios se rige por el <strong>Código Técnico de la Edificación (CTE), Documento Básico HE (Ahorro de Energía)</strong>. Desarrollado con el fin de limitar el consumo energético de los edificios, reducir al mínimo los costes de calefacción en invierno y garantizar unas condiciones de confort adecuadas, este estándar constituye una parte indispensable de los proyectos de instalaciones mecánicas e ingeniería de la edificación. El CTE garantiza mediante modelos matemáticos que la cantidad de energía térmica anual requerida para calentar y enfriar un edificio se mantenga por debajo de determinados valores límite.</p>
-<h2 class="text-xl font-extrabold text-slate-900 pt-4">Zonas Climáticas en España y Optimización Regional</h2>
-<p>España cuenta con una gran diversidad geográfica y climática. Para gestionar esta variedad climática, el CTE divide el territorio peninsular y archipiélagos en zonas climáticas designadas por letras de la A a la E (según la severidad de invierno) y números del 1 al 4 (según la severidad de verano). Cada zona cuenta con temperaturas exteriores de cálculo, grados-día y periodos de insolación específicos. Por ejemplo, mientras que en las zonas costeras más cálidas losespesores de aislamiento de las fachadas pueden ser más moderados, en provincias de interior con climas continentales severos como Burgos, Soria o León, es obligatorio emplear espesores elevados de materiales de aislamiento térmico para prevenir pérdidas de calor.</p>
-<h2 class="text-xl font-extrabold text-slate-900 pt-4">Demanda Energética y Fundamentos de Cálculo</h2>
-<p>La filosofía central del estándar consiste en calcular la pérdida de calor total de un edificio hacia el entorno exterior (demanda energética específica) y compararla con el valor límite permitido. En este cálculo se formulan individualmente las pérdidas por transmisión (conducción) a través de fachadas, ventanas, cubiertas, suelos y puentes térmicos. Asimismo, se tienen en cuenta las ganancias de energía solar a través de la orientación del edificio para determinar las necesidades energéticas netas. Los coeficientes de conductividad térmica de los materiales y las resistencias de transferencia térmica superficial utilizados en los cálculos del CTE deben ajustarse plenamente a la normativa vigente.</p>
-<h2 class="text-xl font-extrabold text-slate-900 pt-4">Conclusión y Recomendaciones de Aplicación</h2>
-<p>Cumplir estrictamente con los principios de la normativa de aislamiento térmico del CTE permite reducir el consumo de combustible en los edificios hasta en un 50%. Realizar proyectos arquitectónicos y cálculos estáticos de acuerdo con los valores límite previstos por este estándar resulta de vital importancia tanto para el pleno cumplimiento legal como para el ahorro económico a largo plazo.</p>
-<p class="font-bold text-slate-900 bg-blue-50 p-4 rounded-xl border border-blue-200">Los edificios diseñados conforme a los estándares del CTE ofrecen contribuciones duraderas y a largo plazo tanto a la economía nacional como al medio ambiente.</p>
-</div>
+<main class="max-w-4xl mx-auto my-10 px-4 flex-grow w-full space-y-8 bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-slate-100">
+<header class="border-b border-slate-100 pb-6 space-y-3">
+<span class="text-xs font-extrabold uppercase tracking-wider bg-blue-50 text-blue-700 py-1 px-3 rounded-full">Guía de ingeniería #5</span>
+<h1 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">Leyes de la termodinámica y su aplicación a la climatización</h1>
+<p class="text-sm text-slate-500 font-medium">Actualizado: 2026 | Fundamentos termodinámicos de la climatización</p>
+</header>
+<article class="prose max-w-none text-slate-700 space-y-6 leading-relaxed text-sm md:text-base">
+<p>Las leyes de la termodinámica explican cómo funciona un aire acondicionado, por qué una bomba de calor puede entregar más calor que la electricidad que consume y qué limita el rendimiento de una instalación. También permiten distinguir entre potencia, energía y temperatura: tres conceptos que suelen confundirse al comparar equipos. Esta guía desarrolla los principios cero, primero y segundo con ecuaciones, ejemplos y aplicaciones a calefacción, refrigeración y agua caliente sanitaria.</p>
+<p>El objetivo es interpretar las prestaciones con criterio técnico. Una máquina eficiente necesita una instalación adecuada, una envolvente bien diseñada y condiciones de trabajo compatibles con su tecnología. Las leyes físicas son universales; el clima, los procedimientos de cálculo y las exigencias reglamentarias deben adaptarse al lugar del proyecto.</p>
+<nav aria-label="Índice del artículo" class="bg-blue-50 rounded-xl p-5"><h2>Contenido de la guía</h2><ul><li><a href="#magnitudes">Magnitudes y unidades</a></li><li><a href="#principio-cero">Principio cero y medición</a></li><li><a href="#primer-principio">Conservación de la energía</a></li><li><a href="#segundo-principio">Entropía y límites</a></li><li><a href="#ciclo">Ciclo frigorífico y rendimiento</a></li><li><a href="#ejemplos">Ejemplos de cálculo</a></li><li><a href="#espana">Aplicación en España</a></li><li><a href="#preguntas">Preguntas frecuentes</a></li></ul></nav>
+<h2 id="magnitudes">1. Temperatura, calor, trabajo y energía</h2>
+<p>La temperatura caracteriza el estado térmico de un sistema. El calor es energía transferida a causa de una diferencia de temperatura; el trabajo es otra forma de transferencia energética, asociada, por ejemplo, a un eje de compresor. No resulta preciso afirmar que un cuerpo «contiene calor»: contiene energía interna, mientras que el calor aparece cuando existe una transferencia a través de su frontera.</p>
+<p>La energía interna, U, reúne contribuciones microscópicas del sistema. La entalpía, H, incorpora además el producto de presión y volumen y resulta especialmente útil al estudiar fluidos que circulan por tuberías. Para una masa determinada, H = U + pV. La entalpía específica se escribe h y se expresa normalmente en kJ/kg.</p>
+<p>Un sistema cerrado puede intercambiar energía, pero no masa. Un volumen de control permite estudiar entradas y salidas de fluido. Un depósito sellado constituye un ejemplo del primero; un compresor con refrigerante circulando pertenece al segundo. Elegir la frontera antes de escribir las ecuaciones evita contar dos veces una misma transferencia.</p>
+<div class="overflow-x-auto"><table><caption>Notación utilizada en los balances</caption><thead><tr><th scope="col">Símbolo</th><th scope="col">Magnitud</th><th scope="col">Unidad habitual</th></tr></thead><tbody><tr><td>T</td><td>Temperatura absoluta</td><td>K</td></tr><tr><td>Q, W</td><td>Calor y trabajo transferidos</td><td>kJ</td></tr><tr><td>Q̇, P</td><td>Potencia térmica y potencia mecánica o eléctrica</td><td>kW</td></tr><tr><td>ṁ</td><td>Caudal másico</td><td>kg/s</td></tr><tr><td>h, cₚ</td><td>Entalpía específica y calor específico a presión constante</td><td>kJ/kg; kJ/(kg·K)</td></tr><tr><td>S, Ṡ<sub>gen</sub></td><td>Entropía y generación de entropía por unidad de tiempo</td><td>kJ/K; kW/K</td></tr></tbody></table></div>
+<p>El kilovatio mide potencia; el kilovatio hora mide energía. Un equipo que consume una potencia constante de 1 kW durante tres horas utiliza 3 kWh. Su potencia térmica puede ser distinta de su potencia eléctrica. Las diferencias de temperatura tienen el mismo valor numérico en kelvin y grados Celsius, pero las relaciones termodinámicas que emplean temperaturas absolutas requieren kelvin: T = θ + 273,15.</p>
+<h2 id="principio-cero">2. Principio cero: equilibrio térmico</h2>
+<p>Si dos sistemas están, por separado, en equilibrio térmico con un tercero, también están en equilibrio térmico entre sí. Este principio fundamenta la comparación de temperaturas y el uso de termómetros. Cuando un sensor alcanza el equilibrio térmico con el medio que lo rodea, su señal permite estimar la temperatura de ese medio mediante una calibración.</p>
+<p>En climatización, la ubicación del sensor importa tanto como su precisión. Un termostato expuesto al sol, junto a una puerta exterior o dentro del chorro de impulsión puede medir una temperatura poco representativa de la zona ocupada. El control responderá correctamente a una señal que describe mal las condiciones de confort, generando ciclos innecesarios o diferencias entre habitaciones.</p>
+<p>Equilibrio térmico no significa que todos los fenómenos hayan desaparecido. Una estancia puede mantener una temperatura aproximadamente constante mientras recibe radiación solar y pierde calor por ventilación. En ese caso existe un estado estacionario con intercambios compensados, no un aislamiento perfecto. Además, el confort depende de la temperatura radiante, la humedad y la velocidad del aire.</p>
+<h2 id="primer-principio">3. Primer principio: conservación de la energía</h2>
+<p>La energía se conserva: puede transformarse y cruzar la frontera del sistema, pero no aparece de la nada. Para un sistema cerrado, adoptando calor positivo hacia el sistema y trabajo positivo realizado por él, el balance general es ΔE = Q − W. Si las variaciones de energía cinética y potencial son despreciables, se reduce a:</p>
+<p class="formula">ΔU = Q − W</p>
+<p>La convención de signos debe mantenerse durante todo el cálculo. Con esta elección, el trabajo que un compresor recibe desde el exterior corresponde a un trabajo realizado por el sistema negativo. Es frecuente encontrar otros convenios en manuales; las ecuaciones pueden parecer distintas y describir exactamente la misma conservación.</p>
+<p>Para un volumen de control con una entrada y una salida, en régimen estacionario y despreciando cambios cinéticos y potenciales, el balance toma la forma siguiente. Q̇ es positivo hacia el volumen y Ẇ es positivo cuando sale como trabajo:</p>
+<p class="formula">Q̇ − Ẇ = ṁ(h₂ − h₁)</p>
+<p>En un compresor aproximadamente adiabático, la potencia suministrada al eje es P<sub>eje</sub> ≈ ṁ(h₂ − h₁). El refrigerante sale con mayor entalpía porque recibe trabajo. La potencia eléctrica de entrada será mayor que la potencia al eje cuando se incluyen pérdidas del motor y del accionamiento. Definir qué consumo recoge el instrumento es esencial para comparar resultados.</p>
+<p>En un intercambiador sin trabajo mecánico relevante, la potencia transferida puede calcularse mediante Q̇ = ṁΔh. Si el fluido no cambia de fase y su calor específico puede considerarse constante, se emplea Q̇ = ṁcₚΔT. Esta aproximación sirve para circuitos de agua; en evaporadores y condensadores frigoríficos conviene utilizar entalpías obtenidas de propiedades del refrigerante.</p>
+<h2 id="segundo-principio">4. Segundo principio: dirección de los procesos y entropía</h2>
+<p>Conservar energía no basta para que un proceso sea posible. El segundo principio establece restricciones sobre su dirección y sobre la conversión de calor en trabajo. El calor no pasa espontáneamente de un foco frío a otro caliente sin un efecto adicional. Un frigorífico sí realiza ese transporte porque recibe trabajo y cede calor al entorno.</p>
+<p>La entropía, S, es una propiedad que permite expresar estas restricciones. En un proceso reversible, una transferencia elemental de calor cumple dS = δQ<sub>rev</sub>/T. En procesos reales aparece generación de entropía por fricción, mezclas, expansión irreversible y transferencia térmica con diferencias finitas de temperatura.</p>
+<p class="formula">ΔS<sub>universo</sub> ≥ 0</p>
+<p>La igualdad corresponde al límite reversible; una transformación real irreversible produce un aumento. Un sistema particular puede disminuir su entropía si la exporta mediante calor o masa, de modo que no debe confundirse el balance local con el conjunto formado por sistema y entorno. Para un sistema cerrado, el balance puede escribirse ΔS = ∫δQ/T<sub>b</sub> + S<sub>gen</sub>, donde T<sub>b</sub> es la temperatura de frontera y S<sub>gen</sub> ≥ 0.</p>
+<p>La energía degradada no desaparece. Pierde capacidad para convertirse en trabajo útil respecto de un entorno de referencia. Esta capacidad se estudia mediante la exergía. Bajo las hipótesis correspondientes, la destrucción de exergía se relaciona con la generación de entropía mediante Ė<sub>D</sub> = T₀Ṡ<sub>gen</sub>. Reducir irreversibilidades ayuda a explicar mejoras que un balance energético aislado no identifica.</p>
+<h2>5. Límite de Carnot y salto térmico</h2>
+<p>Una máquina reversible que trabaja entre dos focos a temperaturas constantes establece un límite teórico. Para una bomba de calor y un refrigerador, respectivamente:</p>
+<p class="formula">COP<sub>H,Carnot</sub> = T<sub>H</sub>/(T<sub>H</sub> − T<sub>L</sub>)<br/>COP<sub>L,Carnot</sub> = T<sub>L</sub>/(T<sub>H</sub> − T<sub>L</sub>)</p>
+<p>T<sub>H</sub> y T<sub>L</sub> son temperaturas absolutas del foco caliente y frío. Estas expresiones muestran por qué un salto térmico menor facilita un rendimiento elevado. No sirven para prometer el consumo de un producto: una máquina comercial presenta pérdidas, necesita diferencias térmicas en sus intercambiadores y puede trabajar en condiciones variables.</p>
+<p>Con focos ideales a 35 °C y 0 °C, el límite de calefacción es 308,15/35 ≈ 8,80. Si el foco caliente pasa a 55 °C, manteniendo el frío a 0 °C, resulta 328,15/55 ≈ 5,97. Son límites entre focos, no COP reales de una instalación hidráulica a esas temperaturas. El refrigerante suele condensar por encima del agua de impulsión y evaporar por debajo del aire exterior.</p>
+<h2 id="ciclo">6. Ciclo frigorífico por compresión de vapor</h2>
+<p>El ciclo básico incluye evaporador, compresor, condensador y dispositivo de expansión. En el evaporador, el refrigerante absorbe energía a baja presión. El compresor eleva su presión y entalpía. En el condensador, el fluido cede energía al foco caliente. Finalmente, la expansión reduce la presión antes de comenzar otro recorrido.</p>
+<p>Definiendo los estados 1 a la entrada del compresor, 2 a su salida, 3 a la salida del condensador y 4 a la salida de la expansión, un modelo estacionario simplificado proporciona las siguientes relaciones:</p>
+<p class="formula">Q̇<sub>L</sub> = ṁ(h₁ − h₄)<br/>P<sub>eje</sub> ≈ ṁ(h₂ − h₁)<br/>Q̇<sub>H</sub> = ṁ(h₂ − h₃)<br/>h₄ ≈ h₃</p>
+<p>La última igualdad corresponde a un estrangulamiento aproximadamente adiabático, sin trabajo y con cambios cinéticos y potenciales despreciables. No implica expansión isentrópica: la válvula genera irreversibilidades. El balance idealizado del conjunto resulta Q̇<sub>H</sub> = Q̇<sub>L</sub> + P<sub>eje</sub>. Al evaluar el sistema completo deben incorporarse motores, ventiladores, bombas y pérdidas según la frontera elegida.</p>
+<p>En refrigeración interesa el calor retirado de la estancia. En calefacción interesa el calor entregado. Una bomba de calor reversible intercambia las funciones de los intercambiadores mediante su circuito. Su utilidad depende del balance deseado, aunque ambos modos respetan las mismas leyes físicas.</p>
+<h2>7. COP, EER, SCOP y SEER</h2>
+<p>El coeficiente de rendimiento en calefacción es COP<sub>H</sub> = Q̇<sub>H</sub>/P<sub>el</sub>. Para refrigeración, COP<sub>L</sub> = Q̇<sub>L</sub>/P<sub>el</sub>. Cuando el EER se expresa como cociente de potencias en W/W, coincide numéricamente con este último bajo idénticas condiciones y fronteras de evaluación. Un EER expresado en Btu/(Wh) tiene otra escala: aproximadamente 3,412 veces el valor en W/W.</p>
+<p>Un COP superior a uno no vulnera la conservación de la energía. El equipo incorpora electricidad y transporta energía desde otra fuente. Por ejemplo, 3 kW absorbidos del ambiente y 1 kW de entrada producen 4 kW térmicos en un balance idealizado. El cociente es cuatro porque la electricidad no es la única entrada energética.</p>
+<p>SCOP y SEER describen prestaciones estacionales obtenidas con condiciones y ponderaciones normalizadas. Permiten comparaciones más representativas que un único punto nominal, pero no garantizan el consumo exacto de una vivienda. El clima local, las consignas, las horas de uso y los auxiliares alteran el resultado. Para transformar rendimiento en gasto conviene utilizar la demanda anual y una estimación del rendimiento del sistema instalado.</p>
+<h2 id="ejemplos">8. Ejemplos de cálculo con unidades</h2>
+<p><strong>Calefacción de una estancia.</strong> Supongamos una demanda instantánea de 5 kW y un COP efectivo de 4 en las condiciones consideradas. La entrada eléctrica estimada es P<sub>el</sub> = 5/4 = 1,25 kW. Durante cuatro horas de funcionamiento constante serían 5 kWh eléctricos. La estancia recibe 20 kWh térmicos; la diferencia procede del foco exterior en el modelo simplificado.</p>
+<p><strong>Calentamiento de agua.</strong> Para elevar 100 kg de agua desde 15 °C hasta 50 °C, tomando cₚ = 4,18 kJ/(kg·K), se obtiene Q = mcₚΔT = 100 × 4,18 × 35 = 14.630 kJ, aproximadamente 4,06 kWh. Este valor excluye pérdidas del depósito, tuberías y recirculación. Tampoco indica por sí solo el tiempo: con 2 kW térmicos constantes se necesitarían unas 2,03 horas.</p>
+<p><strong>Caudal hidráulico.</strong> Una batería entrega 6 kW con agua que cambia 5 K de temperatura. El caudal es ṁ = 6/(4,18 × 5) ≈ 0,287 kg/s. Con densidad aproximada de 1.000 kg/m³ equivale a 1,03 m³/h. La selección de la bomba requiere después considerar pérdidas de carga y regulación, no solamente ese caudal.</p>
+<h2>9. Carga sensible, humedad y dimensionamiento</h2>
+<p>La refrigeración no consiste únicamente en bajar la temperatura. La carga sensible cambia la temperatura del aire; la latente está asociada a la eliminación de humedad. Si una batería enfría el aire por debajo de su punto de rocío, aparece condensación y se retira vapor de agua. Este proceso consume parte de la capacidad frigorífica disponible.</p>
+<p>Para tratar ambas contribuciones se utiliza el balance Q̇ = ṁ<sub>da</sub>(h<sub>entrada</sub> − h<sub>salida</sub>), con entalpías psicrométricas por kilogramo de aire seco y las hipótesis apropiadas. Usar exclusivamente cₚΔT cuando existe deshumidificación puede subestimar la carga total. En zonas costeras, la ventilación y las infiltraciones húmedas pueden resultar decisivas.</p>
+<p>La selección debe considerar ventanas, orientación, protecciones solares, ocupantes, equipos y condiciones exteriores de proyecto. Sobredimensionar puede aumentar los ciclos de arranque y reducir el control de humedad, especialmente con equipos de poca modulación. Una primera aproximación está disponible en la <a href="index.html">calculadora de climatización</a>; para estudiar la envolvente consulta la <a href="makale-1.html">guía de aislamiento y eficiencia energética</a>.</p>
+<h2>10. Cómo mejorar el rendimiento real</h2>
+<p>Reducir la demanda y reducir el salto térmico son estrategias complementarias. El aislamiento y las protecciones solares disminuyen las pérdidas o ganancias del edificio. En calefacción hidráulica, emisores capaces de cubrir la carga con agua menos caliente pueden favorecer el rendimiento de la bomba de calor. Debe comprobarse su potencia a la temperatura de diseño.</p>
+<p>También influyen la limpieza de filtros, la ventilación de la unidad exterior y el equilibrado hidráulico. Un intercambiador obstruido necesita condiciones de trabajo más exigentes para transferir la misma potencia. La regulación climática y una modulación adecuada ayudan a evitar temperaturas de impulsión innecesariamente altas y arranques frecuentes.</p>
+<p>Con aire exterior frío y húmedo puede formarse escarcha en el evaporador de una bomba de calor. El desescarche requiere energía y puede interrumpir temporalmente la entrega de calor. Las resistencias de apoyo modifican el rendimiento global. Por eso conviene revisar prestaciones a baja temperatura, capacidad disponible y consumo auxiliar junto con el dato nominal.</p>
+<h2 id="espana">11. Termodinámica y normativa española</h2>
+<p>La termodinámica fundamenta el cálculo, pero no sustituye la comprobación reglamentaria. En España, el <a href="https://www.codigotecnico.org/DocumentosCTE/AhorroEnergia.html">CTE, Documento Básico HE</a>, aborda el ahorro de energía del edificio. El <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2007-15820">RITE, aprobado por el Real Decreto 1027/2007</a>, establece el marco de las instalaciones térmicas destinadas al bienestar y la higiene, con exigencias de eficiencia y seguridad.</p>
+<p>La certificación energética se encuadra en el <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2021-9176">Real Decreto 390/2021</a>. Se trata de ámbitos relacionados, pero diferentes: edificio, instalación y evaluación certificada. Para profundizar en esa relación puede consultarse la <span>guía de rendimiento energético y certificación</span>. Los procedimientos exigibles dependen del alcance de la actuación y de la normativa aplicable al proyecto.</p>
+<p>El artículo original no incluía referencias a legislación turca. Por ello se incorpora el contexto español sin presentar una norma extranjera como equivalente jurídico. Los principios físicos mantienen su validez, mientras que las condiciones climáticas, documentación y verificación deben corresponder a España. Conviene consultar siempre los textos oficiales y sus modificaciones antes de cerrar un proyecto.</p>
+<h2 id="preguntas">12. Preguntas frecuentes</h2>
+<h3>¿Una bomba de calor crea energía?</h3><p>No. Transfiere energía del ambiente e incorpora trabajo eléctrico. El primer principio permite contabilizar ambas entradas y el calor entregado.</p>
+<h3>¿Un COP de cuatro significa rendimiento del 400 %?</h3><p>Describe una relación entre calor útil y electricidad consumida. Es preferible indicar COP = 4 y las condiciones de evaluación, evitando confundirlo con el rendimiento de conversión de una resistencia eléctrica.</p>
+<h3>¿Se puede calcular Carnot con grados Celsius?</h3><p>No en los numeradores ni en las relaciones de temperaturas absolutas. Deben utilizarse kelvin. Una diferencia de 20 °C sí equivale a una diferencia de 20 K.</p>
+<h3>¿Basta el COP para elegir un aire acondicionado?</h3><p>No. Deben comprobarse capacidad, rango de modulación, prestaciones estacionales, ruido, deshumidificación y condiciones de instalación. El COP es una parte de la evaluación.</p>
+<h3>¿Qué relación tiene la transmisión de calor con estas leyes?</h3><p>La termodinámica establece balances y límites; la transferencia de calor analiza mecanismos y velocidades. Ambos enfoques se complementan al dimensionar intercambiadores y envolventes.</p>
+<h2>13. Referencias y lectura complementaria</h2>
+<ul><li><a href="https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/thermodynamics/">NASA Glenn: introducción a la termodinámica</a>, como recurso educativo sobre los principios físicos.</li><li><a href="https://www.codigotecnico.org/DocumentosCTE/AhorroEnergia.html">Portal oficial del CTE: ahorro de energía</a>.</li><li><a href="https://www.boe.es/buscar/act.php?id=BOE-A-2007-15820">BOE: texto consolidado del RITE</a>.</li><li><a href="https://www.boe.es/buscar/act.php?id=BOE-A-2021-9176">BOE: certificación de la eficiencia energética</a>.</li></ul>
 </article>
+<div class="border-t border-slate-100 pt-6 mt-8 flex justify-between items-center text-xs text-slate-500 font-medium">
+<span>© 2026 calculoclima.es</span>
+<a class="text-blue-600 hover:underline font-bold" href="index.html">Volver al inicio</a>
+</div>
 </main>
 <!-- FOOTER -->
+<!-- Antes de publicar: completar titular/responsable, domicilio y datos fiscales aplicables; verificar inventario de cookies, conservación, proveedores y CMP. -->
+<footer class="bg-white border-t border-slate-200 py-8 text-center text-xs text-slate-500 space-y-4 no-print px-4">
 
-<!-- MODALLAR -->
-
-
-
-<!-- MODAL YÖNETİM SCRIPT -->
-
-<nav aria-label="Más guías" class="max-w-4xl w-full mx-auto px-4 py-6 flex flex-wrap justify-between gap-4 text-sm"><a class="text-blue-700 underline" href="makale-2.html">← Artículo anterior</a><a class="text-blue-700 underline" href="index.html#blogBolumu">Todas las guías</a><a class="text-blue-700 underline" href="makale-4.html">Artículo siguiente →</a></nav><footer class="bg-white border-t border-slate-200 py-8 text-center text-xs text-slate-500 space-y-4 no-print px-4 mt-auto"><p>Contenido informativo. Consulta el alcance y los límites de las herramientas antes de elegir un equipo.</p><nav aria-label="Información del sitio" class="flex justify-center items-center gap-4 font-bold text-slate-600 flex-wrap pt-2 text-xs"><a class="hover:text-blue-600 transition underline-offset-4 hover:underline" href="quienes-somos.html" rel="noopener" target="_blank">Quiénes somos</a>
+<nav aria-label="Información del sitio" class="flex justify-center items-center gap-4 font-bold text-slate-600 flex-wrap pt-2 text-xs"><a class="hover:text-blue-600 transition underline-offset-4 hover:underline" href="quienes-somos.html" rel="noopener" target="_blank">Quiénes somos</a>
 <span>•</span>
 <a class="hover:text-blue-600 transition underline-offset-4 hover:underline" href="contacto.html" rel="noopener" target="_blank">Contacto</a>
 <span>•</span>
@@ -107,5 +145,14 @@
 <span>•</span>
 <a class="hover:text-blue-600 transition underline-offset-4 hover:underline" href="condiciones-uso.html" rel="noopener" target="_blank">Condiciones de uso</a>
 <span>•</span>
-<a class="hover:text-blue-600 transition underline-offset-4 hover:underline" href="aviso-legal.html" rel="noopener" target="_blank">Aviso legal y límites</a></nav><div class="mt-4"><button class="underline text-blue-700" onclick="abrirPreferenciasCookies()" type="button">Preferencias de privacidad y cookies</button><p class="text-xs mt-2" id="estadoCookies" role="status"></p></div><p>© 2026 calculoclima.es</p></footer><script>function abrirPreferenciasCookies(){if(window.googlefc&&typeof window.googlefc.showRevocationMessage==='function'){window.googlefc.callbackQueue=window.googlefc.callbackQueue||[];window.googlefc.callbackQueue.push(window.googlefc.showRevocationMessage);}else{document.getElementById('estadoCookies').textContent='El gestor de consentimiento de Google no está disponible en esta sesión. Consulta la política de privacidad o vuelve a intentarlo cuando se haya cargado.';}}</script></body>
+<a class="hover:text-blue-600 transition underline-offset-4 hover:underline" href="aviso-legal.html" rel="noopener" target="_blank">Aviso legal y límites</a></nav>
+<p class="text-[11px] text-slate-400 pt-2 border-t border-slate-100 max-w-xl mx-auto">
+            © 2026 calculoclima.es | Calculadora de climatización. Todos los derechos reservados.
+        </p>
+<div class="mt-4"><button class="underline text-blue-700" onclick="abrirPreferenciasCookies()" type="button">Preferencias de privacidad y cookies</button><p class="text-xs mt-2" id="estadoCookies" role="status"></p></div></footer>
+
+
+
+
+<script>function abrirPreferenciasCookies(){if(window.googlefc&&typeof window.googlefc.showRevocationMessage==='function'){window.googlefc.callbackQueue=window.googlefc.callbackQueue||[];window.googlefc.callbackQueue.push(window.googlefc.showRevocationMessage);}else{document.getElementById('estadoCookies').textContent='El gestor de consentimiento de Google no está disponible en esta sesión. Consulta la política de privacidad o vuelve a intentarlo cuando se haya cargado.';}}</script></body>
 </html>

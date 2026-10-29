@@ -1,101 +1,159 @@
 <!DOCTYPE html>
 
-<html lang="es">
+<html lang="es-ES">
 <head>
 <meta charset="utf-8"/>
 <meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
 <meta content="no-cache" http-equiv="Pragma"/>
 <meta content="0" http-equiv="Expires"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Radiación Solar y el Factor de Fachada en la Carga de Refrigeración | Calculoclima</title>
-<meta content="Análisis del impacto de la radiación solar en fachadas oeste y sur, vidrios de control solar Low-E y cálculo de cargas de refrigeración." name="description"/>
-<!-- Canonical Etiketi -->
-<link href="https://calculoclima.es/makale-8.html" rel="canonical"/>
-<!-- Article Schema Markup (JSON-LD) -->
-<script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://calculoclima.es/makale-8.html"
-  },
-  "headline": "Radiación Solar y el Factor de Fachada en la Carga de Refrigeración",
-  "description": "Análisis del impacto de la radiación solar en fachadas oeste y sur, vidrios de control solar Low-E y cálculo de cargas de refrigeración.",
-  "image": "https://calculoclima.es/favicon.png",
-  "author": {
-    "@type": "Organization",
-    "name": "Calculoclima",
-    "url": "https://calculoclima.es/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Calculoclima",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://calculoclima.es/favicon.png"
-    }
-  },
-  "datePublished": "2026-09-01",
-  "dateModified": "2026-10-28",
-  "inLanguage": "es-ES",
-  "url": "https://calculoclima.es/makale-8.html"
-}</script>
+<title>Ventilación: cálculo de renovaciones por hora, caudal y conductos | Calculoclima</title>
+<meta content="Calcula renovaciones por hora, aire exterior, conductos y consumo del ventilador. Guía para España con RITE, CTE y ejemplo de oficina en Valencia." name="description"/>
+<meta content="index, follow" name="robots"/>
+
+
+<meta content="Calcula renovaciones por hora, aire exterior, conductos y consumo del ventilador. Guía para España con RITE, CTE y ejemplo de oficina en Valencia." property="og:description"/>
+
+
+<link href="favicon.png" rel="icon" type="image/png"/>
+<link href="favicon.png" rel="apple-touch-icon"/>
 <!-- Google tag (gtag.js) -->
 
 
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6907551704910400"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="favicon.png" rel="icon" type="image/png"/>
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KGZZ4GT50W"></script><script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('consent', 'default', {ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
-  gtag('js', new Date());
-
-  gtag('config', 'G-KGZZ4GT50W');
-</script></head>
+<!-- Article Schema (JSON-LD) -->
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Ventilación: cálculo de renovaciones por hora, caudal y conductos", "description": "Calcula renovaciones por hora, aire exterior, conductos y consumo del ventilador. Guía para España con RITE, CTE y ejemplo de oficina en Valencia.", "inLanguage": "es-ES", "url": "https://calculoclima.es/makale-8.html", "publisher": {"@type": "Organization", "name": "Calculoclima", "url": "https://calculoclima.es/"}, "wordCount": 2495, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://calculoclima.es/makale-8.html"}, "dateModified": "2026-10-29"}</script>
+<style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; scroll-behavior: smooth; }
+        math { font-family: 'Cambria Math','STIX Two Math','Latin Modern Math',serif; font-size: 1.2em; }
+        .eq { display:flex; align-items:center; justify-content:space-between; gap:1rem; background:#f8fafc; border:1px solid #e2e8f0; border-radius:.75rem; padding:.75rem 1.25rem; overflow-x:auto; }
+        .eq math { flex:1; }
+        .eqn { color:#64748b; font-size:.9rem; white-space:nowrap; }
+        .tbl { width:100%; border-collapse:collapse; font-size:.85rem; display:block; overflow-x:auto; }
+        .tbl th,.tbl td { border:1px solid #e2e8f0; padding:.5rem .75rem; text-align:left; vertical-align:top; }
+        .tbl th { background:#f1f5f9; }
+        .formula { overflow-x: auto; background: #eff6ff; padding: 1rem; border-radius: .75rem; font-size: 1.05rem; }
+        article h2 { font-weight: 800; font-size: 1.35rem; padding-top: 1rem; scroll-margin-top: 6rem; }
+        article h3 { font-weight: 700; font-size: 1.1rem; }
+        article a { color: #1d4ed8; text-decoration: underline; }
+        article ul { list-style: disc; padding-left: 1.5rem; }
+        article table { border-collapse: collapse; width: 100%; }
+        article th, article td { border: 1px solid #cbd5e1; padding: .6rem; text-align: left; }
+    </style>
+<link href="https://calculoclima.es/makale-8.html" rel="canonical"/><meta content="Ventilación: cálculo de renovaciones por hora, caudal y conductos" property="og:title"/><meta content="https://calculoclima.es/makale-8.html" property="og:url"/><meta content="article" property="og:type"/><meta content="es_ES" property="og:locale"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KGZZ4GT50W"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});gtag('js',new Date());gtag('config','G-KGZZ4GT50W');</script><style>main,article{min-width:0;overflow-wrap:anywhere}main img,article img{max-width:100%;height:auto}main table,article table{display:block;max-width:100%;overflow-x:auto}main pre,article pre{max-width:100%;overflow-x:auto}nav>div{flex-wrap:wrap;gap:.75rem}</style></head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
 <!-- NAVBAR -->
 <nav class="no-print bg-white border-b border-slate-100 py-4 px-6 shadow-xs sticky top-0 z-40">
 <div class="max-w-7xl mx-auto flex justify-between items-center">
 <div class="flex items-center gap-2">
+<a class="flex items-center gap-2 cursor-pointer" href="index.html">
 <i class="fa-solid fa-snowflake text-blue-600 text-2xl animate-pulse"></i>
 <span class="text-2xl font-black tracking-tight text-slate-900">calculoclima<span class="text-blue-600">.es</span></span>
+</a>
 </div>
 <div class="flex items-center gap-3">
 <a class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-blue-600 transition cursor-pointer" href="index.html">
-<i class="fa-solid fa-arrow-left text-blue-500"></i> Volver a Herramientas de Cálculo
-            </a>
+<i class="fa-solid fa-calculator text-blue-500"></i> Volver a la calculadora
+                </a>
 </div>
 </div>
 </nav>
-<main class="max-w-4xl mx-auto my-8 px-4 flex-grow w-full">
-<article class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-12 space-y-6">
-<div class="space-y-3 border-b pb-6 border-slate-100">
-<span class="text-xs font-extrabold bg-blue-100 text-blue-800 px-3 py-1 rounded-full inline-block">Artículo de Ingeniería &amp; Análisis Solar</span>
-<h1 class="text-2xl md:text-4xl font-black text-slate-900 leading-tight">Radiación Solar y el Factor de Fachada en la Carga de Refrigeración</h1>
-<p class="text-xs text-slate-500"><i class="fa-regular fa-calendar mr-1"></i> Actualizado: 2026 | Grupo de Contenido Técnico</p>
-</div>
-<div class="prose prose-slate max-w-none text-sm md:text-base leading-relaxed space-y-6 text-slate-700">
-<p>Al determinar la capacidad del aire acondicionado en proyectos residenciales y de oficinas, limitarse únicamente al área del suelo de la habitación conduce a equipos insuficientes y situaciones de disconfort durante el verano. El punto de inflexión más crítico en los cálculos de carga de refrigeración es la <strong>radiación solar (carga de insolación)</strong> a la que se expone el edificio y la orientación de las fachadas exteriores y ventanas.</p>
-<h2 class="text-xl font-extrabold text-slate-900 pt-4">El Papel de las Fachadas en la Ganancia Térmica</h2>
-<p>En las distintas horas del día, la posición del sol altera radicalmente la cantidad de calor que incide sobre las fachadas exteriores. Mientras que las fachadas norte apenas reciben radiación solar directa, las fachadas este y sureste se calientan durante las horas matutinas. El peligro más crítico se concentra en las <strong>fachadas oeste y suroeste</strong>, las cuales multiplican la temperatura interior en los momentos en que el sol incide con un ángulo directo durante las tardes.</p>
-<h2 class="text-xl font-extrabold text-slate-900 pt-4">Vidrios de Control Solar Low-E y Sombreamiento</h2>
-<p>Para limitar la energía solar que penetra a través de las superficies acristaladas ubicadas en fachadas críticas, se recomienda el uso de vidrios con capa de Control Solar Low-E. Estos cristales reflejan la energía solar infrarroja hacia el exterior, reduciendo drásticamente la carga de refrigeración.</p>
-<p class="font-bold text-slate-900 bg-blue-50 p-4 rounded-xl border border-blue-200">En los cálculos de capacidad de aire acondicionado es obligatorio tener en cuenta las orientaciones de las fachadas, incrementando los coeficientes de seguridad en estancias orientadas al oeste.</p>
-</div>
+<!-- ANA İÇERİK CONTAINER -->
+<main class="max-w-4xl mx-auto my-10 px-4 flex-grow w-full space-y-8 bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-slate-100">
+<header class="border-b border-slate-100 pb-6 space-y-3">
+<span class="text-xs font-extrabold uppercase tracking-wider bg-blue-50 text-blue-700 py-1 px-3 rounded-full">Guía de ingeniería #10</span>
+<h1 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">Ventilación: cálculo de renovaciones por hora, caudal y conductos</h1>
+<p class="text-sm text-slate-500 font-medium">Actualizado: 5 de octubre de 2026 | ACH, aire exterior, RITE y dimensionado de conductos</p>
+</header>
+<article class="prose max-w-none text-slate-700 space-y-6 leading-relaxed text-sm md:text-base">
+<p>Una instalación puede mantener una temperatura agradable y, al mismo tiempo, renovar insuficientemente el aire. La climatización y la ventilación resuelven necesidades relacionadas, pero distintas. Este artículo explica cómo calcular las renovaciones por hora, seleccionar el caudal exterior y dimensionar una red de conductos, con un ejemplo de oficina en Valencia y referencias españolas.</p>
+<p>El punto de partida es identificar el uso, la ocupación y los contaminantes. Después se comprueban el volumen, la distribución del aire, las pérdidas de presión y el consumo. Un número de renovaciones aislado no permite justificar todas esas decisiones.</p>
+<nav aria-label="Contenido del artículo"><strong>Contenido:</strong> <a href="#ach">ACH y unidades</a> · <a href="#normativa">Criterios españoles</a> · <a href="#co2">Balance de CO₂</a> · <a href="#valencia">Ejemplo en Valencia</a> · <a href="#conductos">Conductos y ventiladores</a> · <a href="#recuperacion">Recuperación de calor</a> · <a href="#verificacion">Puesta en marcha</a></nav>
+<h2 id="ach">1. Qué significa ACH y cómo calcularlo</h2>
+<p>ACH procede de <em>Air Changes per Hour</em> y expresa las renovaciones por hora. En español también se utiliza tasa de renovación del aire. Es el cociente entre un caudal volumétrico y el volumen interior considerado. Su unidad es h⁻¹; no es una velocidad ni un porcentaje de aire exterior.</p>
+<div class="formula">n = Q / V    ;    Q = n · V</div>
+<p>En estas expresiones, n representa las renovaciones por hora, Q el caudal en m³/h y V el volumen en m³. Conviene declarar qué caudal se utiliza: impulsión total, aire exterior o extracción. El mismo recinto puede tener valores diferentes para cada uno.</p>
+<p>Una habitación de 30 m² y 3 m de altura tiene 90 m³. Si se adopta, únicamente como ejemplo matemático, un caudal de 540 m³/h, se obtienen 6 h⁻¹. Ese valor no constituye una exigencia general para dormitorios, despachos ni consultas médicas.</p>
+<div class="formula">540 m³/h = 150 L/s = 0,15 m³/s</div>
+<p>Para convertir de L/s a m³/h se multiplica por 3,6. Para pasar de m³/h a m³/s se divide entre 3.600. Es recomendable conservar una unidad durante cada cálculo y efectuar las conversiones antes de sustituir valores en las fórmulas.</p>
+<h3>Aire exterior, recirculación y aire limpio equivalente</h3>
+<p>Una unidad que impulsa 1.800 m³/h a un local de 300 m³ produce 6 renovaciones totales por hora. Si únicamente 450 m³/h proceden del exterior, la renovación exterior es 1,5 h⁻¹. La recirculación puede transportar frío o calor y pasar por filtros, pero no elimina por sí misma el CO₂ generado por los ocupantes.</p>
+<p>Un purificador introduce otra magnitud: el caudal de aire limpio equivalente frente a un contaminante concreto. Un CADR de 300 m³/h equivale, idealmente, a 1 h⁻¹ de limpieza de partículas en ese local. No equivale a introducir 300 m³/h de aire exterior ni garantiza eliminación de gases.</p>
+<p>La infiltración por rendijas depende del viento, la diferencia térmica y la estanqueidad. No debe contarse automáticamente como un caudal mecánico estable. Tampoco basta con abrir una ventana ocasionalmente para demostrar el funcionamiento previsto de una instalación.</p>
+<h2 id="normativa">2. Cómo elegir el caudal en España</h2>
+<p>Para instalaciones térmicas dentro de su ámbito, el RITE establece categorías de calidad interior y métodos para determinar el aire exterior. Las oficinas se encuadran en IDA 2. El método por persona asigna 12,5 L/s por ocupante a esa categoría, bajo sus condiciones de aplicación: actividad próxima a 1,2 met, baja producción de otros contaminantes y ausencia de humo de tabaco. Debe consultarse la IT 1.1.4.2 y justificar el método elegido.</p>
+<p>En viviendas, la referencia específica es el CTE DB HS 3. La ventilación general conduce el aire desde los locales secos hacia los húmedos y contempla condiciones de admisión, transferencia y extracción. Sus caudales y criterios dependen de la vivienda y de los recintos; una tasa ACH genérica no sustituye esa comprobación. La extracción adicional de la cocina requiere tratamiento propio.</p>
+<p>Una norma extranjera puede servir para comparar enfoques técnicos, pero sus tablas no son automáticamente obligaciones españolas. Por ello no trasladamos como mínimos nacionales los valores hospitalarios de ASHRAE ni una regla residencial norteamericana. También deben revisarse las condiciones específicas del uso, del proyecto y de la autorización aplicable.</p>
+<div class="overflow-x-auto"><table><thead><tr><th>Uso</th><th>Decisión principal</th><th>Comprobación adicional</th></tr></thead><tbody><tr><td>Oficina</td><td>Aire exterior según ocupación y método aplicable</td><td>Distribución, filtración y demanda térmica</td></tr><tr><td>Vivienda</td><td>Ventilación conforme al DB HS 3</td><td>Transferencia entre habitaciones y extracción</td></tr><tr><td>Cocina profesional</td><td>Captación de emisiones en origen</td><td>Compensación de aire y seguridad</td></tr><tr><td>Laboratorio</td><td>Evaluación de riesgos y captación localizada</td><td>Compatibilidad química y presiones</td></tr><tr><td>Espacio sanitario</td><td>Requisitos específicos de la actividad</td><td>Filtración, dirección del flujo y control</td></tr></tbody></table></div>
+<p>Las tablas orientativas de renovaciones resultan útiles para detectar órdenes de magnitud, no para cerrar el diseño. Dos salas con idéntico volumen pueden necesitar caudales exteriores muy distintos cuando cambia el número de personas o aparece una fuente contaminante.</p>
+<h2 id="co2">3. Balance de CO₂ y límites de la medición</h2>
+<p>El CO₂ permite observar la relación entre ocupación y ventilación cuando las personas son la fuente predominante. No describe toda la calidad del aire: pueden existir partículas, vapores, olores o humedad con una lectura moderada. El valor exterior debe medirse o documentarse, en lugar de fijarlo universalmente.</p>
+<p>En régimen estacionario, con mezcla uniforme y generación constante, el balance simplificado es:</p>
+<div class="formula">Q = G / (Cᵢ − Cₑ)</div>
+<p>Q es el caudal exterior; G, la generación de CO₂ en una unidad volumétrica compatible; Cᵢ y Cₑ, las concentraciones interior y exterior expresadas como fracciones volumétricas. Una diferencia de 500 ppm se introduce como 0,0005. Utilizar directamente 500 provoca un error de un millón en la escala.</p>
+<p>Supongamos diez personas con una generación ilustrativa de 0,005 L/s por persona. G suma 0,05 L/s. Para una diferencia interior-exterior de 500 ppm, Q sería 100 L/s, equivalentes a 360 m³/h. La generación cambia con la actividad y las características de los ocupantes; este ejemplo físico no sustituye el método reglamentario.</p>
+<h3>Renovación y tiempo de eliminación</h3>
+<p>Cuando cesa una emisión, el exceso de concentración respecto al exterior disminuye exponencialmente en un recinto idealmente mezclado:</p>
+<div class="formula">C(t) = Cₑ + (C₀ − Cₑ) · exp(−n · t)</div>
+<p>El tiempo t se expresa en horas si n está en h⁻¹. Tras un tiempo 1/n desaparece aproximadamente el 63,2 % del exceso inicial; para eliminar el 95 % se necesitan aproximadamente 3/n horas. Con 6 h⁻¹ de aire exterior, el tiempo ideal es unos 30 minutos.</p>
+<p>Esto explica por qué una renovación por hora no significa reemplazar completamente todo el aire en una hora. Si continúa la emisión, existe mala mezcla o aparecen zonas estancadas, el comportamiento cambia. Una lectura puntual tampoco demuestra el caudal disponible durante toda la jornada.</p>
+<h2 id="valencia">4. Ejemplo completo: oficina en Valencia</h2>
+<p>Consideremos una oficina hipotética de 100 m², altura interior de 3 m y veinte puestos ocupados simultáneamente. El volumen es 300 m³. Se supone actividad sedentaria y ausencia de fuentes que invaliden el método por persona. Los datos son didácticos y no representan mediciones de un edificio real.</p>
+<div class="formula">Qₑ = 20 · 12,5 = 250 L/s = 900 m³/h<br/>nₑ = 900 / 300 = 3 h⁻¹</div>
+<p>El cálculo adopta el valor IDA 2 explicado anteriormente. Si la ocupación efectiva cambia, el sistema puede adaptar el caudal dentro de una estrategia justificada, manteniendo las necesidades del edificio y las condiciones aplicables. Diseñar solamente para una ocupación media puede dejar sin capacidad las horas de máxima asistencia.</p>
+<p>Ahora supongamos una carga sensible interior de 6.000 W y una diferencia de 10 K entre el ambiente y el aire impulsado. El caudal térmico aproximado se obtiene con:</p>
+<div class="formula">Φₛ = ρ · cₚ · Q · ΔT    ;    Φₛ ≈ 0,335 · Qₕ · ΔT</div>
+<p>En la primera expresión, Q está en m³/s y cₚ en J/(kg·K). En la segunda, Qₕ está en m³/h y Φₛ en W. Con ρ = 1,2 kg/m³ y cₚ = 1.006 J/(kg·K), el coeficiente es aproximadamente 0,335.</p>
+<div class="formula">Qₕ = 6.000 / (0,335 · 10) ≈ 1.791 m³/h<br/>n total ≈ 1.791 / 300 ≈ 5,97 h⁻¹</div>
+<p>El resultado distingue casi 6 renovaciones totales de las 3 renovaciones exteriores. En una solución con mezcla y recirculación permitida, los caudales no se suman automáticamente: el aire exterior forma parte de la impulsión total. Una instalación de aire exterior independiente requiere otro balance para repartir las cargas entre equipos.</p>
+<p>La carga sensible indicada excluye aquí el tratamiento del aire exterior. Para dimensionar la batería deben añadirse ese tratamiento, las cargas latentes y los efectos del sistema. En Valencia, las condiciones de humedad también pueden influir: la temperatura exterior por sí sola no permite calcular la deshumidificación necesaria.</p>
+<p>Consulta la explicación de <a href="makale-7.html">capacidad frigorífica y selección del aire acondicionado</a> para relacionar estos caudales con la potencia del equipo. Un split convencional que recircula aire interior no proporciona automáticamente los 900 m³/h exteriores del ejemplo.</p>
+<h2 id="conductos">5. Sección de conductos, presión y consumo</h2>
+<p>Una vez fijado el caudal de cada tramo, la sección se calcula a partir de la velocidad media. El trazado debe repartir el aire sin generar corrientes molestas ni ruido excesivo. La velocidad elegida depende del espacio disponible, la acústica, los terminales y el consumo.</p>
+<div class="formula">Q = A · v    ;    A = π · D² / 4</div>
+<p>Q se expresa en m³/s, A en m², v en m/s y D en metros. Para 0,15 m³/s a 4 m/s, A resulta 0,0375 m² y el diámetro circular calculado es aproximadamente 219 mm. Con un diámetro interior efectivo de 224 mm, la velocidad sería 3,81 m/s.</p>
+<p>La dimensión comercial debe comprobarse con el fabricante. En conductos rectangulares, el diámetro hidráulico es Dₕ = 4A/P, siendo P el perímetro interior. Para lados a y b, Dₕ = 2ab/(a+b). Este diámetro no es intercambiable sin explicación con cualquier diámetro circular equivalente empleado en tablas.</p>
+<h3>Pérdidas de presión y selección del ventilador</h3>
+<p>El ventilador debe vencer las resistencias del recorrido de diseño. La estimación de un tramo uniforme puede expresarse mediante Darcy-Weisbach:</p>
+<div class="formula">Δp = (f · L / Dₕ + Σζ) · ρ · v² / 2</div>
+<p>f es el factor de fricción de Darcy, L la longitud y ζ los coeficientes de pérdidas locales. En una red con cambios de sección se calcula cada tramo con su propia velocidad. Filtros, baterías, recuperadores y terminales necesitan las pérdidas proporcionadas para sus condiciones de funcionamiento.</p>
+<p>Los ramales paralelos no se suman como si estuvieran en serie. Se identifica el recorrido más desfavorable y se equilibran los restantes. También se considera la evolución de la resistencia de los filtros y el margen de regulación, evitando márgenes arbitrarios que conduzcan a sobredimensionar todo el sistema.</p>
+<div class="formula">P eléctrica = Q · Δp / η global</div>
+<p>La eficiencia global debe incluir las pérdidas correspondientes al ventilador, motor y accionamiento. Presión y rendimiento deben compartir la misma definición, estática o total. Si se utiliza solamente el rendimiento aerodinámico del ventilador, el resultado corresponde a la potencia de eje y necesita conversión adicional.</p>
+<p>Por ejemplo, 0,25 m³/s, 300 Pa y una eficiencia global de 0,50 producen una estimación de 150 W. A potencia constante durante 2.000 horas serían 300 kWh. Es un supuesto de cálculo, no una ficha comercial ni una previsión anual completa.</p>
+<p>Las leyes de afinidad relacionan caudal, presión y potencia con la velocidad de giro bajo condiciones semejantes: aproximadamente Q ∝ N, Δp ∝ N² y P ∝ N³. No autorizan aplicar la ley cúbica indiscriminadamente a cualquier modificación de conductos o estrategia de control.</p>
+<h2 id="recuperacion">6. Recuperación de calor y humedad</h2>
+<p>Un recuperador transfiere energía entre el aire extraído y el exterior sin que la renovación dependa de recircular aire contaminado. Los equipos sensibles recuperan principalmente calor; los entálpicos pueden transferir también humedad, según su tecnología y condiciones.</p>
+<div class="formula">εₜ = (T después − T exterior) / (T extracción − T exterior)</div>
+<p>La expresión representa una efectividad térmica simplificada. Debe interpretarse con caudales y condiciones conocidos, sin confundirla con rendimiento eléctrico ni ahorro anual. Cuando las temperaturas del denominador coinciden, la relación deja de ser útil.</p>
+<p>Para 0,25 m³/s, aire exterior a 10 °C, extracción a 22 °C y efectividad del 75 %, la salida exterior alcanzaría aproximadamente 19 °C. La recuperación sensible ideal sería 0,75 · 1,2 · 1.006 · 0,25 · 12 ≈ 2.716 W.</p>
+<p>En verano el intercambio puede reducir el calentamiento del aire entrante si el interior está más frío. Cuando el exterior favorece refrigeración gratuita, el bypass evita una recuperación contraproducente. La estrategia debe considerar humedad, fugas entre corrientes, limpieza y consumo adicional de ventiladores.</p>
+<p>Un 75 % de efectividad en una condición de ensayo no implica ahorrar el 75 % de la factura. El balance anual depende de clima, horarios, cargas, controles y pérdidas de presión. La necesidad reglamentaria de recuperación debe comprobarse en el proyecto concreto.</p>
+<h2 id="verificacion">7. Distribución, control y puesta en marcha</h2>
+<p>La impulsión y la extracción deben formar un recorrido útil. Colocarlas demasiado próximas puede crear un cortocircuito: el aire exterior sale rápidamente mientras otras zonas permanecen mal ventiladas. La selección de difusores requiere comprobar alcance, velocidad residual y comportamiento a caudal reducido.</p>
+<p>Las sondas de CO₂ deben representar la zona ocupada, lejos de respiración directa, puertas o impulsiones. Conviene registrar tendencias, contrastar la calibración y configurar límites de regulación coherentes. El control por demanda necesita una estrategia de fallo y no debe apagar indiscriminadamente la ventilación necesaria para otras emisiones.</p>
+<ul><li>Medir los caudales exteriores y los caudales de cada terminal.</li><li>Comprobar equilibrado, dirección del aire y funcionamiento de compuertas.</li><li>Registrar presión, potencia eléctrica y estado de filtros.</li><li>Verificar horarios, sensores, bypass y modos de ocupación reducida.</li><li>Entregar instrucciones y valores de referencia para mantenimiento.</li></ul>
+<p>Un caudal nominal de catálogo no demuestra el caudal instalado. La resistencia real desplaza el punto de funcionamiento del ventilador. Las mediciones iniciales permiten detectar desviaciones y comparar el estado del sistema después de intervenciones o cambios de uso.</p>
+<p>La secuencia recomendable es definir el criterio de calidad, calcular el aire exterior, resolver la carga térmica, dimensionar conductos y comprobar la instalación. Puedes utilizar la <a href="index.html">calculadora del sitio</a> como apoyo orientativo y continuar con el <a href="makale-6.html">artículo de la serie sobre climatización</a>. El diseño final debe documentar hipótesis y resultados verificables.</p>
+<h3>Errores que conviene evitar</h3>
+<p>Antes de cerrar una memoria, revisa que el volumen corresponda al recinto servido y que la altura utilizada sea real. Un falso techo comunicado con el local puede requerir una interpretación diferente de un plenum separado. Mantén identificadas las zonas y no distribuyas un caudal global entre habitaciones sin comprobar su ocupación.</p>
+<p>Otro error frecuente consiste en sumar renovaciones exteriores y totales cuando la primera magnitud ya está incluida en la segunda. Tampoco deben confundirse extracción, admisión y transferencia: describen movimientos distintos dentro del edificio. Un extractor necesita un camino de entrada de aire; una puerta muy estanca puede modificar considerablemente el caudal disponible.</p>
+<p>Finalmente, documenta el estado de operación de cada resultado. El caudal con filtros nuevos, puertas abiertas o ventilador a máxima velocidad puede diferir del servicio habitual. Esa información permite interpretar las medidas y establecer una referencia útil para mantenimiento.</p>
+<h2 id="fuentes">8. Fuentes y alcance técnico</h2>
+<p>Referencias oficiales consultadas el 5 de octubre de 2026: <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2007-15820" rel="noopener noreferrer" target="_blank">RITE, texto consolidado del BOE, IT 1.1.4.2</a>, y <a href="https://www.codigotecnico.org/pdf/Documentos/HS/DBHS.pdf" rel="noopener noreferrer" target="_blank">CTE DB HS, sección HS 3</a>. Los ejemplos numéricos son elaboraciones didácticas con hipótesis explícitas. No constituyen una certificación de cumplimiento para un inmueble concreto.</p>
 </article>
+<div class="border-t border-slate-100 pt-6 mt-8 flex justify-between items-center text-xs text-slate-500 font-medium">
+<span>© 2026 calculoclima.es</span>
+<a class="text-blue-600 hover:underline font-bold" href="index.html">Volver al inicio</a>
+</div>
 </main>
 <!-- FOOTER -->
+<!-- Antes de publicar: completar titular/responsable, domicilio y datos fiscales aplicables; verificar inventario de cookies, conservación, proveedores y CMP. -->
+<footer class="bg-white border-t border-slate-200 py-8 text-center text-xs text-slate-500 space-y-4 no-print px-4">
 
-<!-- MODALLAR -->
-
-
-
-<!-- MODAL YÖNETİM SCRIPT -->
-
-<nav aria-label="Más guías" class="max-w-4xl w-full mx-auto px-4 py-6 flex flex-wrap justify-between gap-4 text-sm"><a class="text-blue-700 underline" href="makale-7.html">← Artículo anterior</a><a class="text-blue-700 underline" href="index.html#blogBolumu">Todas las guías</a><a class="text-blue-700 underline" href="makale-9.html">Artículo siguiente →</a></nav><footer class="bg-white border-t border-slate-200 py-8 text-center text-xs text-slate-500 space-y-4 no-print px-4 mt-auto"><p>Contenido informativo. Consulta el alcance y los límites de las herramientas antes de elegir un equipo.</p><nav aria-label="Información del sitio" class="flex justify-center items-center gap-4 font-bold text-slate-600 flex-wrap pt-2 text-xs"><a class="hover:text-blue-600 transition underline-offset-4 hover:underline" href="quienes-somos.html" rel="noopener" target="_blank">Quiénes somos</a>
+<nav aria-label="Información del sitio" class="flex justify-center items-center gap-4 font-bold text-slate-600 flex-wrap pt-2 text-xs"><a class="hover:text-blue-600 transition underline-offset-4 hover:underline" href="quienes-somos.html" rel="noopener" target="_blank">Quiénes somos</a>
 <span>•</span>
 <a class="hover:text-blue-600 transition underline-offset-4 hover:underline" href="contacto.html" rel="noopener" target="_blank">Contacto</a>
 <span>•</span>
@@ -103,5 +161,14 @@
 <span>•</span>
 <a class="hover:text-blue-600 transition underline-offset-4 hover:underline" href="condiciones-uso.html" rel="noopener" target="_blank">Condiciones de uso</a>
 <span>•</span>
-<a class="hover:text-blue-600 transition underline-offset-4 hover:underline" href="aviso-legal.html" rel="noopener" target="_blank">Aviso legal y límites</a></nav><div class="mt-4"><button class="underline text-blue-700" onclick="abrirPreferenciasCookies()" type="button">Preferencias de privacidad y cookies</button><p class="text-xs mt-2" id="estadoCookies" role="status"></p></div><p>© 2026 calculoclima.es</p></footer><script>function abrirPreferenciasCookies(){if(window.googlefc&&typeof window.googlefc.showRevocationMessage==='function'){window.googlefc.callbackQueue=window.googlefc.callbackQueue||[];window.googlefc.callbackQueue.push(window.googlefc.showRevocationMessage);}else{document.getElementById('estadoCookies').textContent='El gestor de consentimiento de Google no está disponible en esta sesión. Consulta la política de privacidad o vuelve a intentarlo cuando se haya cargado.';}}</script></body>
+<a class="hover:text-blue-600 transition underline-offset-4 hover:underline" href="aviso-legal.html" rel="noopener" target="_blank">Aviso legal y límites</a></nav>
+<p class="text-[11px] text-slate-400 pt-2 border-t border-slate-100 max-w-xl mx-auto">
+            © 2026 calculoclima.es | Calculadora de climatización. Todos los derechos reservados.
+        </p>
+<div class="mt-4"><button class="underline text-blue-700" onclick="abrirPreferenciasCookies()" type="button">Preferencias de privacidad y cookies</button><p class="text-xs mt-2" id="estadoCookies" role="status"></p></div></footer>
+
+
+
+
+<script>function abrirPreferenciasCookies(){if(window.googlefc&&typeof window.googlefc.showRevocationMessage==='function'){window.googlefc.callbackQueue=window.googlefc.callbackQueue||[];window.googlefc.callbackQueue.push(window.googlefc.showRevocationMessage);}else{document.getElementById('estadoCookies').textContent='El gestor de consentimiento de Google no está disponible en esta sesión. Consulta la política de privacidad o vuelve a intentarlo cuando se haya cargado.';}}</script></body>
 </html>
