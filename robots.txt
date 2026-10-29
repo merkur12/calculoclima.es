@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://calculoclima.es/sitemap.xml
