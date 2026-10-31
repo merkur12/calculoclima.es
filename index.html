@@ -2194,6 +2194,13 @@ function isitmaKatKaybi(alan,kat,disT,yapi,sehir,yalitim='standart') {
     </script>
 <script>function abrirPreferenciasCookies(){if(window.googlefc&&typeof window.googlefc.showRevocationMessage==='function'){window.googlefc.callbackQueue=window.googlefc.callbackQueue||[];window.googlefc.callbackQueue.push(window.googlefc.showRevocationMessage);}else{document.getElementById('estadoCookies').textContent='El gestor de consentimiento de Google no está disponible en esta sesión. Consulta la política de privacidad o vuelve a intentarlo cuando se haya cargado.';}}</script><script>document.addEventListener('DOMContentLoaded',function(){const modo=new URLSearchParams(window.location.search).get('calculadora');if(['pratik','klima','isitma'].includes(modo)&&typeof hesapAracinaGit==='function'){hesapAracinaGit(modo);}});</script>
 <style id="guia-embed-style">
+/* Rehber iframe görünümünde demonstrasyonu gizle; ana sayfada koru. */
+@media screen {
+ body.guia-embed section:has(> div #klimaCanvas),
+ body.guia-embed section:has(#klimaCanvas),
+ body.guia-embed #demoBilgiKutusu { display:none!important; }
+}
+
 @media screen{body.guia-embed > :not(#hesapAraclariSekmeler):not(#hesapAraclari):not(script):not(style){display:none!important}
 body.guia-embed{background:#f8fafc!important;display:block!important;min-height:0!important}
 body.guia-embed #hesapAraclariSekmeler{position:static!important;padding-top:12px!important}
