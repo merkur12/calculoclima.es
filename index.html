@@ -20,6 +20,12 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('consent', 'default', {ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+  // Restore an existing explicit choice before GA4 configuration.
+  try {
+    if (localStorage.getItem('calculoclima_analytics_consent_v1') === 'granted') {
+      gtag('consent', 'update', {analytics_storage:'granted'});
+    }
+  } catch (e) { /* Storage may be unavailable; remain denied. */ }
   gtag('js', new Date());
 
   gtag('config', 'G-KGZZ4GT50W');
@@ -2192,7 +2198,71 @@ function isitmaKatKaybi(alan,kat,disT,yapi,sehir,yalitim='standart') {
         };
 
     </script>
-<script>function abrirPreferenciasCookies(){if(window.googlefc&&typeof window.googlefc.showRevocationMessage==='function'){window.googlefc.callbackQueue=window.googlefc.callbackQueue||[];window.googlefc.callbackQueue.push(window.googlefc.showRevocationMessage);}else{document.getElementById('estadoCookies').textContent='El gestor de consentimiento de Google no está disponible en esta sesión. Consulta la política de privacidad o vuelve a intentarlo cuando se haya cargado.';}}</script><script>document.addEventListener('DOMContentLoaded',function(){const modo=new URLSearchParams(window.location.search).get('calculadora');if(['pratik','klima','isitma'].includes(modo)&&typeof hesapAracinaGit==='function'){hesapAracinaGit(modo);}});</script>
+<style id="cc-cookie-consent-style">
+#cc-cookie-panel{position:fixed;z-index:2147483000;left:16px;bottom:16px;width:min(440px,calc(100vw - 32px));background:#fff;color:#1e293b;border:1px solid #cbd5e1;border-radius:14px;box-shadow:0 12px 40px #0f172a35;padding:20px;font:14px/1.5 system-ui,Arial,sans-serif}
+#cc-cookie-panel[hidden],#cc-cookie-settings[hidden]{display:none!important}
+#cc-cookie-panel h2{font-size:18px;font-weight:700;margin:0 0 8px}
+#cc-cookie-panel p{margin:0 0 12px}
+#cc-cookie-panel .cc-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+#cc-cookie-panel button{border:1px solid #2563eb;border-radius:7px;padding:9px 12px;font-weight:600;cursor:pointer;flex:1;min-width:100px}
+#cc-cookie-accept{background:#2563eb;color:#fff}#cc-cookie-reject,#cc-cookie-configure,#cc-cookie-save{background:#fff;color:#1d4ed8}
+#cc-cookie-settings{background:#f1f5f9;border-radius:8px;padding:12px;margin-top:12px}
+#cc-cookie-settings label{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+#cc-cookie-panel a{color:#1d4ed8;text-decoration:underline}
+</style>
+<div id="cc-cookie-panel" role="dialog" aria-label="Preferencias de cookies" aria-modal="false" hidden>
+  <h2>Tu privacidad importa</h2>
+  <p>Utilizamos cookies analíticas opcionales para conocer el uso de la web y mejorar nuestras calculadoras. Puedes aceptarlas o rechazarlas sin afectar al funcionamiento del sitio.</p>
+  <a href="privacidad-cookies.html" target="_blank" rel="noopener">Política de privacidad y cookies</a>
+  <div id="cc-cookie-settings" hidden>
+    <p><strong>Cookies necesarias:</strong> siempre activas para el funcionamiento básico.</p>
+    <label><input id="cc-analytics-optin" type="checkbox"/> Permitir cookies analíticas (Google Analytics)</label>
+    <button id="cc-cookie-save" type="button">Guardar preferencias</button>
+  </div>
+  <div class="cc-actions">
+    <button id="cc-cookie-accept" type="button">Aceptar</button>
+    <button id="cc-cookie-reject" type="button">Rechazar</button>
+    <button id="cc-cookie-configure" type="button" aria-expanded="false">Configurar</button>
+  </div>
+</div>
+<script>
+(function(){
+  'use strict';
+  var key='calculoclima_analytics_consent_v1';
+  function read(){try{return localStorage.getItem(key)}catch(e){return null}}
+  function write(v){try{localStorage.setItem(key,v)}catch(e){}}
+  function apply(v){
+    if(typeof gtag==='function')gtag('consent','update',{analytics_storage:v});
+    write(v);
+    document.getElementById('cc-cookie-panel').hidden=true;
+    var status=document.getElementById('estadoCookies');
+    if(status)status.textContent=v==='granted'?'Cookies analíticas aceptadas.':'Cookies analíticas rechazadas.';
+  }
+  function abrirPreferenciasCookies(){
+    var panel=document.getElementById('cc-cookie-panel');
+    var settings=document.getElementById('cc-cookie-settings');
+    var toggle=document.getElementById('cc-analytics-optin');
+    if(!panel)return;
+    toggle.checked=read()==='granted';settings.hidden=true;
+    document.getElementById('cc-cookie-configure').setAttribute('aria-expanded','false');
+    panel.hidden=false;
+  }
+  window.abrirPreferenciasCookies=abrirPreferenciasCookies;
+  document.addEventListener('DOMContentLoaded',function(){
+    var panel=document.getElementById('cc-cookie-panel');
+    document.getElementById('cc-cookie-accept').addEventListener('click',function(){apply('granted')});
+    document.getElementById('cc-cookie-reject').addEventListener('click',function(){apply('denied')});
+    document.getElementById('cc-cookie-configure').addEventListener('click',function(){
+      var settings=document.getElementById('cc-cookie-settings');settings.hidden=!settings.hidden;
+      this.setAttribute('aria-expanded',String(!settings.hidden));
+    });
+    document.getElementById('cc-cookie-save').addEventListener('click',function(){
+      apply(document.getElementById('cc-analytics-optin').checked?'granted':'denied');
+    });
+    if(read()!=='granted'&&read()!=='denied'&&!new URLSearchParams(location.search).has('embed'))panel.hidden=false;
+  });
+})();
+</script><script>document.addEventListener('DOMContentLoaded',function(){const modo=new URLSearchParams(window.location.search).get('calculadora');if(['pratik','klima','isitma'].includes(modo)&&typeof hesapAracinaGit==='function'){hesapAracinaGit(modo);}});</script>
 <style id="guia-embed-style">
 /* Rehber iframe görünümünde demonstrasyonu gizle; ana sayfada koru. */
 @media screen {
