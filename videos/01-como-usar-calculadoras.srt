@@ -1,0 +1,151 @@
+1
+00:00:00,000 --> 00:00:02,040
+¿Qué potencia necesita tu habitación?
+
+2
+00:00:02,400 --> 00:00:07,680
+En Calculoclima.es puedes empezar con una estimación rápida y después introducir
+
+3
+00:00:07,680 --> 00:00:09,440
+medidas más completas.
+
+4
+00:00:09,600 --> 00:00:12,200
+Vamos a recorrer las dos opciones con un ejemplo.
+
+5
+00:00:12,640 --> 00:00:18,160
+Antes de comenzar, ten a mano la superficie del recinto, la altura, la orientación y
+
+6
+00:00:18,160 --> 00:00:19,880
+las medidas de los cerramientos.
+
+7
+00:00:20,320 --> 00:00:23,440
+Pulsa Cálculo rápido de aire acondicionado.
+
+8
+00:00:23,600 --> 00:00:28,320
+Selecciona Valencia e introduce treinta metros cuadrados y dos metros ochenta de
+
+9
+00:00:28,320 --> 00:00:33,400
+altura. Para este ejemplo dejamos aislamiento medio, vivienda y planta
+
+10
+00:00:33,400 --> 00:00:35,400
+intermedia, con tres personas.
+
+11
+00:00:35,760 --> 00:00:39,440
+En tu caso, utiliza las condiciones reales de la habitación.
+
+12
+00:00:39,600 --> 00:00:43,240
+La fachada exterior mide siete metros treinta y mira al sur.
+
+13
+00:00:43,600 --> 00:00:48,080
+Seleccionamos una fachada y ventanas orientadas al sur, con acristalamiento muy
+
+14
+00:00:48,080 --> 00:00:52,920
+grande, del sesenta por ciento, y doble vidrio con marco de PVC.
+
+15
+00:00:53,120 --> 00:00:57,160
+Ese porcentaje se refiere a la fachada, no a la superficie del suelo.
+
+16
+00:00:57,600 --> 00:01:01,560
+Las medidas opcionales solo deben completarse cuando correspondan.
+
+17
+00:01:01,760 --> 00:01:07,320
+Al pulsar Calcular refrigeración, este ejemplo da aproximadamente cinco coma cero
+
+18
+00:01:07,360 --> 00:01:12,000
+cinco kilovatios de potencia frigorífica, equivalentes a unos diecisiete mil
+
+19
+00:01:12,000 --> 00:01:17,040
+doscientos catorce BTU por hora o cuatro mil trescientas treinta y ocho frigorías
+
+20
+00:01:17,040 --> 00:01:21,520
+por hora. La primera clase nominal propuesta es de cinco coma veintiocho
+
+21
+00:01:21,520 --> 00:01:26,960
+kilovatios, equivalentes a unos dieciocho mil BTU por hora o cuatro mil quinientas
+
+22
+00:01:26,960 --> 00:01:29,360
+treinta y seis frigorías por hora.
+
+23
+00:01:29,360 --> 00:01:34,240
+Es capacidad de refrigeración: no significa que el aparato consuma esa misma
+
+24
+00:01:34,240 --> 00:01:35,880
+potencia eléctrica.
+
+25
+00:01:35,880 --> 00:01:41,200
+Cambiar el sol, los cristales o la ocupación puede cambiar mucho el resultado.
+
+26
+00:01:41,200 --> 00:01:46,080
+Para realizar un cálculo más detallado y preciso, abre Cálculo detallado de aire
+
+27
+00:01:46,080 --> 00:01:51,480
+acondicionado. Revisa la ciudad, el uso, el aislamiento y la altura.
+
+28
+00:01:51,680 --> 00:01:55,520
+Introduce las dimensiones de cada fachada y de sus ventanas en sus campos
+
+29
+00:01:55,520 --> 00:01:57,040
+correspondientes.
+
+30
+00:01:57,040 --> 00:01:59,800
+No repitas la misma ventana en dos filas.
+
+31
+00:02:00,000 --> 00:02:04,800
+Revisa también las personas, las cargas internas y la ventilación exterior cuando
+
+32
+00:02:04,800 --> 00:02:09,560
+proceda. El aire exterior no es el caudal total que recircula el split.
+
+33
+00:02:10,000 --> 00:02:12,920
+Calcula la carga detallada y revisa su desglose.
+
+34
+00:02:13,360 --> 00:02:18,080
+El botón Imprimir o guardar PDF abre las opciones de impresión del
+
+35
+00:02:18,080 --> 00:02:20,840
+navegador; allí puedes guardar el informe.
+
+36
+00:02:21,200 --> 00:02:24,040
+Conserva también los datos que has introducido.
+
+37
+00:02:24,240 --> 00:02:29,520
+Estos resultados orientan la preselección: no sustituyen un estudio de cargas, un
+
+38
+00:02:29,520 --> 00:02:34,593
+proyecto ni la comprobación del CTE y del RITE por un profesional competente.
