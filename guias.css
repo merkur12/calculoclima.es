@@ -25,14 +25,16 @@
 .cooling-panel .cooling-panel-heading h2 { font-size: 1.2rem; margin: 0; }
 .cooling-panel iframe { display: block; width: 100%; height: 1120px; border: 1px solid var(--line); border-radius: 12px; background: #f8fafc; }
 .cooling-guide #equipos { scroll-margin-top: 24px; }
-/* The calculator and comparison share the full width below the guide text. */
-.cooling-guide main.wrap { max-width: 1360px; }
-.cooling-guide main.wrap > :is(.crumb, .hero, .content) { max-width: 1056px; margin-inline: auto; }
-.cooling-workspace { min-width: 0; margin: 0 auto 48px; }
+/* Keep the original cover sizing and narrow the calculator and comparison. */
+.cooling-workspace {
+    width: min(100%, clamp(780px, calc(75vw - 33px), 987px));
+    min-width: 0;
+    margin: 0 auto 48px;
+}
 .cooling-guide #equipos .guide-table { overflow: visible; }
-.cooling-guide #equipos table { min-width: 0; table-layout: fixed; }
+.cooling-guide #equipos table { min-width: 0; table-layout: fixed; font-size: 0.84rem; }
 .cooling-guide #equipos th,
-.cooling-guide #equipos td { min-width: 0; overflow-wrap: anywhere; }
+.cooling-guide #equipos td { min-width: 0; padding: 7px 8px; overflow-wrap: anywhere; }
 .cooling-guide #equipos thead th:first-child { width: 21%; }
 .cooling-guide #equipos thead th:last-child { width: 17%; }
 .cooling-cell-label { display: none; }
