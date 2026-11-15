@@ -24,12 +24,12 @@
 .diy-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px;margin-top:8px}
 .diy-grid label{font-size:.93rem}
 .diy-check{align-self:center}
-.diy-grid input[type=text]{display:block;width:100%;margin:4px 0;padding:8px 10px;border:1px solid #aebfd2;border-radius:8px;background:#fff;color:var(--ink);font:inherit}
+.diy-grid input[type=text],.diy-grid select{display:block;width:100%;margin:4px 0;padding:8px 10px;border:1px solid #aebfd2;border-radius:8px;background:#fff;color:var(--ink);font:inherit}
 .diy-grid input[aria-invalid=true]{border-color:#a8282e}
 .diy-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
 .diy-actions button{border:0;cursor:pointer;font:inherit;font-weight:700}
 .diy-reset{background:transparent;color:#075fae;padding:10px;text-decoration:underline}
-.article :is(button,input,[tabindex]):focus-visible{outline:3px solid #e6a400;outline-offset:3px}
+.article :is(button,input,select,[tabindex]):focus-visible{outline:3px solid #e6a400;outline-offset:3px}
 .diy-result{font-weight:700;color:var(--navy)}
 .diy-result[data-error]{color:#a8282e}
 .guide-table{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:12px}
@@ -45,6 +45,10 @@
 .article details fieldset{margin-top:14px}
 .material-list dt{font-weight:750;color:var(--navy);margin:8px 0 0}
 .material-list dd{margin:0 0 10px}
+
+.ceiling-options{display:grid;gap:6px;margin:8px 0}
+#floor-form select{display:block;width:100%;padding:8px 10px;border:1px solid #aebfd2;border-radius:8px;background:#fff;color:var(--ink);font:inherit}
+#paint-ceiling>p{padding:0 10px}
 </style>
 <style id="cc-guide-footer-links">.site-footer .cc-guide-legal{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:12px 22px;margin:18px auto 0;max-width:1100px;padding:0 22px}.site-footer .cc-guide-legal a{color:#fff;font-size:14px;line-height:1.6;text-decoration:underline;text-underline-offset:4px;font-weight:600}.site-footer .cc-guide-legal a:focus-visible{outline:3px solid #f5b531;outline-offset:5px}@media(max-width:600px){.site-footer .cc-guide-legal{flex-direction:column;gap:12px}}</style>
 </head>
@@ -70,7 +74,7 @@
     <article class="article">
       <section id="pintura" aria-labelledby="pintura-titulo">
         <h2 id="pintura-titulo">Calculadora de pintura interior</h2>
-        <p>Mide el largo, ancho y alto de la habitación. Resta el área de puertas y ventanas que no vas a pintar. Consulta el rendimiento por mano en la ficha del producto.</p>
+        <p>Mide el largo, ancho y alto de la habitación. Indica las puertas y mide las ventanas que no vas a pintar. La calculadora descontará su superficie.</p>
         <form id="paint-form">
           <fieldset>
             <legend>Medidas y aplicación</legend>
@@ -78,38 +82,91 @@
               <label>Largo de la habitación (m)<input name="length" type="text" inputmode="decimal" value="5" required></label>
               <label>Ancho de la habitación (m)<input name="width" type="text" inputmode="decimal" value="4" required></label>
               <label>Altura de las paredes (m)<input name="height" type="text" inputmode="decimal" value="2,6" required></label>
-              <label>Puertas y ventanas sin pintar (m²)<input name="openings" type="text" inputmode="decimal" value="4" required></label>
               <label>Número de manos<input name="coats" type="text" inputmode="numeric" value="2" required></label>
-              <label>Rendimiento de la pintura (m²/L por mano)<input name="coverage" type="text" inputmode="decimal" value="11" required></label>
-              <label>Reserva de pintura (%)<input name="reserve" type="text" inputmode="decimal" value="10" required></label>
-              <label class="diy-check"><input name="ceiling" type="checkbox"> Incluye el techo con la misma pintura</label>
+              <label>Margen de desperdicio de pintura (%)<input name="reserve" type="text" inputmode="decimal" value="10" aria-describedby="paint-margin-help" required><small id="paint-margin-help">Añade un margen para pérdidas de aplicación y retoques. Si calculas 8 L, un 10 % añade 0,8 L.</small></label>
+              <label class="diy-check">
+                <input name="irregularRoom" type="checkbox" aria-describedby="irregular-room-help"> La habitación tiene entrantes o salientes
+                <small id="irregular-room-help">Añade un 9 % a la superficie bruta estimada de las paredes. Este ajuste se aplica aparte del margen de pintura. Para plantas muy irregulares, mide todos los tramos de pared, incluidos los entrantes.</small>
+              </label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Pintura del techo</legend>
+            <div class="ceiling-options">
+              <label><input type="radio" name="ceilingMode" value="none" checked> No calcular pintura del techo</label>
+              <label><input type="radio" name="ceilingMode" value="combined"> Incluir el techo con la pintura de paredes</label>
+              <label><input type="radio" name="ceilingMode" value="separate"> Calcular la pintura del techo por separado</label>
+            </div>
+            <small class="muted">Se aplican las mismas manos y el mismo margen de pintura al techo si lo incluyes.</small>
+          </fieldset>
+          <fieldset>
+            <legend>Puertas y ventanas sin pintar</legend>
+            <div class="diy-grid">
+              <label>Número de puertas
+                <select name="doors" aria-describedby="door-size"><option value="0">0</option><option value="1" selected>1</option><option value="2">2</option></select>
+              </label>
+            </div>
+            <p class="muted" id="door-size">Cada puerta, incluida la del balcón, se estima en 80 × 200 cm (1,60 m²).</p>
+            <p class="muted" id="window-measurements">Mide el ancho y el alto de cada hueco. Si no hay ventana, deja sus dos campos vacíos.</p>
+            <div class="diy-grid">
+              <label>Ventana 1 · ancho (m)<input name="windowWidth1" type="text" inputmode="decimal" value="1,50" aria-describedby="window-measurements"></label>
+              <label>Ventana 1 · alto (m)<input name="windowHeight1" type="text" inputmode="decimal" value="1,60" aria-describedby="window-measurements"></label>
+              <label>Ventana 2 · ancho (m)<input name="windowWidth2" type="text" inputmode="decimal" aria-describedby="window-measurements"></label>
+              <label>Ventana 2 · alto (m)<input name="windowHeight2" type="text" inputmode="decimal" aria-describedby="window-measurements"></label>
             </div>
           </fieldset>
           <fieldset>
             <legend>Formatos y precios del mismo producto</legend>
-            <p class="muted">Sustituye estos valores de ejemplo por los de tu tienda. Usa el mismo color y acabado. Para descartar un formato, deja sus dos campos vacíos.</p>
-            <div class="diy-grid"><label>Formato 1 (L)<input name="size0" type="text" inputmode="decimal" value="2,5"></label><label>Precio por bote (€)<input name="paintPrice0" type="text" inputmode="decimal" value="14"></label></div>
-            <div class="diy-grid"><label>Formato 2 (L)<input name="size1" type="text" inputmode="decimal" value="5"></label><label>Precio por bote (€)<input name="paintPrice1" type="text" inputmode="decimal" value="23"></label></div>
-            <div class="diy-grid"><label>Formato 3 (L)<input name="size2" type="text" inputmode="decimal" value="10"></label><label>Precio por bote (€)<input name="paintPrice2" type="text" inputmode="decimal" value="38"></label></div>
+            <p class="muted">Sustituye estos formatos en kg y precios de ejemplo por los de tu tienda. Usa el mismo color y acabado. Para descartar un formato, deja sus dos campos vacíos.</p>
+            <div class="diy-grid"><label>Formato 1 (kg)<input name="size0" type="text" inputmode="decimal" value="2"></label><label>Precio por bote (€)<input name="paintPrice0" type="text" inputmode="decimal" value="7"></label></div>
+            <div class="diy-grid"><label>Formato 2 (kg)<input name="size1" type="text" inputmode="decimal" value="3"></label><label>Precio por bote (€)<input name="paintPrice1" type="text" inputmode="decimal" value="10"></label></div>
+            <div class="diy-grid"><label>Formato 3 (kg)<input name="size2" type="text" inputmode="decimal" value="5"></label><label>Precio por bote (€)<input name="paintPrice2" type="text" inputmode="decimal" value="16"></label></div>
           </fieldset>
-          <details><summary>Imprimación, masilla, protección y herramientas</summary><fieldset><legend>Imprimación</legend><div class="diy-grid"><label>Superficie a imprimar (% del área a pintar)<input name="primerPct" type="text" inputmode="decimal" value="100"></label><label>Manos de imprimación<input name="primerCoats" type="text" inputmode="decimal" value="1"></label><label>Rendimiento (m²/L por mano)<input name="primerRate" type="text" inputmode="decimal" value="10"></label><label>Litros por bote<input name="primerPack" type="text" inputmode="decimal" value="5"></label><label>Precio por envase (€)<input name="primerPrice" type="text" inputmode="decimal" value="18"></label></div></fieldset><fieldset><legend>Masilla</legend><div class="diy-grid"><label>Zona a reparar (m²)<input name="fillerArea" type="text" inputmode="decimal" value="1"></label><label>Espesor medio (mm)<input name="fillerDepth" type="text" inputmode="decimal" value="1"></label><label>Consumo (kg/m² por mm)<input name="fillerRate" type="text" inputmode="decimal" value="1,5"></label><label>Kilogramos por envase<input name="fillerPack" type="text" inputmode="decimal" value="2"></label><label>Precio por envase (€)<input name="fillerPrice" type="text" inputmode="decimal" value="7"></label></div></fieldset><fieldset><legend>Cinta y protector</legend><div class="diy-grid"><label>Longitud de cinta (m)<input name="tapeNeed" type="text" inputmode="decimal" value="25"></label><label>Metros por rollo<input name="tapePack" type="text" inputmode="decimal" value="25"></label><label>Precio por envase (€)<input name="tapePrice" type="text" inputmode="decimal" value="4"></label><label>Superficie que vas a proteger (m²)<input name="coverNeed" type="text" inputmode="decimal" value="20"></label><label>m² por rollo<input name="coverPack" type="text" inputmode="decimal" value="20"></label><label>Precio por envase (€)<input name="coverPrice" type="text" inputmode="decimal" value="6"></label></div></fieldset><fieldset><legend>Útiles de pintura</legend><div class="diy-grid"><label>Rodillos (uds.)<input name="rollerQty" type="text" inputmode="decimal" value="1"></label><label>Precio unitario (€)<input name="rollerPrice" type="text" inputmode="decimal" value="7"></label><label>Brochas (uds.)<input name="brushQty" type="text" inputmode="decimal" value="1"></label><label>Precio unitario (€)<input name="brushPrice" type="text" inputmode="decimal" value="5"></label><label>Bandejas (uds.)<input name="trayQty" type="text" inputmode="decimal" value="1"></label><label>Precio unitario (€)<input name="trayPrice" type="text" inputmode="decimal" value="4"></label><label>Espátulas (uds.)<input name="scraperQty" type="text" inputmode="decimal" value="1"></label><label>Precio unitario (€)<input name="scraperPrice" type="text" inputmode="decimal" value="4"></label><label>Paquetes de lija (uds.)<input name="sandpaperQty" type="text" inputmode="decimal" value="1"></label><label>Precio unitario (€)<input name="sandpaperPrice" type="text" inputmode="decimal" value="3"></label></div></fieldset><p class="muted">Introduce 0 en la cantidad, área o porcentaje de los auxiliares que ya tengas o no necesites.</p></details>
+          <details>
+            <summary>Imprimación, masilla, protección y herramientas</summary>
+            <p class="muted">Estimamos la masilla, la protección y los útiles con las medidas de la habitación.</p>
+            <div class="diy-grid">
+              <label class="diy-check"><input name="usePrimer" type="checkbox"> Aplicar imprimación a toda la superficie a pintar</label>
+              <label>Manos de imprimación<input name="primerCoats" type="text" inputmode="numeric" value="1" aria-describedby="primer-coats-help"><small id="primer-coats-help">Solo se usa si activas la imprimación.</small></label>
+            </div>
+          </details>
           <div class="diy-actions"><button class="button" type="submit">Calcular cantidad y coste</button><button class="diy-reset" type="reset">Restaurar ejemplo</button></div>
         </form>
         <p class="diy-result" id="paint-summary" role="status">Con JavaScript podrás calcular con tus propias medidas. Más abajo tienes un ejemplo resuelto.</p>
         <div class="guide-table" id="paint-results" role="region" aria-label="Comparación de compra de pintura" tabindex="0" hidden>
           <table>
             <caption>Compra de pintura en botes completos</caption>
-            <thead><tr><th scope="col">Compra</th><th scope="col">Litros</th><th scope="col">Sobrante</th><th scope="col">Botes</th><th scope="col">Total con auxiliares</th></tr></thead>
+            <thead><tr><th scope="col">Compra</th><th scope="col">Peso comprado</th><th scope="col">Sobrante</th><th scope="col">Botes</th><th scope="col">Total del trabajo</th></tr></thead>
             <tbody id="paint-rows"></tbody>
           </table>
         </div>
+        <div class="guide-table" id="paint-ceiling" role="region" aria-label="Pintura del techo por separado" tabindex="0" hidden>
+          <table>
+            <caption>Pintura del techo por separado</caption>
+            <thead><tr><th scope="col">Compra de pintura para techos</th><th scope="col">Cantidad necesaria</th><th scope="col">Cantidad comprada</th><th scope="col">Coste</th></tr></thead>
+            <tbody id="paint-ceiling-rows"></tbody>
+          </table>
+          <p class="muted">Referencia: <a href="https://www.leroymerlin.es/productos/pintura-de-interior-especial-techos-luxens-color-blanco-mate-4-l-para-techos-96114383.html" target="_blank" rel="noopener noreferrer">LUXENS especial techos, formatos de 2,5 y 4 L</a>. La imprimación y los útiles compartidos figuran en los auxiliares del proyecto.</p>
+        </div>
         <div class="guide-table" id="paint-aux" role="region" aria-label="Auxiliares de pintura" tabindex="0" hidden><table>
-    <caption>Auxiliares de pintura</caption><thead><tr><th scope="col">Material</th><th scope="col">Cantidad necesaria</th><th scope="col">Compra</th><th scope="col">Coste</th></tr></thead><tbody id="paint-aux-rows"></tbody></table></div>
-        <p class="muted">El total incluye los botes y auxiliares indicados. Usa precios con la misma base de impuestos. Mano de obra y envío se presupuestan aparte. Si el techo lleva otra pintura, calcúlalo por separado.</p>
+    <caption>Auxiliares de pintura</caption><thead><tr><th scope="col">Material</th><th scope="col">Cantidad necesaria</th><th scope="col">Compra</th><th scope="col">Precio por envase o unidad</th><th scope="col">Coste</th></tr></thead><tbody id="paint-aux-rows"></tbody></table></div>
+        <p class="muted">Precios de referencia consultados el 15 de noviembre de 2026 en Leroy Merlin España. Pueden variar según el vendedor, la tienda y las ofertas.</p>
+        <details>
+          <summary>Cómo estimamos los auxiliares y de dónde salen los precios</summary>
+          <ul>
+            <li><a href="https://www.leroymerlin.es/productos/imprimacion-universal-luxens-de-5-l-19380354.html" target="_blank" rel="noopener noreferrer">Imprimación de 5 L</a> · 12 m²/L por mano. Si la activas, se aplica a toda la superficie que vas a pintar.</li>
+            <li><a href="https://www.leroymerlin.es/productos/aguaplast-standard-en-polvo-1-kg-10675063.html" target="_blank" rel="noopener noreferrer">Masilla en polvo de 1 kg</a> · estimamos reparaciones puntuales en el 2 % de la pared neta, con 1 mm de espesor y un consumo de <a href="https://www.beissier.es/media/documents/fichas_t_cnicas/FT_AGUAPLAST_STANDARD_v.1.3.pdf">1,1 kg/m²/mm según la ficha técnica</a>.</li>
+            <li><a href="https://www.leroymerlin.es/productos/cinta-perfil-recto-dexter-50-m-x-25-mm-86904464.html" target="_blank" rel="noopener noreferrer">Cinta de 50 m</a> · perímetro estimado de la habitación más los dos laterales y el dintel de cada puerta y los cuatro lados de cada ventana.</li>
+            <li><a href="https://www.leroymerlin.es/productos/plastico-para-proteccion-de-pintura-4x5-m-medium-81963532.html" target="_blank" rel="noopener noreferrer">Plástico de 20 m²</a> · una superficie de protección equivalente al suelo de la habitación.</li>
+            <li>Un <a href="https://www.leroymerlin.es/productos/kit-de-rodillo-para-pintar-bandeja-brocha-18cm-dexter-82800778.html" target="_blank" rel="noopener noreferrer">kit con rodillo, brocha y bandeja</a>, una <a href="https://www.leroymerlin.es/productos/espatula-dexter-de-acero-inoxidable-16467703.html" target="_blank" rel="noopener noreferrer">espátula</a> y una <a href="https://www.leroymerlin.es/productos/esponja-abrasiva-dexter-de-grano-120-81885791.html" target="_blank" rel="noopener noreferrer">esponja de lija</a> por habitación.</li>
+          </ul>
+        </details>
+        <p class="muted">El total incluye los botes y auxiliares indicados. Usa precios con la misma base de impuestos. Mano de obra y envío se presupuestan aparte. Si eliges pintura específica para el techo, su compra se suma al total del trabajo.</p>
         <div class="callout">
           <strong>Ejemplo resuelto · salón de 5 × 4 m</strong>
-          <p>Con 2,60 m de altura y 4 m² de huecos quedan 42,80 m² de pared. Dos manos, 11 m²/L por mano y un 10 % de reserva dan <strong>8,56 L</strong>. Con los precios de ejemplo, un bote de 10 L cuesta 38 €, frente a 46 € por dos de 5 L. Con los auxiliares seleccionados, el total del primer caso es <strong>96 €</strong>.</p>
+          <p>Con 2,60 m de altura, una puerta de 80 × 200 cm y una ventana de 1,50 × 1,60 m, quedan 42,80 m² de pared. Para dos manos y un 10 % de margen se necesitan <strong>aprox. 14,13 kg (9,42 L)</strong>. Para una necesidad de 8 kg, con los precios del ejemplo, se recomienda <strong>un bote de 5 kg y uno de 3 kg</strong>.</p>
         </div>
+        <p class="muted">El cálculo usa un rendimiento fijo orientativo de 10 m²/L por mano para pintura interior. Para los botes de pared usamos una densidad orientativa de 1,50 kg/L para convertir a kg. La densidad y el rendimiento reales dependen del producto y del soporte. Referencias: <a href="https://media.cdn.bauhaus/m/601620/1.pdf">ficha Bruguer</a> y <a href="https://www.titanlux.es/es/productos/producto/pintura-plastica-mate">ficha Titanlux</a>.</p>
         <h3>Qué pintura elegir</h3>
         <ul>
           <li><strong>Plástica o acrílica al agua para interior.</strong> Una pintura mate va bien en paredes y techos de estancias secas. Para zonas que se limpian a menudo, compara la resistencia al frote húmedo de cada ficha.</li>
@@ -131,39 +188,64 @@
           <li>Recorta esquinas y bordes con brocha. Pasa el rodillo por franjas, manteniendo húmedo el borde entre ellas.</li>
           <li>Deja secar el tiempo de repintado de la ficha, aplica la siguiente mano y retira la cinta según las instrucciones.</li>
         </ol>
-        <div class="related"><a href="https://www.leroymerlin.es/productos/pintura-y-drogueria/pintura-para-interior/">Pintura interior en Leroy Merlin →</a><a href="https://www.manomano.es/pintura-interior-para-paredes-5132">Pintura interior en ManoMano →</a></div>
+        <div class="related"><a href="https://www.leroymerlin.es/productos/pintura-y-drogueria/pintura-para-interior/" target="_blank" rel="noopener noreferrer">Pintura interior en Leroy Merlin →</a><a href="https://www.manomano.es/pintura-interior-para-paredes-5132" target="_blank" rel="noopener noreferrer">Pintura interior en ManoMano →</a></div>
       </section>
       <section id="suelo" aria-labelledby="suelo-titulo">
         <h2 id="suelo-titulo">Calculadora de suelo laminado, vinílico, parquet y cerámico</h2>
-        <p>Introduce la superficie neta a cubrir. En una habitación irregular, divide la planta en rectángulos y suma sus áreas. Ajusta el margen a los recortes y al patrón de colocación. Consulta cuántos m² trae cada caja.</p>
+        <p>Introduce el largo y el ancho del rectángulo principal. Para habitaciones muy irregulares, mide por zonas y comprueba la superficie y el despiece antes de comprar. Los formatos, consumos y precios de referencia se aplican automáticamente.</p>
         <form id="floor-form">
           <fieldset>
-            <legend>Superficie y recortes</legend>
+            <legend>Medidas de la habitación</legend>
             <div class="diy-grid">
-              <label>Superficie neta (m²)<input name="area" type="text" inputmode="decimal" value="20" required></label>
-              <label>Margen para recortes (%)<input name="waste" type="text" inputmode="decimal" value="10" required></label>
+              <label>Largo de la zona principal (m)<input name="length" type="text" inputmode="decimal" value="5" required></label>
+              <label>Ancho de la zona principal (m)<input name="width" type="text" inputmode="decimal" value="4" required></label>
+              <label class="diy-check"><input name="irregularRoom" type="checkbox" aria-describedby="floor-shape-help"> La habitación tiene entrantes o salientes</label>
             </div>
+            <p class="muted" id="floor-shape-help">La forma irregular añade un 5 % a la superficie estimada. Aparte se suma un 10 % para recortes del pavimento.</p>
           </fieldset>
-          <p class="muted">Todos los precios y rendimientos son ejemplos editables. Copia las cantidades de cada envase y los precios de tu tienda. Si la ficha de la baldosa declara m² por caja, puedes introducirlos en lugar de la cobertura deducida del formato.</p>
-          <details><summary>Rodapiés, perfiles, adhesivo, juntas y herramientas</summary><fieldset><legend>Remates de suelo flotante</legend><div class="diy-grid"><label>Longitud neta de rodapié (m)<input name="trimNeed" type="text" inputmode="decimal" value="17"></label><label>Metros por barra<input name="trimPack" type="text" inputmode="decimal" value="2,4"></label><label>Precio por envase (€)<input name="trimPrice" type="text" inputmode="decimal" value="7"></label><label>Perfiles de transición (uds.)<input name="profileQty" type="text" inputmode="decimal" value="1"></label><label>Precio unitario (€)<input name="profilePrice" type="text" inputmode="decimal" value="12"></label><label>Kits de cuñas (uds.)<input name="spacerQty" type="text" inputmode="decimal" value="1"></label><label>Precio unitario (€)<input name="spacerPrice" type="text" inputmode="decimal" value="8"></label></div></fieldset><fieldset><legend>Remates de cerámica</legend><div class="diy-grid"><label>Longitud neta de rodapié cerámico (m)<input name="tileTrimNeed" type="text" inputmode="decimal" value="17"></label><label>Metros por pieza<input name="tileTrimPack" type="text" inputmode="decimal" value="0,6"></label><label>Precio por envase (€)<input name="tileTrimPrice" type="text" inputmode="decimal" value="3"></label><label>Perfiles de transición (uds.)<input name="tileProfileQty" type="text" inputmode="decimal" value="1"></label><label>Precio unitario (€)<input name="tileProfilePrice" type="text" inputmode="decimal" value="12"></label><label>Paquetes de crucetas (uds.)<input name="tileSpacerQty" type="text" inputmode="decimal" value="1"></label><label>Precio unitario (€)<input name="tileSpacerPrice" type="text" inputmode="decimal" value="5"></label></div></fieldset><fieldset><legend>Adhesivo para cerámica</legend><div class="diy-grid"><label>Consumo del adhesivo (kg/m²)<input name="adhesiveRate" type="text" inputmode="decimal" value="4"></label><label>kg por saco<input name="adhesivePack" type="text" inputmode="decimal" value="25"></label><label>Precio por envase (€)<input name="adhesivePrice" type="text" inputmode="decimal" value="15"></label></div></fieldset><fieldset><legend>Rejuntado cerámico</legend><div class="diy-grid"><label>Ancho de junta (mm)<input name="jointWidth" type="text" inputmode="decimal" value="3"></label><label>Profundidad de junta (mm)<input name="jointDepth" type="text" inputmode="decimal" value="8"></label><label>Densidad según ficha (kg/L)<input name="jointDensity" type="text" inputmode="decimal" value="1,6"></label><label>kg por envase<input name="jointPack" type="text" inputmode="decimal" value="2"></label><label>Precio por envase (€)<input name="jointPrice" type="text" inputmode="decimal" value="8"></label></div></fieldset><fieldset><legend>Herramientas</legend><div class="diy-grid"><label>Kits de instalación flotante (uds.)<input name="floatingKitQty" type="text" inputmode="decimal" value="1"></label><label>Precio unitario (€)<input name="floatingKitPrice" type="text" inputmode="decimal" value="12"></label><label>Llanas dentadas (uds.)<input name="trowelQty" type="text" inputmode="decimal" value="1"></label><label>Precio unitario (€)<input name="trowelPrice" type="text" inputmode="decimal" value="12"></label><label>Kits de cubeta y esponja (uds.)<input name="tileToolsQty" type="text" inputmode="decimal" value="1"></label><label>Precio unitario (€)<input name="tileToolsPrice" type="text" inputmode="decimal" value="9"></label><label>Cortadoras o alquileres (uds.)<input name="tileCutterQty" type="text" inputmode="decimal" value="0"></label><label>Precio unitario (€)<input name="tileCutterPrice" type="text" inputmode="decimal" value="30"></label></div></fieldset><p class="muted">Ajusta los materiales compartidos o deja a cero la cantidad si ya los tienes. En cerámica, la reserva de piezas no se encola ni se rejunta. El consumo de adhesivo del ejemplo debe ajustarse a la ficha, al soporte y a la técnica.</p></details>
-          <details><summary>Precios y formatos de laminado, vinilo y parquet</summary><fieldset><legend>Laminado</legend><div class="diy-grid"><label>Cobertura (m²/caja)<input name="box0" type="text" inputmode="decimal" value="2,2"></label><label>Precio por caja (€)<input name="floorPrice0" type="text" inputmode="decimal" value="25"></label><label>Superficie con base separada (% del suelo)<input name="basePct0" type="text" inputmode="decimal" value="100"></label><label>m² por rollo de base<input name="base0Pack" type="text" inputmode="decimal" value="10"></label><label>Precio por envase (€)<input name="base0Price" type="text" inputmode="decimal" value="20"></label><label>Superficie con barrera separada (% del suelo)<input name="vaporPct0" type="text" inputmode="decimal" value="0"></label><label>m² por rollo de barrera<input name="vapor0Pack" type="text" inputmode="decimal" value="20"></label><label>Precio por envase (€)<input name="vapor0Price" type="text" inputmode="decimal" value="12"></label></div></fieldset><fieldset><legend>Vinílico clic</legend><div class="diy-grid"><label>Cobertura (m²/caja)<input name="box1" type="text" inputmode="decimal" value="2"></label><label>Precio por caja (€)<input name="floorPrice1" type="text" inputmode="decimal" value="32"></label><label>Superficie con base separada (% del suelo)<input name="basePct1" type="text" inputmode="decimal" value="0"></label><label>m² por rollo de base<input name="base1Pack" type="text" inputmode="decimal" value="10"></label><label>Precio por envase (€)<input name="base1Price" type="text" inputmode="decimal" value="20"></label><label>Superficie con barrera separada (% del suelo)<input name="vaporPct1" type="text" inputmode="decimal" value="0"></label><label>m² por rollo de barrera<input name="vapor1Pack" type="text" inputmode="decimal" value="20"></label><label>Precio por envase (€)<input name="vapor1Price" type="text" inputmode="decimal" value="12"></label></div></fieldset><fieldset><legend>Parquet multicapa</legend><div class="diy-grid"><label>Cobertura (m²/caja)<input name="box2" type="text" inputmode="decimal" value="2,4"></label><label>Precio por caja (€)<input name="floorPrice2" type="text" inputmode="decimal" value="65"></label><label>Superficie con base separada (% del suelo)<input name="basePct2" type="text" inputmode="decimal" value="100"></label><label>m² por rollo de base<input name="base2Pack" type="text" inputmode="decimal" value="10"></label><label>Precio por envase (€)<input name="base2Price" type="text" inputmode="decimal" value="20"></label><label>Superficie con barrera separada (% del suelo)<input name="vaporPct2" type="text" inputmode="decimal" value="0"></label><label>m² por rollo de barrera<input name="vapor2Pack" type="text" inputmode="decimal" value="20"></label><label>Precio por envase (€)<input name="vapor2Price" type="text" inputmode="decimal" value="12"></label></div></fieldset></details><fieldset><legend>Cerámica: formato y precio</legend><div class="diy-grid"><label>Largo de la baldosa (cm)<input name="tileLength" type="text" inputmode="decimal" value="60"></label><label>Ancho de la baldosa (cm)<input name="tileWidth" type="text" inputmode="decimal" value="30"></label><label>Baldosas por caja<input name="tilePieces" type="text" inputmode="decimal" value="8"></label><label>m²/caja de la ficha (0 para calcular)<input name="tileCoverage" type="text" inputmode="decimal" value="0"></label><label>Precio por caja (€)<input name="tilePrice" type="text" inputmode="decimal" value="25"></label></div></fieldset>
+          <label>Modelo de baldosa para la comparación
+            <select name="tileModel">
+              <option value="vesta" selected>Vesta 30 × 60 cm · Leroy Merlin</option>
+              <option value="marmi">Marmi 60 × 60 cm · Leroy Merlin</option>
+              <option value="reims">Reims 60 × 120 cm · ManoMano</option>
+            </select>
+          </label>
+          <p class="muted">El contenido y el precio de la caja se toman de la referencia seleccionada.</p>
           <div class="diy-actions"><button class="button" type="submit">Calcular cajas y comparar coste</button><button class="diy-reset" type="reset">Restaurar ejemplo</button></div>
         </form>
-        <p class="diy-result" id="floor-summary" role="status">Con JavaScript podrás comparar con tus propios precios. Más abajo tienes un ejemplo resuelto.</p>
+        <p class="diy-result" id="floor-summary" role="status">Activa JavaScript para comparar las compras con tus medidas. Más abajo tienes un ejemplo resuelto.</p>
         <div class="guide-table" id="floor-results" role="region" aria-label="Comparación de compra de suelo" tabindex="0" hidden>
           <table>
             <caption>Cajas completas y presupuesto estimado</caption>
-            <thead><tr><th scope="col">Material</th><th scope="col">Cajas</th><th scope="col">m² comprados</th><th scope="col">Pavimento</th><th scope="col">Auxiliares</th><th scope="col">Total</th><th scope="col">€/m² útil</th></tr></thead>
+            <thead><tr><th scope="col">Material</th><th scope="col">Cajas</th><th scope="col">m² comprados</th><th scope="col">Precio por caja</th><th scope="col">Pavimento</th><th scope="col">Auxiliares</th><th scope="col">Total</th><th scope="col">€/m² útil</th></tr></thead>
             <tbody id="floor-rows"></tbody>
           </table>
         </div>
         <div class="guide-table" id="floor-aux" role="region" aria-label="Auxiliares por tipo de suelo" tabindex="0" hidden><table>
-    <caption>Auxiliares por tipo de suelo</caption><thead><tr><th scope="col">Sistema y material</th><th scope="col">Cantidad necesaria</th><th scope="col">Compra</th><th scope="col">Coste</th></tr></thead><tbody id="floor-aux-rows"></tbody></table></div>
-        <p class="muted">El presupuesto incluye cajas completas y auxiliares. Mano de obra, nivelación, retirada y transporte quedan fuera. Marca cero unidades para las herramientas que ya tienes.</p>
+    <caption>Auxiliares por tipo de suelo</caption><thead><tr><th scope="col">Sistema y material</th><th scope="col">Cantidad necesaria</th><th scope="col">Compra</th><th scope="col">Precio por envase o unidad</th><th scope="col">Coste</th></tr></thead><tbody id="floor-aux-rows"></tbody></table></div>
+        <p class="muted">El presupuesto incluye cajas completas y auxiliares. Mano de obra, nivelación, retirada y transporte quedan fuera. Los útiles y remates indicados se presupuestan como una compra inicial. El cálculo supone un paso de puerta de 0,80 m y un perfil; la barrera de vapor separada y el alquiler de cortadora se valoran según la instalación.</p>
         <div class="callout">
           <strong>Ejemplo resuelto · 20 m² de suelo</strong>
-          <p>Con un 10 % para recortes, necesitas 22 m². Si cada caja de laminado cubre 2,20 m², compras <strong>10 cajas</strong>. A 25 € por caja son 250 € de pavimento. Para comparar con una baldosa de 30 × 60 cm, 8 piezas por caja cubren 1,44 m² y esos 22 m² requieren <strong>16 cajas</strong>. Con los auxiliares incluidos en el ejemplo, el total es <strong>378 € para laminado, 440 € para vinílico clic, 601 € para cerámica y 778 € para parquet multicapa</strong>.</p>
+          <p>Una habitación de 5 × 4 m requiere <strong>22 m²</strong> de pavimento con el margen de recortes. Con el ajuste de planta irregular se estiman <strong>21 m² útiles</strong> y <strong>23,10 m²</strong> de material para comprar antes de redondear a cajas. Al seleccionar el porcelánico Vesta de 30 × 60 cm, su caja de 1,26 m² da 18 cajas en el primer caso y 19 en el segundo.</p>
         </div>
+
+        <details>
+          <summary>De dónde salen los márgenes para habitaciones irregulares</summary>
+          <p>Comparamos cinco plantas hipotéticas con el rectángulo principal, a igual altura de pared. Para el suelo contamos como extra solo la superficie que falta en el rectángulo; un recorte hacia dentro aporta 0 % de superficie adicional.</p>
+          <div class="guide-table" role="region" aria-label="Escenarios geométricos" tabindex="0">
+            <table>
+              <thead><tr><th scope="col">Planta de ejemplo</th><th scope="col">Pared bruta adicional</th><th scope="col">Suelo adicional</th></tr></thead>
+              <tbody>
+              <tr><th scope="row">4 × 3 m, con un hueco hacia fuera de 1,20 × 0,60 m</th><td>8,57 %</td><td>6,00 %</td></tr>
+              <tr><th scope="row">5 × 4 m, con un hueco hacia fuera de 1,50 × 1 m</th><td>11,11 %</td><td>7,50 %</td></tr>
+              <tr><th scope="row">6 × 4 m, con dos huecos hacia fuera de 1,20 × 0,60 m y 1,50 × 0,90 m</th><td>15,00 %</td><td>8,62 %</td></tr>
+              <tr><th scope="row">5 × 4 m, con un entrante en medio de una pared de 0,80 × 0,60 m</th><td>6,67 %</td><td>0,00 %</td></tr>
+              <tr><th scope="row">6 × 4 m, con esquina recortada en L de 2 × 1,50 m</th><td>0,00 %</td><td>0,00 %</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Promedio de estos cinco casos: <strong>8,27 %</strong> en pared y <strong>4,43 %</strong> en suelo. Redondeamos hacia arriba al <strong>9 % y al 5 %</strong>. Son márgenes del modelo para estas geometrías, no una medición de tu habitación.</p>
+        </details>
         <h3>Cómo elegir el material</h3>
         <dl class="material-list">
           <dt>Laminado</dt><dd>Lamas con acabado decorativo, habituales en dormitorios y salones. Verifica si el modelo admite humedad y si necesita base separada.</dd>
@@ -190,20 +272,40 @@
           <li>Coloca con separadores, ajusta las piezas y limpia el adhesivo de las juntas antes de que endurezca.</li>
           <li>Cuando se pueda transitar y rejuntar según la ficha, aplica el mortero de juntas y limpia el exceso con esponja. Respeta el curado antes de usar el suelo.</li>
         </ol>
-        <details><summary>Cómo se calculan las compras</summary>
-          <p>La superficie con recortes se divide por los m² reales de cada caja y se redondea hacia arriba. En cerámica, si no indicas m² por caja, se multiplican largo y ancho de la pieza por el número de piezas. La base, la barrera y el rodapié se redondean a rollos o barras completas. El adhesivo se calcula con la superficie colocada y los kg/m² de su ficha. Para el rejuntado se aproxima el volumen de junta con el formato, anchura y profundidad de la junta y la densidad del producto. Comprueba el rendimiento en su ficha.</p>
+        <details>
+          <summary>Cómo se calculan las compras y de dónde salen los precios</summary>
+          <p>Usamos la cobertura comercial de la referencia seleccionada. Dividimos el área con recortes por la cobertura de cada caja y redondeamos hacia arriba. Para el rodapié descontamos una puerta de 0,80 m al perímetro estimado. El adhesivo se estima con 4 kg/m² sobre la superficie a colocar. Para el rejuntado se usan una junta de 3 mm, una profundidad de 8 mm y una densidad orientativa de 1,6 kg/L. Las crucetas se estiman por intersecciones de baldosas y se compran en bolsas de 200. Comprueba el rendimiento de cada producto antes de comprar.</p>
+          <p>Precios de referencia de Leroy Merlin España consultados el 15 de noviembre de 2026. Los importes pueden variar por tienda, oferta y disponibilidad.</p>
+          <ul>
+            <li><a href="https://www.leroymerlin.es/productos/suelo-laminado-forte-8mm-lota-ac4-osc420-artens-85540154.html" target="_blank" rel="noopener noreferrer">Laminado ARTENS Lota, 2,22 m² por caja</a></li>
+            <li><a href="https://www.leroymerlin.es/productos/suelo-vinilico-spc-en-clic-extrem-new-timanfaya-5-5mm-espesor-base-integrada-gr105-86617368.html" target="_blank" rel="noopener noreferrer">Vinílico Timanfaya con base integrada, 2,24 m² por caja</a></li>
+            <li><a href="https://www.leroymerlin.es/productos/parquet-multicapa-medfloor-baltic-wood-13-3mm-roble-natural-3-lamas-mb6265-3-60m2-75097615.html" target="_blank" rel="noopener noreferrer">Parquet multicapa MEDFLOOR, 3,60 m² por caja</a></li>
+            <li><a href="https://www.leroymerlin.es/productos/suelo-porcelanico-vesta-efecto-piedra-natural-30x60-cm-90321395.html" target="_blank" rel="noopener noreferrer">Porcelánico Vesta 30 × 60 cm, 1,26 m² por caja</a></li>
+            <li><a href="https://www.leroymerlin.es/productos/suelo-porcelanico-marmi-efecto-marmol-silver-60x60-cm-artens-83421380.html" target="_blank" rel="noopener noreferrer">Marmi 60 × 60 cm, 1,44 m² por caja</a></li>
+            <li><a href="https://www.manomano.es/p/reims-baldosa-porcelanica-efecto-piedra-interior-y-exterior-gris-60x120-cm-caja-2-piezas-1-44-m-248953298?model_id=250853721" target="_blank" rel="noopener noreferrer">Reims 60 × 120 cm, 2 piezas y 1,44 m² por caja</a></li>
+            <li><a href="https://www.leroymerlin.es/productos/suelos/bases-aislantes-para-suelos/bases-aislantes-p.html" target="_blank" rel="noopener noreferrer">Base aislante de 10 m²</a></li>
+            <li><a href="https://www.leroymerlin.es/productos/rodapie-liso-con-pasacable-de-mdf-de-2-4-m-de-longitud-14704774.html" target="_blank" rel="noopener noreferrer">Rodapié MDF de 2,40 m</a></li>
+            <li><a href="https://www.leroymerlin.es/productos/rodapie-porcelanico-bedford-60x8-cm-blanco-73231105.html" target="_blank" rel="noopener noreferrer">Rodapié cerámico de 60 cm</a></li>
+            <li><a href="https://www.leroymerlin.es/productos/perfil-de-transicion-de-aluminio-natural-90-cm-17406613.html" target="_blank" rel="noopener noreferrer">Perfil de transición de 90 cm</a></li>
+            <li><a href="https://www.leroymerlin.es/productos/juego-de-colocacion-suelo-laminado-13922174.html" target="_blank" rel="noopener noreferrer">Juego de colocación flotante</a></li>
+            <li><a href="https://www.leroymerlin.es/productos/mortero-cola-porcelanico-pragma-25-kg-blanco-90875348.html" target="_blank" rel="noopener noreferrer">Adhesivo en sacos de 25 kg</a></li>
+            <li><a href="https://www.leroymerlin.es/productos/mortero-para-juntas-axton-2kg-85480290.html" target="_blank" rel="noopener noreferrer">Mortero de juntas de 2 kg</a></li>
+            <li><a href="https://www.leroymerlin.es/productos/crucetas-para-juntas-rubi-3-mm-200-unidades-14425852.html" target="_blank" rel="noopener noreferrer">Crucetas de 3 mm, 200 unidades</a></li>
+            <li><a href="https://www.leroymerlin.es/productos/llana-dexter-acero-6mm-89124070.html" target="_blank" rel="noopener noreferrer">Llana dentada</a></li>
+            <li><a href="https://www.leroymerlin.es/productos/kit-cubo-limpieza-19l-c-rodillos-tws19a-97120658.html" target="_blank" rel="noopener noreferrer">Cubeta de limpieza para rejuntado</a></li>
+          </ul>
         </details>
         <div class="related">
-          <a href="https://www.leroymerlin.es/productos/suelos/suelos-laminados/">Laminado en Leroy Merlin →</a><a href="https://www.manomano.es/suelos-laminados-5401">Laminado en ManoMano →</a>
-          <a href="https://www.leroymerlin.es/productos/suelos/suelos-vinilicos/">Vinílico en Leroy Merlin →</a><a href="https://www.manomano.es/lamas-de-pvc-para-suelos-335">Lamas de PVC en ManoMano →</a>
-          <a href="https://www.leroymerlin.es/productos/ceramica/suelos-ceramicos/">Cerámico en Leroy Merlin →</a>
-          <a href="https://www.leroymerlin.es/productos/suelos/suelos-de-madera/parquet/">Parquet de madera en Leroy Merlin →</a>
+          <a href="https://www.leroymerlin.es/productos/suelos/suelos-laminados/" target="_blank" rel="noopener noreferrer">Laminado en Leroy Merlin →</a><a href="https://www.manomano.es/suelos-laminados-5401" target="_blank" rel="noopener noreferrer">Laminado en ManoMano →</a>
+          <a href="https://www.leroymerlin.es/productos/suelos/suelos-vinilicos/" target="_blank" rel="noopener noreferrer">Vinílico en Leroy Merlin →</a><a href="https://www.manomano.es/lamas-de-pvc-para-suelos-335" target="_blank" rel="noopener noreferrer">Lamas de PVC en ManoMano →</a>
+          <a href="https://www.leroymerlin.es/productos/ceramica/suelos-ceramicos/" target="_blank" rel="noopener noreferrer">Cerámico en Leroy Merlin →</a>
+          <a href="https://www.leroymerlin.es/productos/suelos/suelos-de-madera/parquet/" target="_blank" rel="noopener noreferrer">Parquet de madera en Leroy Merlin →</a>
         </div>
         <h3>Materiales auxiliares y fichas de aplicación</h3>
         <div class="related">
-          <a href="https://www.manomano.es/busqueda/imprimacion%20pared%20masilla%20rodillo">Imprimación, masilla y útiles en ManoMano →</a>
-          <a href="https://www.manomano.es/busqueda/base%20suelo%20laminado">Bases para suelo en ManoMano →</a>
-          <a href="https://www.manomano.es/busqueda/adhesivo%20ceramica%20rejuntado">Adhesivos y juntas en ManoMano →</a>
+          <a href="https://www.manomano.es/busqueda/imprimacion%20pared%20masilla%20rodillo" target="_blank" rel="noopener noreferrer">Imprimación, masilla y útiles en ManoMano →</a>
+          <a href="https://www.manomano.es/busqueda/base%20suelo%20laminado" target="_blank" rel="noopener noreferrer">Bases para suelo en ManoMano →</a>
+          <a href="https://www.manomano.es/busqueda/adhesivo%20ceramica%20rejuntado" target="_blank" rel="noopener noreferrer">Adhesivos y juntas en ManoMano →</a>
           <a href="https://guiaselecciononline.weber.es/">Weber · Selección de adhesivos según soporte y uso →</a>
         </div>
         <p class="muted">Fuentes prácticas: <a href="https://www.leroymerlin.es/ideas-y-consejos/paso-a-paso/como-preparar-las-paredes-para-pintar-y-reparar-grietas.html">preparar paredes y reparar grietas</a> y <a href="https://www.leroymerlin.es/ideas-y-consejos/como-elegir/como-elegir-una-base-aislante-para-suelos.html">elegir una base para suelos</a>.</p>
@@ -228,7 +330,23 @@
     const n = value => number.format(value);
     const euros = cents => money.format(cents / 100);
     const containers = (need, size) => Math.ceil(need / size - 1e-9);
-    const materials = ['Laminado', 'Vinílico clic', 'Parquet multicapa'];
+    const doorArea = 0.8 * 2;
+    const paintCoverage = 10;
+    const paintDensity = 1.5;
+    const ceilingFormats = [{ size: 250, cents: 2099 }, { size: 400, cents: 2799 }];
+    const tileReferences = {
+        vesta: { label: 'Cerámico 30 × 60 cm (Vesta)', length: 60, width: 30, size: 1.26, pieces: 7, unitCents: 1511 },
+        marmi: { label: 'Cerámico 60 × 60 cm (Marmi)', length: 60, width: 60, size: 1.44, pieces: 4, unitCents: 3887 },
+        reims: { label: 'Cerámico 60 × 120 cm (Reims)', length: 120, width: 60, size: 1.44, pieces: 2, unitCents: 4321 },
+    };
+    const irregularWallAllowance = 0.09;
+    const irregularFloorAllowance = 0.05;
+    const flooringCutAllowance = 0.10;
+    const flooringReferences = [
+        { name: 'Laminado', size: 2.22, unitCents: 2440, separateUnderlay: true },
+        { name: 'Vinílico clic', size: 2.24, unitCents: 6270, separateUnderlay: false },
+        { name: 'Parquet multicapa', size: 3.60, unitCents: 22632, separateUnderlay: true },
+    ];
 
     function fail(field, message) {
         field.setAttribute('aria-invalid', 'true');
@@ -266,27 +384,31 @@
         return formats;
     }
 
-    function cheapestPaint(formats, requirement) {
-        // One state per centilitre. An optimum cannot include enough excess
+    function cheapestPaint(formats, requirement, unit) {
+        // One state per 0.01 kg or 0.01 L. An optimum cannot include enough excess
         // to remove a full container, because every container has a positive price.
         const limit = requirement + Math.max(...formats.map(format => format.size)) - 1;
         const costs = new Float64Array(limit + 1).fill(Infinity);
+        const tins = new Float64Array(limit + 1).fill(Infinity);
         const previous = new Int8Array(limit + 1).fill(-1);
         costs[0] = 0;
+        tins[0] = 0;
         for (let quantity = 0; quantity <= limit; quantity++) {
             if (!Number.isFinite(costs[quantity])) continue;
             for (const [index, format] of formats.entries()) {
                 const next = quantity + format.size;
                 const cost = costs[quantity] + format.cents;
-                if (next <= limit && cost < costs[next]) {
+                const count = tins[quantity] + 1;
+                if (next <= limit && (cost < costs[next] || (cost === costs[next] && count < tins[next]))) {
                     costs[next] = cost;
+                    tins[next] = count;
                     previous[next] = index;
                 }
             }
         }
         let best = requirement;
         for (let quantity = requirement + 1; quantity <= limit; quantity++) {
-            if (costs[quantity] < costs[best]) best = quantity;
+            if (costs[quantity] < costs[best] || (costs[quantity] === costs[best] && tins[quantity] < tins[best])) best = quantity;
         }
         const counts = formats.map(() => 0);
         for (let amount = best; amount > 0;) {
@@ -294,22 +416,15 @@
             counts[index]++;
             amount -= formats[index].size;
         }
-        const basket = formats.flatMap((format, index) => counts[index] ? [`${counts[index]} × ${n(format.size / 100)} L`] : []);
-        return { label: basket.join(' + '), quantity: best, cents: costs[best] };
+        const items = formats.map((format, index) => ({ ...format, count: counts[index] }))
+            .filter(item => item.count > 0).sort((a, b) => b.size - a.size);
+        const label = items.map(item => `${item.count} × ${n(item.size / 100)} ${unit}`).join(' + ');
+        return { label, items, quantity: best, cents: costs[best] };
     }
 
-    function packageItem(form, key, name, need, unit) {
-        if (need <= 0) return { name, need: 0, unit, count: 0, pack: 0, cents: 0 };
-        const pack = value(form, key + 'Pack', 0.01, 500);
-        const cents = Math.round(value(form, key + 'Price', 0, 10000) * 100);
+    function purchaseItem(name, need, unit, pack, unitCents) {
         const count = containers(need, pack);
-        return { name, need, unit, count, pack, cents: count * cents };
-    }
-
-    function unitItem(form, key, name) {
-        const count = value(form, key + 'Qty', 0, 100, 0);
-        const cents = count ? Math.round(value(form, key + 'Price', 0, 10000) * 100) : 0;
-        return { name, need: count, unit: 'uds.', count, pack: 1, cents: count * cents };
+        return { name, need, unit, pack, count, unitCents, cents: count * unitCents };
     }
 
     function itemRows(items, system = '') {
@@ -317,114 +432,153 @@
             system ? `${system} · ${item.name}` : item.name,
             `${n(item.need)} ${item.unit}`,
             item.pack === 1 && item.unit === 'uds.' ? `${n(item.count)} uds.` : `${n(item.count)} × ${n(item.pack)} ${item.unit}`,
+            euros(item.unitCents),
             euros(item.cents),
         ]);
     }
 
     const totalItems = items => items.reduce((sum, item) => sum + item.cents, 0);
 
-    function paintAuxiliaries(form, area) {
-        const primerPct = value(form, 'primerPct', 0, 100) / 100;
-        const primer = primerPct
-            ? area * primerPct * value(form, 'primerCoats', 1, 5, 0) / value(form, 'primerRate', 0.1, 40)
+    function paintAuxiliaries(form, area, netWalls, perimeter, doors, windowEdges, floorArea) {
+        const primer = form.elements.namedItem('usePrimer').checked
+            ? area * value(form, 'primerCoats', 1, 5, 0) / 12
             : 0;
-        const fillerArea = value(form, 'fillerArea', 0, area + 1e-9);
-        const filler = fillerArea
-            ? fillerArea * value(form, 'fillerDepth', 0.01, 50) * value(form, 'fillerRate', 0.01, 10)
-            : 0;
-        return [
-            packageItem(form, 'primer', 'Imprimación', primer, 'L'),
-            packageItem(form, 'filler', 'Masilla', filler, 'kg'),
-            packageItem(form, 'tape', 'Cinta', value(form, 'tapeNeed', 0, 5000), 'm'),
-            packageItem(form, 'cover', 'Protector', value(form, 'coverNeed', 0, 5000), 'm²'),
-            ...[['roller','Rodillos'],['brush','Brochas'],['tray','Bandejas'],['scraper','Espátulas'],['sandpaper','Paquetes de lija']]
-                .map(([key, name]) => unitItem(form, key, name)),
+        const filler = netWalls * 0.02 * 1 * 1.1;
+        const tape = perimeter + doors * (0.8 + 2 * 2) + windowEdges;
+        const references = [
+            ['Imprimación', primer, 'L', 5, 2699],
+            ['Masilla', filler, 'kg', 1, 735],
+            ['Cinta de enmascarar', tape, 'm', 50, 289],
+            ['Plástico protector', floorArea, 'm²', 20, 289],
+            ['Kit de rodillo, brocha y bandeja', 1, 'uds.', 1, 1099],
+            ['Espátula', 1, 'uds.', 1, 439],
+            ['Esponja de lija', 1, 'uds.', 1, 70],
         ];
+        return references.map(reference => purchaseItem(...reference));
+    }
+
+    function windowSize(form, index, maxWidth, maxHeight) {
+        const widthName = `windowWidth${index}`;
+        const heightName = `windowHeight${index}`;
+        const width = form.elements.namedItem(widthName);
+        const height = form.elements.namedItem(heightName);
+        if (!width.value.trim() && !height.value.trim()) return { area: 0, edges: 0 };
+        const w = value(form, widthName, 0.01, maxWidth);
+        const h = value(form, heightName, 0.01, maxHeight);
+        return { area: w * h, edges: 2 * (w + h) };
     }
 
     function calculatePaint(form) {
         const length = value(form, 'length', 0.1, 100);
         const width = value(form, 'width', 0.1, 100);
         const height = value(form, 'height', 0.1, 20);
-        const walls = 2 * (length + width) * height;
-        const openings = value(form, 'openings', 0, 10000);
-        if (openings > walls) fail(form.elements.namedItem('openings'), 'El área de puertas y ventanas supera la superficie de las paredes.');
+        const rectangularWalls = 2 * (length + width) * height;
+        const extraWalls = form.elements.namedItem('irregularRoom').checked
+            ? rectangularWalls * irregularWallAllowance
+            : 0;
+        const walls = rectangularWalls + extraWalls;
+        const doors = value(form, 'doors', 0, 2, 0);
+        const maxWindowWidth = Math.max(length, width);
+        const firstWindow = windowSize(form, 1, maxWindowWidth, height);
+        const secondWindow = windowSize(form, 2, maxWindowWidth, height);
+        const openings = doors * doorArea + firstWindow.area + secondWindow.area;
+        const netWalls = walls - openings;
+        if (netWalls < -1e-9) fail(form.elements.namedItem('doors'), 'El área de puertas y ventanas supera la superficie de las paredes.');
         const coats = value(form, 'coats', 1, 10, 0);
-        const coverage = value(form, 'coverage', 0.1, 40);
         const reserve = value(form, 'reserve', 0, 100);
-        const area = walls - openings + (form.elements.namedItem('ceiling').checked ? length * width : 0);
-        if (area <= 1e-9) fail(form.elements.namedItem('openings'), 'La superficie a pintar debe ser mayor que cero.');
-        const required = Math.max(1, containers(area * coats * (1 + reserve / 100) / coverage * 100, 1));
-        if (required > 100000) fail(form.elements.namedItem('coverage'), 'Este cálculo admite hasta 1.000 L. Divide el proyecto en varias zonas.');
-        const formats = takePaintFormats(form);
-        const best = cheapestPaint(formats, required);
-        const auxiliaries = paintAuxiliaries(form, area);
+        const floorArea = length * width;
+        const paintableWalls = Math.max(0, netWalls);
+        const ceilingMode = form.elements.namedItem('ceilingMode').value;
+        const ceilingArea = ceilingMode === 'none' ? 0 : floorArea;
+        const totalArea = paintableWalls + ceilingArea;
+        const wallPaintArea = paintableWalls + (ceilingMode === 'combined' ? ceilingArea : 0);
+        if (totalArea <= 1e-9) fail(form.elements.namedItem('doors'), 'La superficie a pintar debe ser mayor que cero.');
+        const litresPerSquareMetre = coats * (1 + reserve / 100) / paintCoverage;
+        const wallLitres = wallPaintArea * litresPerSquareMetre;
+        const required = Math.max(0, containers(wallLitres * paintDensity * 100, 1));
+        const ceilingLitres = ceilingMode === 'separate' ? ceilingArea * litresPerSquareMetre : 0;
+        if (required > 150000 || ceilingLitres > 1000) fail(form.elements.namedItem('coats'), 'Este cálculo admite hasta 1.000 L por tipo de pintura. Divide el proyecto en varias zonas.');
+        const formats = required ? takePaintFormats(form) : [];
+        const best = required ? cheapestPaint(formats, required, 'kg') : { label: '—', quantity: 0, cents: 0 };
+        const ceiling = ceilingLitres ? cheapestPaint(ceilingFormats, containers(ceilingLitres * 100, 1), 'L') : null;
+        const auxiliaries = paintAuxiliaries(form, totalArea, paintableWalls, walls / height, doors, firstWindow.edges + secondWindow.edges, floorArea);
         const extras = totalItems(auxiliaries);
-        const options = [best, ...formats.map(format => {
+        const ceilingCost = ceiling?.cents ?? 0;
+        const geometryNote = extraWalls > 0
+            ? ` Ajuste por planta irregular: +${n(irregularWallAllowance * 100)} % de pared bruta (${n(extraWalls)} m²).`
+            : '';
+        const options = required ? [best, ...formats.map(format => {
             const count = containers(required, format.size);
-            return { label: `${count} × ${n(format.size / 100)} L`, quantity: count * format.size, cents: count * format.cents };
-        })];
+            return { label: `${count} × ${n(format.size / 100)} kg`, quantity: count * format.size, cents: count * format.cents };
+        }).filter(option => option.label !== best.label)] : [];
+        const ceilingNote = ceiling ? ` · Pintura del techo: ${euros(ceilingCost)}` : '';
+        const ceilingRows = ceiling ? [
+            ...ceiling.items.map(item => [
+                `${item.count} × ${n(item.size / 100)} L de pintura para techos`, '—',
+                `${n(item.count * item.size / 100)} L`, euros(item.count * item.cents),
+            ]),
+            ['Total de pintura del techo', `${n(ceilingLitres)} L`, `${n(ceiling.quantity / 100)} L`, euros(ceilingCost)],
+        ] : [];
         return {
-            summary: `${n(area)} m² a pintar · ${n(required / 100)} L con reserva · Compra más barata: ${best.label} · Auxiliares: ${euros(extras)} · Total: ${euros(best.cents + extras)}.`,
+            summary: `${n(wallPaintArea)} m² con pintura de paredes · ${n(required / 100)} kg (aprox. ${n(wallLitres)} L) con margen · Compra más barata: ${best.label}${ceilingNote} · Auxiliares: ${euros(extras)} · Total: ${euros(best.cents + ceilingCost + extras)}. Huecos descontados: ${n(openings)} m².${geometryNote}`,
             auxiliaries: itemRows(auxiliaries),
+            ceilingRows,
             rows: options.map(({ label, quantity, cents }, i) => [
                 i === 0 ? `Menor coste · ${label}` : label,
-                `${n(quantity / 100)} L`, `${n((quantity - required) / 100)} L`, euros(cents), euros(cents + extras),
+                `${n(quantity / 100)} kg`, `${n((quantity - required) / 100)} kg`, euros(cents), euros(cents + extras + ceilingCost),
             ]),
         };
     }
 
     function calculateFloor(form) {
-        const area = value(form, 'area', 0.1, 5000);
-        const waste = value(form, 'waste', 0, 100);
-        const need = area * (1 + waste / 100);
+        const length = value(form, 'length', 0.1, 100);
+        const width = value(form, 'width', 0.1, 100);
+        const irregular = form.elements.namedItem('irregularRoom').checked;
+        const area = length * width * (1 + (irregular ? irregularFloorAllowance : 0));
+        const need = area * (1 + flooringCutAllowance);
+        const perimeter = 2 * (length + width) * (1 + (irregular ? irregularWallAllowance : 0));
+        const skirting = Math.max(0, perimeter - 0.8);
+        const profile = purchaseItem('Perfil de transición', 1, 'uds.', 1, 999);
         const floatingItems = [
-            packageItem(form, 'trim', 'Rodapié', value(form, 'trimNeed', 0, 5000), 'm'),
-            unitItem(form, 'profile', 'Perfiles'),
-            unitItem(form, 'spacer', 'Kits de cuñas'),
-            unitItem(form, 'floatingKit', 'Kits de instalación'),
+            purchaseItem('Rodapié de MDF', skirting, 'm', 2.4, 699),
+            profile,
+            purchaseItem('Juego de colocación con cuñas', 1, 'uds.', 1, 1249),
         ];
-        const tileLength = value(form, 'tileLength', 1, 500);
-        const tileWidth = value(form, 'tileWidth', 1, 500);
-        const tilePieces = value(form, 'tilePieces', 1, 1000, 0);
-        const tileSize = value(form, 'tileCoverage', 0, 100) || tileLength * tileWidth / 10000 * tilePieces;
-        const grout = area * (1 / (tileLength * 10) + 1 / (tileWidth * 10))
-            * value(form, 'jointWidth', 0, 30) * value(form, 'jointDepth', 0, 50) * value(form, 'jointDensity', 0.01, 5);
+        const underlay = purchaseItem('Base aislante', area, 'm²', 10, 3490);
+        const tile = tileReferences[form.elements.namedItem('tileModel').value];
+        const { length: tileLength, width: tileWidth, size: tileSize, pieces: tilePieces } = tile;
+        const tileArea = tileSize / tilePieces;
+        const grout = area * (1 / (tileLength * 10) + 1 / (tileWidth * 10)) * 3 * 8 * 1.6;
         const tileItems = [
-            packageItem(form, 'adhesive', 'Adhesivo', area * value(form, 'adhesiveRate', 0, 30), 'kg'),
-            packageItem(form, 'joint', 'Rejuntado', grout, 'kg'),
-            packageItem(form, 'tileTrim', 'Rodapié', value(form, 'tileTrimNeed', 0, 5000), 'm'),
-            ...[['tileProfile','Perfiles'],['tileSpacer','Paquetes de crucetas'],['trowel','Llanas'],['tileTools','Kits de cubeta y esponja'],['tileCutter','Cortadoras o alquileres']]
-                .map(([key, name]) => unitItem(form, key, name)),
+            purchaseItem('Adhesivo', area * 4, 'kg', 25, 1097),
+            purchaseItem('Rejuntado', grout, 'kg', 2, 729),
+            purchaseItem('Rodapié cerámico', skirting, 'm', 0.6, 599),
+            profile,
+            purchaseItem('Crucetas', containers(area, tileArea), 'uds.', 200, 741),
+            purchaseItem('Llana dentada', 1, 'uds.', 1, 799),
+            purchaseItem('Cubeta de limpieza', 1, 'uds.', 1, 4028),
         ];
-        const options = materials.map((name, index) => ({
-            name,
-            size: value(form, `box${index}`, 0.01, 100),
-            price: value(form, `floorPrice${index}`, 0.01, 10000),
-            items: [
-                packageItem(form, `base${index}`, 'Base aislante', area * value(form, `basePct${index}`, 0, 100) / 100, 'm²'),
-                packageItem(form, `vapor${index}`, 'Barrera de vapor', area * value(form, `vaporPct${index}`, 0, 100) / 100, 'm²'),
-                ...floatingItems,
-            ],
+        const options = flooringReferences.map(reference => ({
+            ...reference,
+            items: reference.separateUnderlay ? [underlay, ...floatingItems] : floatingItems,
         }));
         options.push({
-            name: `Cerámico ${n(tileWidth)} × ${n(tileLength)} cm`,
-            size: tileSize, price: value(form, 'tilePrice', 0.01, 10000), items: tileItems,
+            name: tile.label, size: tileSize, unitCents: tile.unitCents, items: tileItems,
         });
-        for (const option of options) {
-            option.count = containers(need, option.size);
-            option.supplies = option.count * Math.round(option.price * 100);
-            option.extras = totalItems(option.items);
-            option.total = option.supplies + option.extras;
-        }
-        options.sort((left, right) => left.total - right.total);
-        const best = options[0];
-        const lowest = options.filter(option => option.total === best.total).map(option => option.name);
+        const budgets = options.map(option => {
+            const count = containers(need, option.size);
+            const supplies = count * option.unitCents;
+            const extras = totalItems(option.items);
+            return { ...option, count, supplies, extras, total: supplies + extras };
+        }).sort((left, right) => left.total - right.total);
+        const best = budgets[0];
+        const lowest = budgets.filter(option => option.total === best.total).map(option => option.name);
+        const geometryNote = irregular ? ` · Ajuste de superficie por planta irregular: +${n(irregularFloorAllowance * 100)} %` : '';
         return {
-            summary: `Necesitas ${n(need)} m² con recortes · Menor coste: ${lowest.join(' y ')} por ${euros(best.total)}.`,
-            auxiliaries: options.flatMap(option => itemRows(option.items, option.name)),
-            rows: options.map(({ name, size, count, supplies, extras, total }) => [
-                name, n(count), `${n(count * size)} m²`, euros(supplies), euros(extras), euros(total), euros(total / area),
+            summary: `${n(area)} m² útiles${geometryNote} · Necesitas ${n(need)} m² con recortes · Menor coste: ${lowest.join(' y ')} por ${euros(best.total)}.`,
+            auxiliaries: budgets.flatMap(option => itemRows(option.items, option.name)),
+            rows: budgets.map(({ name, size, count, unitCents, supplies, extras, total }) => [
+                name, n(count), `${n(count * size)} m²`, euros(unitCents), euros(supplies), euros(extras), euros(total), euros(total / area),
             ]),
         };
     }
@@ -449,6 +603,8 @@
         const tableRows = document.getElementById(`${tool}-rows`);
         const auxiliaryResults = document.getElementById(`${tool}-aux`);
         const auxiliaryRows = document.getElementById(`${tool}-aux-rows`);
+        const ceilingResults = tool === 'paint' ? document.getElementById('paint-ceiling') : null;
+        const ceilingRows = tool === 'paint' ? document.getElementById('paint-ceiling-rows') : null;
 
         function update() {
             form.querySelectorAll('[aria-invalid]').forEach(field => field.removeAttribute('aria-invalid'));
@@ -460,6 +616,7 @@
                 message.setAttribute('data-error', '');
                 results.hidden = true;
                 auxiliaryResults.hidden = true;
+                if (ceilingResults) ceilingResults.hidden = true;
                 return;
             }
             message.removeAttribute('data-error');
@@ -467,7 +624,11 @@
             renderRows(tableRows, result.rows);
             renderRows(auxiliaryRows, result.auxiliaries);
             auxiliaryResults.hidden = result.auxiliaries.length === 0;
-            results.hidden = false;
+            results.hidden = result.rows.length === 0;
+            if (ceilingResults) {
+                renderRows(ceilingRows, result.ceilingRows);
+                ceilingResults.hidden = result.ceilingRows.length === 0;
+            }
         }
 
         form.noValidate = true;
