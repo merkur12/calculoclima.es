@@ -81,7 +81,7 @@
             <div class="diy-grid">
               <label>Largo de la habitación (m)<input name="length" type="text" inputmode="decimal" value="5" required></label>
               <label>Ancho de la habitación (m)<input name="width" type="text" inputmode="decimal" value="4" required></label>
-              <label>Altura de las paredes (m)<input name="height" type="text" inputmode="decimal" value="2,6" required></label>
+              <label>Altura libre del suelo al techo (m)<input name="height" type="text" inputmode="decimal" value="2,6" aria-describedby="paint-height-help" required><small id="paint-height-help">Mide desde el suelo acabado hasta el techo interior.</small></label>
               <label>Número de manos<input name="coats" type="text" inputmode="numeric" value="2" required></label>
               <label>Margen de desperdicio de pintura (%)<input name="reserve" type="text" inputmode="decimal" value="10" aria-describedby="paint-margin-help" required><small id="paint-margin-help">Añade un margen para pérdidas de aplicación y retoques. Si calculas 8 L, un 10 % añade 0,8 L.</small></label>
               <label class="diy-check">
@@ -115,13 +115,6 @@
               <label>Ventana 2 · alto (m)<input name="windowHeight2" type="text" inputmode="decimal" aria-describedby="window-measurements"></label>
             </div>
           </fieldset>
-          <fieldset>
-            <legend>Formatos y precios del mismo producto</legend>
-            <p class="muted">Sustituye estos formatos en kg y precios de ejemplo por los de tu tienda. Usa el mismo color y acabado. Para descartar un formato, deja sus dos campos vacíos.</p>
-            <div class="diy-grid"><label>Formato 1 (kg)<input name="size0" type="text" inputmode="decimal" value="2"></label><label>Precio por bote (€)<input name="paintPrice0" type="text" inputmode="decimal" value="7"></label></div>
-            <div class="diy-grid"><label>Formato 2 (kg)<input name="size1" type="text" inputmode="decimal" value="3"></label><label>Precio por bote (€)<input name="paintPrice1" type="text" inputmode="decimal" value="10"></label></div>
-            <div class="diy-grid"><label>Formato 3 (kg)<input name="size2" type="text" inputmode="decimal" value="5"></label><label>Precio por bote (€)<input name="paintPrice2" type="text" inputmode="decimal" value="16"></label></div>
-          </fieldset>
           <details>
             <summary>Imprimación, masilla, protección y herramientas</summary>
             <p class="muted">Estimamos la masilla, la protección y los útiles con las medidas de la habitación.</p>
@@ -140,6 +133,7 @@
             <tbody id="paint-rows"></tbody>
           </table>
         </div>
+        <p class="muted">Para estimar el coste de la pintura de paredes usamos botes de ejemplo de 2 kg (7 €), 3 kg (10 €) y 5 kg (16 €). Los precios reales dependen del producto y de la tienda.</p>
         <div class="guide-table" id="paint-ceiling" role="region" aria-label="Pintura del techo por separado" tabindex="0" hidden>
           <table>
             <caption>Pintura del techo por separado</caption>
@@ -333,6 +327,7 @@
     const doorArea = 0.8 * 2;
     const paintCoverage = 10;
     const paintDensity = 1.5;
+    const wallPaintFormats = [{ size: 200, cents: 700 }, { size: 300, cents: 1000 }, { size: 500, cents: 1600 }];
     const ceilingFormats = [{ size: 250, cents: 2099 }, { size: 400, cents: 2799 }];
     const tileReferences = {
         vesta: { label: 'Cerámico 30 × 60 cm (Vesta)', length: 60, width: 30, size: 1.26, pieces: 7, unitCents: 1511 },
@@ -367,21 +362,6 @@
             fail(field, `${label}: introduce un valor entre ${n(min)} y ${n(max)}${decimals ? ' con hasta dos decimales' : ' sin decimales'}.`);
         }
         return parsed;
-    }
-
-    function takePaintFormats(form) {
-        const formats = [];
-        for (let i = 0; i < 3; i++) {
-            const size = form.elements.namedItem(`size${i}`);
-            const price = form.elements.namedItem(`paintPrice${i}`);
-            if (!size.value.trim() && !price.value.trim()) continue;
-            formats.push({
-                size: Math.round(value(form, size.name, 0.05, 50) * 100),
-                cents: Math.round(value(form, price.name, 0.01, 1000) * 100),
-            });
-        }
-        if (!formats.length) fail(form.elements.namedItem('size0'), 'Introduce al menos un tamaño de bote y su precio.');
-        return formats;
     }
 
     function cheapestPaint(formats, requirement, unit) {
@@ -498,8 +478,7 @@
         const required = Math.max(0, containers(wallLitres * paintDensity * 100, 1));
         const ceilingLitres = ceilingMode === 'separate' ? ceilingArea * litresPerSquareMetre : 0;
         if (required > 150000 || ceilingLitres > 1000) fail(form.elements.namedItem('coats'), 'Este cálculo admite hasta 1.000 L por tipo de pintura. Divide el proyecto en varias zonas.');
-        const formats = required ? takePaintFormats(form) : [];
-        const best = required ? cheapestPaint(formats, required, 'kg') : { label: '—', quantity: 0, cents: 0 };
+        const best = required ? cheapestPaint(wallPaintFormats, required, 'kg') : { label: '—', quantity: 0, cents: 0 };
         const ceiling = ceilingLitres ? cheapestPaint(ceilingFormats, containers(ceilingLitres * 100, 1), 'L') : null;
         const auxiliaries = paintAuxiliaries(form, totalArea, paintableWalls, walls / height, doors, firstWindow.edges + secondWindow.edges, floorArea);
         const extras = totalItems(auxiliaries);
@@ -507,7 +486,7 @@
         const geometryNote = extraWalls > 0
             ? ` Ajuste por planta irregular: +${n(irregularWallAllowance * 100)} % de pared bruta (${n(extraWalls)} m²).`
             : '';
-        const options = required ? [best, ...formats.map(format => {
+        const options = required ? [best, ...wallPaintFormats.map(format => {
             const count = containers(required, format.size);
             return { label: `${count} × ${n(format.size / 100)} kg`, quantity: count * format.size, cents: count * format.cents };
         }).filter(option => option.label !== best.label)] : [];
