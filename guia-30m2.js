@@ -1,6 +1,29 @@
 'use strict';
 
-const calculatorFrame = document.querySelector('#calculadora-integrada iframe');
+const calculatorPanel = document.getElementById('calculadora-integrada');
+const calculatorFrame = calculatorPanel.querySelector('iframe');
+const calculatorButtons = document.querySelectorAll('[data-open-calculator]');
+let lastTrigger;
+for (const button of calculatorButtons) {
+    button.addEventListener('click', event => {
+        event.preventDefault();
+        lastTrigger = button;
+        calculatorPanel.hidden = false;
+        const url = button.getAttribute('href');
+        if (calculatorFrame.getAttribute('src') !== url) calculatorFrame.setAttribute('src', url);
+        for (const trigger of calculatorButtons) trigger.setAttribute('aria-expanded', 'true');
+        calculatorPanel.scrollIntoView({
+            behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+            block: 'start',
+        });
+    });
+}
+document.getElementById('cerrar-calculadora').addEventListener('click', () => {
+    calculatorPanel.hidden = true;
+    for (const trigger of calculatorButtons) trigger.setAttribute('aria-expanded', 'false');
+    lastTrigger?.focus();
+});
+
 const equipmentStatus = document.getElementById('equipos-estado');
 const showAllButton = document.getElementById('equipos-todos');
 const modelRows = Array.from(document.querySelectorAll('#equipos tbody tr'));
@@ -23,7 +46,7 @@ window.addEventListener('message', (event) => {
     const result = event.data;
     if (result?.type !== 'calculoclima:guide-cooling') return;
 
-    if (Number.isFinite(result.height) && result.height > 0) {
+    if (Number.isFinite(result.height) && result.height >= 200 && result.height <= 25000) {
         calculatorFrame.style.height = Math.ceil(result.height) + 'px';
     }
 
@@ -38,7 +61,9 @@ window.addEventListener('message', (event) => {
     const load = `Carga calculada de ${numberFormat.format(watts / 1000)} kW.`;
     const matchingRows = modelRows.filter(row => Number(row.dataset.capacity) === capacity);
     if (!matchingRows.length) {
-        equipmentStatus.textContent = `${load} La selección de esta guía no cubre la configuración recomendada. Consulta el resultado del cálculo y pide una valoración de la instalación.`;
+        for (const row of modelRows) row.hidden = true;
+        showAllButton.hidden = false;
+        equipmentStatus.textContent = `${load} La tabla cubre splits murales individuales de 9.000 a 24.000 BTU/h. Consulta la configuración recomendada por la calculadora.`;
         return;
     }
 
@@ -52,3 +77,9 @@ window.addEventListener('message', (event) => {
             : 'Todos los modelos de esta clase quedan por debajo de la carga a potencia nominal. Revisa la clase siguiente.';
     equipmentStatus.textContent = `${load} Clase recomendada de ${capacityFormat.format(capacity)} BTU/h. ${note}`;
 });
+
+function requestCoolingResult() {
+    calculatorFrame.contentWindow?.postMessage({ type: 'calculoclima:request-cooling' }, location.origin);
+}
+calculatorFrame.addEventListener('load', requestCoolingResult);
+requestCoolingResult();

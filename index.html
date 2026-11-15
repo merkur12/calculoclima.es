@@ -13,6 +13,108 @@
 <!-- Favicon (Sekme Logosu) -->
 <link href="favicon.png" rel="icon" type="image/png"/>
 <link href="favicon.png" rel="apple-touch-icon"/>
+<script>
+if (new URLSearchParams(location.search).get('embed') === 'clima') {
+    document.documentElement.dataset.guiaFrio = '';
+}
+</script>
+<style>
+    @media screen {
+        html[data-guia-frio], html[data-guia-frio] body { min-height: 0 !important; }
+        html[data-guia-frio] body { padding: 0 !important; background: #f8fafc; }
+        html[data-guia-frio] body > :not(script, style, #hesapAraclari, #hesapAraclariSekmeler),
+        html[data-guia-frio] :is(#btnTabIsitma, #motorIsitma) { display: none !important; }
+        html[data-guia-frio] #hesapAraclariSekmeler { position: static !important; }
+        html[data-guia-frio] section:has(#klimaCanvas),
+        html[data-guia-frio] #demoBilgiKutusu { display: none !important; }
+
+        /* Ajuste del formulario al ancho útil de la guía. */
+        html[data-guia-frio] #hesapAraclari {
+            min-width: 0;
+            gap: clamp(0.875rem, 2vw, 1.5rem);
+        }
+        html[data-guia-frio] #hesapAraclari > div,
+        html[data-guia-frio] :is(#motorPratik, #motorKlima) .grid > * {
+            min-width: 0;
+        }
+        html[data-guia-frio] :is(#motorPratik, #motorKlima) {
+            container: kh-klima-form / inline-size;
+            padding: clamp(0.75rem, 2vw, 1.5rem);
+        }
+        html[data-guia-frio] :is(#motorPratik, #motorKlima) :is(select, input:not([type="hidden"], [type="checkbox"], [type="radio"])) {
+            min-width: 0;
+            max-width: 100%;
+        }
+        html[data-guia-frio] :is(#motorPratik, #motorKlima) select {
+            text-overflow: ellipsis;
+        }
+        html[data-guia-frio] .kh-klima-alanlar {
+            gap: 0.75rem;
+        }
+        html[data-guia-frio] .kh-klima-alanlar > div:not(.hidden) {
+            display: flex;
+            flex-direction: column;
+        }
+        html[data-guia-frio] .kh-klima-alanlar :is(label + select, label + input) {
+            margin-top: auto;
+            min-height: 2.75rem;
+            padding: 0.5rem 0.625rem;
+        }
+        html[data-guia-frio] #hesapAraclari > div:last-child > div {
+            padding: clamp(0.875rem, 1.5vw, 1.25rem);
+            overflow-wrap: anywhere;
+        }
+        html[data-guia-frio] :is(#lblWatt, #lblBTU) {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+        }
+        html[data-guia-frio] :is(#lblWatt, #lblBTU) + span {
+            flex-shrink: 0;
+        }
+        html[data-guia-frio] #pazaryeriListesi > .flex {
+            flex-wrap: wrap;
+        }
+        html[data-guia-frio] #hesapAraclariSekmeler button {
+            min-width: min(100%, 12.5rem);
+        }
+
+        @media (min-width: 64rem) {
+            html[data-guia-frio] #hesapAraclari {
+                grid-template-columns: minmax(0, 1fr) minmax(14.5rem, 25%);
+            }
+            html[data-guia-frio] #hesapAraclari > div {
+                grid-column: auto;
+            }
+        }
+        @container kh-klima-form (max-width: 35.99rem) {
+            html[data-guia-frio] :is(.kh-klima-alanlar, .print-grid-pencere, .print-grid-duvar) {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        @container kh-klima-form (max-width: 23.99rem) {
+            html[data-guia-frio] :is(.kh-klima-alanlar, .print-grid-pencere, .print-grid-duvar) {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+        @container kh-klima-form (min-width: 36rem) and (max-width: 43.99rem) {
+            html[data-guia-frio] #printParametreSatiri {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+        @container kh-klima-form (min-width: 36rem) {
+            html[data-guia-frio] .kh-klima-inicio { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            html[data-guia-frio] .kh-klima-cephe {
+                grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.8fr) minmax(0, 1.1fr) minmax(0, 1fr);
+            }
+        }
+        @container kh-klima-form (min-width: 44rem) {
+            html[data-guia-frio] #printParametreSatiri {
+                grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.15fr) minmax(0, 0.8fr) minmax(0, 1.65fr) minmax(0, 0.8fr);
+            }
+        }
+
+        html[data-guia-frio] #lblAltBirim { flex-shrink: 1; }
+    }
+</style>
 <!-- Harici Kütüphaneler ve Tailwind -->
 <!-- Google tag (gtag.js) -->
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KGZZ4GT50W"></script>
@@ -179,7 +281,7 @@
 <section aria-labelledby="guia-titulo" class="max-w-6xl mx-auto w-full px-4 py-6 no-print" id="hesap-rehberi"><div class="bg-white border border-slate-200 rounded-3xl p-6 md:p-10 shadow-sm space-y-8">
 <div><p class="text-xs font-bold text-blue-700 uppercase tracking-wide mb-2">De la carga térmica a la elección del equipo</p><h2 class="text-2xl font-extrabold text-slate-900 mb-4" id="guia-titulo">¿Cuánta potencia necesita tu aire acondicionado?</h2><p class="text-slate-600 leading-relaxed">Dos habitaciones de la misma superficie pueden necesitar equipos distintos. Un ventanal al oeste, una cubierta expuesta al sol o una ocupación elevada cambian las ganancias de calor. Por eso conviene mirar algo más que los metros cuadrados: la orientación, el aislamiento y el uso del espacio ayudan a entender de dónde procede la carga.</p></div>
 <div class="grid md:grid-cols-3 gap-4 text-sm leading-relaxed"><div class="bg-amber-50 border border-amber-200 rounded-2xl p-5"><h3 class="font-bold mb-2">Cálculo rápido</h3><p>Úsalo si conoces la superficie, la anchura de la fachada principal y el tamaño aproximado de las ventanas. La calculadora estima la geometría que falta. Si dispones de las medidas reales, puedes introducirlas en los parámetros opcionales para reducir la incertidumbre.</p></div><div class="bg-blue-50 border border-blue-200 rounded-2xl p-5"><h3 class="font-bold mb-2">Cálculo detallado</h3><p>Permite introducir cada fachada y ventana por separado, con sus orientaciones. También distingue usos, ocupantes, equipos y ventilación. El desglose ayuda a identificar qué elementos pesan más en el resultado. Puedes imprimir o guardar un informe de una página.</p></div><div class="bg-orange-50 border border-orange-200 rounded-2xl p-5"><h3 class="font-bold mb-2">Calefacción y aerotermia</h3><p>Estima la potencia de calefacción a partir de la superficie, la altura, el aislamiento, el clima y la exposición. Añade las pérdidas de suelo o cubierta que correspondan. Es una primera aproximación: no sustituye un cálculo de pérdidas estancia por estancia.</p></div></div>
-<article class="border border-blue-200 rounded-2xl p-5 md:p-6 space-y-4 text-sm leading-relaxed" id="ornek-klima-hesabi"><h2 class="text-xl font-extrabold text-slate-900">Ejemplo: un salón de 30 m² en Valencia</h2><p>Tomamos una vivienda en planta intermedia, con aislamiento medio, altura de 2,80 m y tres ocupantes. La fachada principal mide 7,30 m y mira al sur. Seleccionamos una sola fachada, ventanas muy grandes —el 60 % del área bruta— y carpintería de PVC con doble vidrio. No se introducen medidas opcionales ni equipos adicionales.</p><p>La fachada bruta ocupa 7,30 × 2,80 = 20,44 m². El acristalamiento estimado es 12,26 m² y quedan 8,18 m² de muro opaco. La longitud de las particiones interiores se estima suponiendo una planta rectangular.</p><div id="ejemplo-resultados"><div class="overflow-x-auto"><table class="w-full text-left"><caption class="text-left font-bold mb-3">Cargas antes del margen de seguridad</caption><thead><tr class="bg-slate-100"><th class="p-3" scope="col">Componente</th><th class="p-3" scope="col">Carga</th></tr></thead><tbody><tr class="border-b border-slate-100"><th class="p-3 font-normal" scope="row">Fachada opaca</th><td class="p-3">34 W</td></tr><tr class="border-b border-slate-100"><th class="p-3 font-normal" scope="row">Particiones hacia recintos no climatizados</th><td class="p-3">153 W</td></tr><tr class="border-b border-slate-100"><th class="p-3 font-normal" scope="row">Transmisión por el vidrio</th><td class="p-3">201 W</td></tr><tr class="border-b border-slate-100"><th class="p-3 font-normal" scope="row">Ganancia solar por el vidrio</th><td class="p-3">3.667 W</td></tr><tr class="border-b border-slate-100"><th class="p-3 font-normal" scope="row">Iluminación y aparatos</th><td class="p-3">360 W</td></tr><tr class="border-b border-slate-100"><th class="p-3 font-normal" scope="row">Personas: carga sensible</th><td class="p-3">225 W</td></tr><tr class="border-b border-slate-100"><th class="p-3 font-normal" scope="row">Personas: carga latente</th><td class="p-3">165 W</td></tr></tbody></table></div><p class="mt-4 rounded-xl bg-emerald-50 border border-emerald-200 p-4"><strong>Resultado:</strong> 4.640 W sensibles y 165 W latentes. Con el margen del 5 %, la carga es <strong>5,05 kW · 17.214 BTU/h · 4.338 fg/h</strong>. Primera propuesta: <strong>5,28 kW · 18.000 BTU/h · 4536 fg/h split mural inverter</strong>. Los valores de la tabla se han redondeado.</p></div><p><strong>Cómo interpretar el resultado:</strong> en un recinto con tanto vidrio, la ganancia solar puede tener más peso que la transmisión a través del muro. Sustituir el área estimada por la superficie real del acristalamiento es una de las mejoras más útiles. La recomendación se redondea hacia arriba a una clase de potencia; antes de comprar, hay que comprobar la capacidad útil del modelo elegido a la temperatura exterior prevista.</p><p>En este ejemplo no se añaden cargas de ventilación de la vivienda, ni transmisión por los forjados hacia vecinos climatizados. Es una limitación deliberada del cálculo, no una exención de los requisitos de ventilación del CTE DB HS 3.</p></article>
+<article class="border border-blue-200 rounded-2xl p-5 md:p-6 space-y-4 text-sm leading-relaxed" id="ornek-klima-hesabi"><h2 class="text-xl font-extrabold text-slate-900">Ejemplo: un salón de 30 m² en Valencia</h2><p>Tomamos una vivienda en planta intermedia, con aislamiento medio, altura de 2,80 m y tres ocupantes. La fachada principal mide 6,00 m y mira al sur. Seleccionamos recinto en esquina, pero dejamos sin indicar la orientación de la segunda fachada. El motor calcula la principal con ventanas muy grandes —el 60 % del área bruta— y carpintería de PVC con doble vidrio. No se introducen medidas opcionales ni equipos adicionales.</p><p>La fachada bruta ocupa 6,00 × 2,80 = 16,80 m². El acristalamiento estimado es 10,08 m² y quedan 6,72 m² de muro opaco. La longitud de las particiones interiores se estima suponiendo una planta rectangular.</p><div id="ejemplo-resultados"><div class="overflow-x-auto"><table class="w-full text-left"><caption class="text-left font-bold mb-3">Cargas antes del margen de seguridad</caption><thead><tr class="bg-slate-100"><th class="p-3" scope="col">Componente</th><th class="p-3" scope="col">Carga</th></tr></thead><tbody><tr class="border-b border-slate-100"><th class="p-3 font-normal" scope="row">Fachada opaca</th><td class="p-3">28 W</td></tr><tr class="border-b border-slate-100"><th class="p-3 font-normal" scope="row">Particiones hacia recintos no climatizados</th><td class="p-3">158 W</td></tr><tr class="border-b border-slate-100"><th class="p-3 font-normal" scope="row">Transmisión por el vidrio</th><td class="p-3">165 W</td></tr><tr class="border-b border-slate-100"><th class="p-3 font-normal" scope="row">Ganancia solar por el vidrio</th><td class="p-3">3.014 W</td></tr><tr class="border-b border-slate-100"><th class="p-3 font-normal" scope="row">Iluminación y aparatos</th><td class="p-3">360 W</td></tr><tr class="border-b border-slate-100"><th class="p-3 font-normal" scope="row">Personas: carga sensible</th><td class="p-3">225 W</td></tr><tr class="border-b border-slate-100"><th class="p-3 font-normal" scope="row">Personas: carga latente</th><td class="p-3">165 W</td></tr></tbody></table></div><p class="mt-4 rounded-xl bg-emerald-50 border border-emerald-200 p-4"><strong>Resultado:</strong> 3.950 W sensibles y 165 W latentes. Con el margen del 5 %, la carga es <strong>4,32 kW · 14.742 BTU/h · 3.715 fg/h</strong>. Primera propuesta: <strong>5,28 kW · 18.000 BTU/h · 4.536 fg/h split mural inverter</strong>. Los valores de la tabla se han redondeado.</p></div><p><strong>Cómo interpretar el resultado:</strong> en un recinto con tanto vidrio, la ganancia solar puede tener más peso que la transmisión a través del muro. Sustituir el área estimada por la superficie real del acristalamiento es una de las mejoras más útiles. La recomendación se redondea hacia arriba a una clase de potencia; antes de comprar, hay que comprobar la capacidad útil del modelo elegido a la temperatura exterior prevista.</p><p>En este ejemplo no se añaden cargas de ventilación de la vivienda, ni transmisión por los forjados hacia vecinos climatizados. Es una limitación deliberada del cálculo, no una exención de los requisitos de ventilación del CTE DB HS 3.</p></article>
 <div class="space-y-4" id="hesap-yontemi"><h2 class="text-2xl font-extrabold text-slate-900">Método de cálculo y alcance</h2><div class="grid md:grid-cols-2 gap-5 text-sm text-slate-700 leading-relaxed">
 <div class="border border-slate-200 rounded-2xl p-5"><h3 class="font-bold mb-2">Clima y condiciones interiores</h3><p>Se incluyen 52 localidades de referencia. Las zonas CTE corresponden al núcleo y altitud representativos; otra localidad de la misma provincia puede pertenecer a una zona distinta. Las temperaturas proceden de la guía IDAE/ATECYR de 2010: verano al percentil 1 %, con temperatura húmeda coincidente, e invierno al 99 %. La oscilación diaria es la de la estación. No son récords históricos ni observaciones de este año.</p><p class="mt-2">Se adoptan 25 °C y 50 % de humedad relativa en refrigeración, y 21 °C en calefacción. La humedad exterior se calcula a partir de las temperaturas seca y húmeda de diseño, corrigiendo la presión con la altitud. Estas condiciones deben revisarse para actividades intensas o necesidades especiales.</p></div>
 <div class="border border-slate-200 rounded-2xl p-5"><h3 class="font-bold mb-2">Muros, ventanas y cubiertas</h3><p>La fachada opaca se calcula como U × área neta × diferencia equivalente. La orientación y la inercia se representan con un modelo reducido sol-aire: día despejado de julio, absorción del muro 0,60 y de la cubierta 0,80; constantes de respuesta de 8 h y 16 h. No son tablas CLTD obligatorias del CTE ni una simulación dinámica del edificio. Sumar máximos de componentes no simultáneos puede dar una estimación conservadora.</p><p class="mt-2">Para aislamiento medio se usan como referencia los límites de fachada y cubierta de HE 1; para aislamiento alto, los valores orientativos del Anejo E. El edificio antiguo se representa con hipótesis de U de 1,60 y 1,80 W/m²K, respectivamente. No se verifica el cumplimiento del edificio. Las U de las ventanas son aproximaciones por tipo de carpintería y vidrio, no valores fijados por el CTE: prevalece la ficha del fabricante.</p></div>
@@ -213,7 +315,7 @@
 <i class="fa-solid fa-bolt text-amber-500"></i> Cálculo rápido de refrigeración 
                 </h2>
 <form autocomplete="off" class="space-y-6" id="pratikForm">
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 kh-klima-alanlar kh-klima-inicio">
 <div>
 <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Localidad / zona climática CTE</label>
 <select class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:outline-none focus:border-amber-500 font-bold" id="pratikSehir"><optgroup label="Zona CTE α3"><option data-kis-dis="14.4" data-zona="α3" value="Las Palmas de Gran Canaria">Las Palmas de Gran Canaria · α3</option><option data-kis-dis="14.6" data-zona="α3" value="Santa Cruz de Tenerife">Santa Cruz de Tenerife · α3</option></optgroup><optgroup label="Zona CTE A3"><option data-kis-dis="7.6" data-zona="A3" value="Cádiz">Cádiz · A3</option><option data-kis-dis="8.4" data-zona="A3" value="Melilla">Melilla · A3</option><option data-kis-dis="5.8" data-zona="A3" value="Málaga">Málaga · A3</option></optgroup><optgroup label="Zona CTE A4"><option data-kis-dis="7.5" data-zona="A4" value="Almería">Almería · A4</option><option data-kis-dis="3.6" data-zona="A4" value="Huelva">Huelva · A4</option></optgroup><optgroup label="Zona CTE B3"><option data-kis-dis="4.4" data-zona="B3" value="Castellón">Castellón · B3</option><option data-kis-dis="5.7" data-zona="B3" value="Ibiza">Ibiza · B3</option><option data-kis-dis="5.6" data-zona="B3" value="Mahón">Mahón · B3</option><option data-kis-dis="3.5" data-zona="B3" value="Murcia">Murcia · B3</option><option data-kis-dis="6.3" data-zona="B3" value="Palma">Palma · B3</option><option data-kis-dis="0.5" data-zona="B3" value="Tarragona">Tarragona · B3</option><option data-kis-dis="5.5" data-zona="B3" selected="" value="Valencia">Valencia · B3</option></optgroup><optgroup label="Zona CTE B4"><option data-kis-dis="4.4" data-zona="B4" value="Alicante">Alicante · B4</option><option data-kis-dis="1.4" data-zona="B4" value="Córdoba">Córdoba · B4</option><option data-kis-dis="4.5" data-zona="B4" value="Sevilla">Sevilla · B4</option></optgroup><optgroup label="Zona CTE C1"><option data-kis-dis="5.6" data-zona="C1" value="A Coruña">A Coruña · C1</option><option data-kis-dis="1.2" data-zona="C1" value="Bilbao">Bilbao · C1</option><option data-kis-dis="3.3" data-zona="C1" value="Pontevedra">Pontevedra · C1</option><option data-kis-dis="4.7" data-zona="C1" value="Santander">Santander · C1</option></optgroup><optgroup label="Zona CTE C2"><option data-kis-dis="2.7" data-zona="C2" value="Barcelona">Barcelona · C2</option><option data-kis-dis="-1.9" data-zona="C2" value="Girona">Girona · C2</option></optgroup><optgroup label="Zona CTE C3"><option data-kis-dis="-0.6" data-zona="C3" value="Granada">Granada · C3</option><option data-kis-dis="-1.4" data-zona="C3" value="Ourense">Ourense · C3</option><option data-kis-dis="-1.1" data-zona="C3" value="Zaragoza">Zaragoza · C3</option></optgroup><optgroup label="Zona CTE C4"><option data-kis-dis="0.3" data-zona="C4" value="Badajoz">Badajoz · C4</option><option data-kis-dis="1.2" data-zona="C4" value="Cáceres">Cáceres · C4</option><option data-kis-dis="2.6" data-zona="C4" value="Jaén">Jaén · C4</option></optgroup><optgroup label="Zona CTE D1"><option data-kis-dis="-2.5" data-zona="D1" value="Lugo">Lugo · D1</option><option data-kis-dis="1.2" data-zona="D1" value="Oviedo">Oviedo · D1</option><option data-kis-dis="-3.6" data-zona="D1" value="Palencia">Palencia · D1</option><option data-kis-dis="-2.0" data-zona="D1" value="Pamplona">Pamplona · D1</option><option data-kis-dis="1.0" data-zona="D1" value="San Sebastián">San Sebastián · D1</option><option data-kis-dis="-2.4" data-zona="D1" value="Vitoria-Gasteiz">Vitoria-Gasteiz · D1</option></optgroup><optgroup label="Zona CTE D2"><option data-kis-dis="-3.1" data-zona="D2" value="Cuenca">Cuenca · D2</option><option data-kis-dis="-2.5" data-zona="D2" value="Huesca">Huesca · D2</option><option data-kis-dis="-1.1" data-zona="D2" value="Logroño">Logroño · D2</option><option data-kis-dis="-4.4" data-zona="D2" value="Salamanca">Salamanca · D2</option><option data-kis-dis="-3.4" data-zona="D2" value="Segovia">Segovia · D2</option><option data-kis-dis="-6.1" data-zona="D2" value="Teruel">Teruel · D2</option><option data-kis-dis="-2.8" data-zona="D2" value="Valladolid">Valladolid · D2</option><option data-kis-dis="-3.2" data-zona="D2" value="Zamora">Zamora · D2</option></optgroup><optgroup label="Zona CTE D3"><option data-kis-dis="-3.0" data-zona="D3" value="Albacete">Albacete · D3</option><option data-kis-dis="-1.3" data-zona="D3" value="Ciudad Real">Ciudad Real · D3</option><option data-kis-dis="-2.8" data-zona="D3" value="Lleida">Lleida · D3</option><option data-kis-dis="0.3" data-zona="D3" value="Madrid">Madrid · D3</option><option data-kis-dis="-1.2" data-zona="D3" value="Toledo">Toledo · D3</option></optgroup><optgroup label="Zona CTE E1"><option data-kis-dis="-4.2" data-zona="E1" value="Burgos">Burgos · E1</option><option data-kis-dis="-3.8" data-zona="E1" value="León">León · E1</option><option data-kis-dis="-4.8" data-zona="E1" value="Soria">Soria · E1</option><option data-kis-dis="-4.5" data-zona="E1" value="Ávila">Ávila · E1</option></optgroup></select>
@@ -221,7 +323,8 @@
 <div>
 <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Superficie útil (m²)</label>
 <input class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:outline-none focus:border-amber-500 font-bold" id="pratikAlan" max="500.0" min="0.0" step="0.1" type="number" value="0.0"/>
-</div><div><label class="block text-xs font-bold uppercase text-slate-500 mb-2" for="pratikYukseklik">Altura del recinto (m)</label><input class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 font-bold" id="pratikYukseklik" min="1" step="0.1" type="number" value="2.8"/></div>
+</div>
+<div id="guiaAlturaTecho"><label class="block text-xs font-bold uppercase text-slate-500 mb-2" for="pratikYukseklik">Altura del techo (m)</label><input class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 font-bold" id="pratikYukseklik" min="1" step="0.1" type="number" value="2.8"/></div>
 <div>
 <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Nivel de aislamiento</label>
 <select class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:outline-none focus:border-amber-500 font-bold" id="pratikYalitim">
@@ -231,7 +334,7 @@
 </select>
 </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 kh-klima-alanlar kh-klima-cephe">
 <div>
 <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Orientación de la fachada más ancha</label>
 <select class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:outline-none focus:border-amber-500 font-bold" id="pratikYon" onchange="pratikIkinciYonleriGuncelle()">
@@ -273,7 +376,7 @@
 </select>
 </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 kh-klima-alanlar">
 <div>
 <label class="block text-xs font-bold uppercase text-slate-500 mb-2" for="mahalFonksiyon">Uso del recinto</label>
 <select class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:outline-none focus:border-amber-500" id="pratikFonksiyon" onchange="pratikFonksiyonDegisti()">
@@ -296,7 +399,7 @@
 </select>
 </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 kh-klima-alanlar">
 <label class="text-xs font-bold">Número de fachadas exteriores<select class="w-full border rounded-lg p-3" id="pratikCephe" onchange="pratikCepheDegisti()"><option value="1">Una fachada</option><option value="2">Recinto en esquina: dos fachadas</option></select></label>
 <label class="text-xs font-bold">Proporción estimada de ventanas<select class="w-full border rounded-lg p-3" id="pratikCamOrani"><option value="0.15">Pequeña: 15 %</option><option selected="" value="0.25">Normal: 25 %</option><option value="0.40">Grande: 40 %</option><option value="0.60">Muy grande: 60 %</option></select><span aria-live="polite" class="block mt-1 text-xs font-normal text-slate-600" id="pratikCamAlaniBilgi"></span></label>
 <label class="text-xs font-bold">Tipo de ventana<select class="w-full border rounded-lg p-3" id="pratikCamTipi">
@@ -310,7 +413,7 @@
 </div>
 <details class="parametre-paneli parametre-amber text-xs text-slate-600" id="pratikParametrePaneli">
 <summary class="font-bold cursor-pointer">Parámetros detallados (opcionales)</summary><p class="mt-2 font-bold">Si conoce estos datos:</p>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3 kh-klima-alanlar" id="guiaParametrosPracticos">
 <label>Superficie total de ventanas y puertas acristaladas (m²)<input class="w-full border rounded p-2" id="pratikCamAlani" min="0.1" onchange="pratikCamAlaniDuzelt()" step="0.1" type="number"/></label>
 <label>Anchura de la 2. fachada (m)<input class="w-full border rounded p-2" disabled="" id="pratikIkinciDuvar" min="0.1" onchange="pratikIkinciDuvarDuzelt()" step="0.1" type="number"/></label>
 <label>Orientación de la 2. fachada<select class="w-full border rounded p-2" disabled="" id="pratikIkinciYon"><option selected="" value="Ninguna">Ninguna</option><option value="Oeste">Oeste</option><option value="Este">Este</option><option value="Sur">Sur</option><option value="Norte">Norte</option><option value="Suroeste">Suroeste</option><option value="Sureste">Sureste</option><option value="Noroeste">Noroeste</option><option value="Noreste">Noreste</option></select></label>
@@ -355,7 +458,7 @@
 <i class="fa-solid fa-file-pdf"></i> Imprimir / guardar PDF
                         </button>
 </div>
-<div class="bg-blue-50/70 p-4 rounded-xl border border-blue-200 grid grid-cols-1 md:grid-cols-2 gap-4 print-grid-2">
+<div class="bg-blue-50/70 p-4 rounded-xl border border-blue-200 grid grid-cols-1 md:grid-cols-2 gap-4 print-grid-2 kh-klima-alanlar">
 <div>
 <label class="block text-xs font-bold uppercase text-blue-900 mb-1.5"><i class="fa-solid fa-tag mr-1"></i> Código del recinto</label>
 <input class="w-full bg-white border border-blue-300 rounded-lg p-2.5 text-sm font-bold text-blue-950 focus:outline-none focus:border-blue-500" id="raporMahalNo" placeholder="Örn: 201, Salon, Oficina-B" type="text" value="M-101"/>
@@ -366,7 +469,7 @@
 </div>
 </div>
 <form autocomplete="off" class="space-y-4" id="ts825Form">
-<div class="print-grid-3 grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="print-grid-3 grid grid-cols-1 md:grid-cols-3 gap-4 kh-klima-alanlar">
 <div>
 <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Localidad / zona climática CTE</label>
 <select class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:outline-none focus:border-blue-500" id="sehir" onchange="guncelleSihirbazVeMotor()"><optgroup label="Zona CTE α3"><option data-kis-dis="14.4" data-zona="α3" value="Las Palmas de Gran Canaria">Las Palmas de Gran Canaria · α3</option><option data-kis-dis="14.6" data-zona="α3" value="Santa Cruz de Tenerife">Santa Cruz de Tenerife · α3</option></optgroup><optgroup label="Zona CTE A3"><option data-kis-dis="7.6" data-zona="A3" value="Cádiz">Cádiz · A3</option><option data-kis-dis="8.4" data-zona="A3" value="Melilla">Melilla · A3</option><option data-kis-dis="5.8" data-zona="A3" value="Málaga">Málaga · A3</option></optgroup><optgroup label="Zona CTE A4"><option data-kis-dis="7.5" data-zona="A4" value="Almería">Almería · A4</option><option data-kis-dis="3.6" data-zona="A4" value="Huelva">Huelva · A4</option></optgroup><optgroup label="Zona CTE B3"><option data-kis-dis="4.4" data-zona="B3" value="Castellón">Castellón · B3</option><option data-kis-dis="5.7" data-zona="B3" value="Ibiza">Ibiza · B3</option><option data-kis-dis="5.6" data-zona="B3" value="Mahón">Mahón · B3</option><option data-kis-dis="3.5" data-zona="B3" value="Murcia">Murcia · B3</option><option data-kis-dis="6.3" data-zona="B3" value="Palma">Palma · B3</option><option data-kis-dis="0.5" data-zona="B3" value="Tarragona">Tarragona · B3</option><option data-kis-dis="5.5" data-zona="B3" selected="" value="Valencia">Valencia · B3</option></optgroup><optgroup label="Zona CTE B4"><option data-kis-dis="4.4" data-zona="B4" value="Alicante">Alicante · B4</option><option data-kis-dis="1.4" data-zona="B4" value="Córdoba">Córdoba · B4</option><option data-kis-dis="4.5" data-zona="B4" value="Sevilla">Sevilla · B4</option></optgroup><optgroup label="Zona CTE C1"><option data-kis-dis="5.6" data-zona="C1" value="A Coruña">A Coruña · C1</option><option data-kis-dis="1.2" data-zona="C1" value="Bilbao">Bilbao · C1</option><option data-kis-dis="3.3" data-zona="C1" value="Pontevedra">Pontevedra · C1</option><option data-kis-dis="4.7" data-zona="C1" value="Santander">Santander · C1</option></optgroup><optgroup label="Zona CTE C2"><option data-kis-dis="2.7" data-zona="C2" value="Barcelona">Barcelona · C2</option><option data-kis-dis="-1.9" data-zona="C2" value="Girona">Girona · C2</option></optgroup><optgroup label="Zona CTE C3"><option data-kis-dis="-0.6" data-zona="C3" value="Granada">Granada · C3</option><option data-kis-dis="-1.4" data-zona="C3" value="Ourense">Ourense · C3</option><option data-kis-dis="-1.1" data-zona="C3" value="Zaragoza">Zaragoza · C3</option></optgroup><optgroup label="Zona CTE C4"><option data-kis-dis="0.3" data-zona="C4" value="Badajoz">Badajoz · C4</option><option data-kis-dis="1.2" data-zona="C4" value="Cáceres">Cáceres · C4</option><option data-kis-dis="2.6" data-zona="C4" value="Jaén">Jaén · C4</option></optgroup><optgroup label="Zona CTE D1"><option data-kis-dis="-2.5" data-zona="D1" value="Lugo">Lugo · D1</option><option data-kis-dis="1.2" data-zona="D1" value="Oviedo">Oviedo · D1</option><option data-kis-dis="-3.6" data-zona="D1" value="Palencia">Palencia · D1</option><option data-kis-dis="-2.0" data-zona="D1" value="Pamplona">Pamplona · D1</option><option data-kis-dis="1.0" data-zona="D1" value="San Sebastián">San Sebastián · D1</option><option data-kis-dis="-2.4" data-zona="D1" value="Vitoria-Gasteiz">Vitoria-Gasteiz · D1</option></optgroup><optgroup label="Zona CTE D2"><option data-kis-dis="-3.1" data-zona="D2" value="Cuenca">Cuenca · D2</option><option data-kis-dis="-2.5" data-zona="D2" value="Huesca">Huesca · D2</option><option data-kis-dis="-1.1" data-zona="D2" value="Logroño">Logroño · D2</option><option data-kis-dis="-4.4" data-zona="D2" value="Salamanca">Salamanca · D2</option><option data-kis-dis="-3.4" data-zona="D2" value="Segovia">Segovia · D2</option><option data-kis-dis="-6.1" data-zona="D2" value="Teruel">Teruel · D2</option><option data-kis-dis="-2.8" data-zona="D2" value="Valladolid">Valladolid · D2</option><option data-kis-dis="-3.2" data-zona="D2" value="Zamora">Zamora · D2</option></optgroup><optgroup label="Zona CTE D3"><option data-kis-dis="-3.0" data-zona="D3" value="Albacete">Albacete · D3</option><option data-kis-dis="-1.3" data-zona="D3" value="Ciudad Real">Ciudad Real · D3</option><option data-kis-dis="-2.8" data-zona="D3" value="Lleida">Lleida · D3</option><option data-kis-dis="0.3" data-zona="D3" value="Madrid">Madrid · D3</option><option data-kis-dis="-1.2" data-zona="D3" value="Toledo">Toledo · D3</option></optgroup><optgroup label="Zona CTE E1"><option data-kis-dis="-4.2" data-zona="E1" value="Burgos">Burgos · E1</option><option data-kis-dis="-3.8" data-zona="E1" value="León">León · E1</option><option data-kis-dis="-4.8" data-zona="E1" value="Soria">Soria · E1</option><option data-kis-dis="-4.5" data-zona="E1" value="Ávila">Ávila · E1</option></optgroup></select>
@@ -422,7 +525,7 @@
 <select class="w-full bg-white border border-amber-300 rounded-lg p-2.5 text-xs font-bold text-amber-950 focus:outline-none focus:border-amber-500" id="dukkanDolap" onchange="guncelleSihirbazVeMotor()"><option value="ic">Automático: condensador en el recinto</option><option value="yok">Ninguno / condensador exterior</option></select>
 </div>
 </div>
-<div class="print-grid-5 grid grid-cols-1 md:grid-cols-5 gap-4" id="printParametreSatiri">
+<div class="print-grid-5 grid grid-cols-1 md:grid-cols-5 gap-4 kh-klima-alanlar" id="printParametreSatiri">
 <div class="flex flex-col justify-end" id="divMahalAlaniKutusu">
 <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Superficie útil (m²)</label>
 <input class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 focus:outline-none focus:border-blue-500 font-bold text-center" id="mahalAlani" oninput="guncelleSihirbazVeMotor()" step="0.1" type="number" value="0.0"/>
@@ -826,7 +929,7 @@
 <h3 class="text-lg font-extrabold text-slate-800 border-b pb-2 border-slate-100 flex items-center gap-2">
 <i class="fa-solid fa-cart-shopping text-orange-500"></i> Buscar equipos
                 </h3>
-<a class="text-sm font-bold text-blue-700 hover:underline" hidden id="guiaEquiposResultado" href="/aire-acondicionado-30m2.html#equipos" target="_parent">Comparar equipos en la guía de 30 m² →</a>
+<a class="text-sm font-bold text-blue-700 hover:underline" hidden id="guiaEquiposResultado" href="/aire-acondicionado-30m2.html#equipos" target="_parent">Comparar equipos recomendados →</a>
 <div class="space-y-3" id="pazaryeriListesi"></div>
 <!-- PAZARYERİ PANELİ DİPNOTU -->
 <div class="pt-3 border-t border-slate-100 space-y-1">
@@ -1056,6 +1159,7 @@
 <!-- HESAPLAMA VE MANTIK SCRIPT'LERİ -->
 <script>
         let mevcutMod = 'klima';
+        let ejemploGuiadoPreparado = false;
 
         const trYonOptions = `
             <option value="Ninguna" selected>Ninguna / sin fachada</option>
@@ -1116,6 +1220,7 @@
         }
 
         function sekmeDegistir(mod) {
+            if (mod === "isitma" && document.documentElement.hasAttribute("data-guia-frio")) return;
             mevcutMod = mod;
             const btnPratik = document.getElementById('btnTabPratik');
             const btnKlima = document.getElementById('btnTabKlima');
@@ -1155,6 +1260,7 @@
                 document.getElementById('lblOnerilenSegment').innerText = "Pulse el botón de cálculo.";
                 boxManuelRehber.classList.add("hidden");
                 renderVarsayilanPazaryeri('klima');
+                if (ejemploGuiadoPreparado) hesaplaPratik();
             }
             else if (mod === 'klima') {
                 btnKlima.className = "flex-1 min-w-[200px] py-3 px-4 rounded-xl font-bold text-sm transition flex items-center justify-center gap-2 bg-white text-blue-600 shadow-sm cursor-pointer";
@@ -1512,15 +1618,22 @@ function yapiTipiDegisti() {
             document.getElementById("netAlanIsitma").value = (zemin + birinci).toFixed(1);
         }
 
+        let resultadoGuia = { type: 'calculoclima:guide-cooling', watts: null, capacity: null };
+
         function publicarResultadoGuia(watts, recommendation) {
-            const params = new URLSearchParams(location.search);
-            if (window.parent === window || params.get('embed') !== 'clima' || params.get('superficie') !== '30') return;
+            if (window.parent === window || !document.documentElement.hasAttribute('data-guia-frio')) return;
             const onlyModel = recommendation?.urunler.length === 1 ? recommendation.urunler[0] : null;
             const capacity = onlyModel?.tip === 'duvar' ? onlyModel.kapasite : null;
-            window.parent.postMessage({ type: 'calculoclima:guide-cooling', watts, capacity }, location.origin);
-            const link = document.getElementById('guiaEquiposResultado');
-            link.hidden = !Number.isFinite(watts) || watts <= 0;
+            resultadoGuia = { type: 'calculoclima:guide-cooling', watts, capacity };
+            window.parent.postMessage(resultadoGuia, location.origin);
+            document.getElementById('guiaEquiposResultado').hidden = !Number.isFinite(watts) || watts <= 0;
         }
+
+        window.addEventListener('message', event => {
+            if (window.parent === window || event.source !== window.parent || event.origin !== location.origin) return;
+            if (event.data?.type !== 'calculoclima:request-cooling' || !document.documentElement.hasAttribute('data-guia-frio')) return;
+            window.parent.postMessage(resultadoGuia, location.origin);
+        });
 
         function renderVarsayilanPazaryeri(mod) {
             if (mod === 'klima') publicarResultadoGuia(null);
@@ -1699,7 +1812,9 @@ function yapiTipiDegisti() {
             document.getElementById('hesapAraclariSekmeler').hidden=false;
             document.getElementById('hesapAraclari').hidden=false;
             sekmeDegistir(mod);
-            document.getElementById('hesapAraclariSekmeler').scrollIntoView({behavior:'smooth',block:'start'});
+            if (!document.documentElement.hasAttribute('data-guia-frio')) {
+                document.getElementById('hesapAraclariSekmeler').scrollIntoView({behavior:'smooth',block:'start'});
+            }
         }
         const ISYERI_PROFILLERI={
             'Oficina':{ad:'Oficina',ach:6,sensible:75,latente:55,dukkan:false,cihaz:true},
@@ -2214,14 +2329,45 @@ function isitmaKatKaybi(alan,kat,disT,yapi,sehir,yalitim='standart') {
         }
 
       
-        window.onload = function() {
+        function iniciarCalculadoras() {
             initYonSelects();
-            sifirlaPratik(); 
-            sekmeDegistir('pratik'); // Pratik mod etiketlerini ve görünümünü tetikler
+            sifirlaPratik();
+            sekmeDegistir('pratik');
             yapiTipiDegisti();
             isiticiCihazDegisti();
             isyeriHavalandirmaDegisti();
-        };
+        }
+
+        function iniciarGuiaFrio() {
+            document.getElementById('guiaParametrosPracticos').prepend(document.getElementById('guiaAlturaTecho'));
+            iniciarCalculadoras();
+            const params = new URLSearchParams(location.search);
+            const detail = params.get('modo') === 'detallado';
+            const sample = params.get('superficie') === '30';
+            const calculator = sample ? 'aire-acondicionado-30m2.html' : 'calcular-frigorias.html';
+            document.getElementById('guiaEquiposResultado').href = '/' + calculator + '#equipos';
+            if (sample) {
+                const values = {
+                    pratikSehir: 'Valencia', pratikAlan: '30', pratikDuvarOlcusu: '6',
+                    pratikYukseklik: '2.8', pratikYalitim: 'standart', pratikKisi: '3',
+                    pratikYon: 'Sur', pratikPencereYon: 'Sur', pratikCephe: '2',
+                    pratikIkinciYon: 'Ninguna', pratikCamOrani: '0.60',
+                    pratikCamTipi: 'PVC - Doble vidrio', pratikKatKonum: 'Planta intermedia',
+                    pratikFonksiyon: 'Vivienda',
+                };
+                for (const [id, value] of Object.entries(values)) document.getElementById(id).value = value;
+                pratikCepheDegisti();
+                document.getElementById('mahalAlani').value = '30';
+                ejemploGuiadoPreparado = true;
+            }
+            hesapAracinaGit(detail ? 'klima' : 'pratik');
+        }
+
+        if (document.documentElement.hasAttribute('data-guia-frio')) {
+            document.addEventListener('DOMContentLoaded', iniciarGuiaFrio, { once: true });
+        } else {
+            window.onload = iniciarCalculadoras;
+        }
 
     </script>
 <style id="cc-cookie-consent-style">
@@ -2303,11 +2449,10 @@ body.guia-embed #hesapAraclariSekmeler{position:static!important;padding-top:12p
 body.guia-embed #hesapAraclari{margin-top:0!important;padding-top:0!important}
 body.guia-embed #hesapAraclariSekmeler,#hesapAraclari{scroll-margin-top:0}
 body.guia-embed .sticky{position:static!important}
-body.guia-embed.guia-frio #btnTabIsitma{display:none!important}
 body.guia-embed.guia-calor #btnTabPratik,body.guia-embed.guia-calor #btnTabKlima{display:none!important}}
 </style>
 <script>
-(function(){const mode=new URLSearchParams(location.search).get('embed');if(!['clima','isitma'].includes(mode))return;document.addEventListener('DOMContentLoaded',function(){document.body.classList.add('guia-embed',mode==='clima'?'guia-frio':'guia-calor');const start=()=>{if(typeof hesapAracinaGit==='function'){hesapAracinaGit(mode==='clima'?'pratik':'isitma');window.scrollTo(0,0);}};if(document.readyState==='complete')start();else window.addEventListener('load',()=>setTimeout(start,0),{once:true});});})();
+(function(){const mode=new URLSearchParams(location.search).get('embed');if(mode!=='isitma')return;document.addEventListener('DOMContentLoaded',function(){document.body.classList.add('guia-embed','guia-calor');const start=()=>{if(typeof hesapAracinaGit==='function'){hesapAracinaGit('isitma');window.scrollTo(0,0);}};if(document.readyState==='complete')start();else window.addEventListener('load',()=>setTimeout(start,0),{once:true});});})();
 </script>
 <dialog id="ccVideoDialog" aria-labelledby="ccVideoTitle"><h2 id="ccVideoTitle">Guía en vídeo</h2><video id="ccVideoPlayer" controls playsinline preload="none" aria-label="Vídeo explicativo en español"></video><div class="cc-video-actions"><button id="ccVideoClose" class="cc-video-close" type="button">Cerrar</button></div></dialog>
 <script id="cc-video-script">
@@ -2334,7 +2479,7 @@ body.guia-embed.guia-calor #btnTabPratik,body.guia-embed.guia-calor #btnTabKlima
 <script>
 (function () {
     const params = new URLSearchParams(location.search);
-    if (window.parent === window || params.get('embed') !== 'clima' || params.get('superficie') !== '30') return;
+    if (window.parent === window || params.get('embed') !== 'clima') return;
     function syncHeight() {
         const tools = document.getElementById('hesapAraclari');
         if (tools.hidden) return;
