@@ -25,7 +25,44 @@
 .cooling-panel .cooling-panel-heading h2 { font-size: 1.2rem; margin: 0; }
 .cooling-panel iframe { display: block; width: 100%; height: 1120px; border: 1px solid var(--line); border-radius: 12px; background: #f8fafc; }
 .cooling-guide #equipos { scroll-margin-top: 24px; }
-.cooling-guide #equipos table { min-width: 820px; }
+/* The calculator and comparison share the full width below the guide text. */
+.cooling-guide main.wrap { max-width: 1360px; }
+.cooling-guide main.wrap > :is(.crumb, .hero, .content) { max-width: 1056px; margin-inline: auto; }
+.cooling-workspace { min-width: 0; margin: 0 auto 48px; }
+.cooling-guide #equipos .guide-table { overflow: visible; }
+.cooling-guide #equipos table { min-width: 0; table-layout: fixed; }
+.cooling-guide #equipos th,
+.cooling-guide #equipos td { min-width: 0; overflow-wrap: anywhere; }
+.cooling-guide #equipos thead th:first-child { width: 21%; }
+.cooling-guide #equipos thead th:last-child { width: 17%; }
+.cooling-cell-label { display: none; }
+
+@media (max-width: 740px) {
+    .cooling-guide #equipos table,
+    .cooling-guide #equipos caption,
+    .cooling-guide #equipos tbody { display: block; }
+    .cooling-guide #equipos thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+    .cooling-guide #equipos tbody tr {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .cooling-guide #equipos tbody :is(th, td:last-child) { grid-column: 1 / -1; }
+    .cooling-guide #equipos tbody th { background: #eaf4ff; }
+    .cooling-cell-label {
+        display: block;
+        color: #53677f;
+        font-size: 0.82rem;
+        font-weight: 650;
+        margin-bottom: 3px;
+    }
+}
 .cooling-guide #equipos tr[hidden], .cooling-guide #equipos-todos[hidden] { display: none !important; }
 @media (max-width: 480px) {
     .cooling-guide .wrap { padding-inline: 12px; }
